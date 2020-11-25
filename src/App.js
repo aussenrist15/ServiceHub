@@ -1,12 +1,11 @@
+import { Banner } from "./AirBnB/Components/Banner";
+import { Navbar } from "./AirBnB/Components/Navbar";
 import "./App.css";
-import { Navbar } from "./Components/Navbar";
-
 function App() {
   return (
-    <div className="App">
+    <div className="Container">
       <Navbar></Navbar>
-      <h1>Hello Guys. Welcome to Service Hub</h1>
-      <h2>Developed by your very own, Ch Abdul Basit...</h2>
+      <Banner></Banner>
     </div>
   );
 }
