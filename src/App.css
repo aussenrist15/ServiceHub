@@ -1,0 +1,8 @@
+@font-face {
+  font-family: "MyFamily";
+  src: local(MyFamily), url("./Fonts/NerkoOne-Regular.ttf") format("truetype");
+}
+
+h1 {
+  size: 10px;
+}
