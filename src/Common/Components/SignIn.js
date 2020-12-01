@@ -10,6 +10,7 @@ import Box from "@material-ui/core/Box";
 import Typography from "@material-ui/core/Typography";
 import { makeStyles } from "@material-ui/core/styles";
 import Container from "@material-ui/core/Container";
+import { useHistory } from "react-router-dom";
 import "../CSS/Card.css";
 
 function Copyright() {
@@ -46,6 +47,7 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 export default function SignIn({ val, revertVal }) {
+  const history = useHistory();
   const classes = useStyles();
   const [username, setUsername] = useState("");
   const [pass, setPass] = useState("");
@@ -56,6 +58,7 @@ export default function SignIn({ val, revertVal }) {
     if (username === "") setUserErr(true);
     if (pass === "") setPassErr(true);
     if (userErr || passErr) return;
+    history.push("/");
   }
 
   return (
