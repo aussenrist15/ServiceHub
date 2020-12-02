@@ -58,6 +58,7 @@ export default function SignIn({ val, revertVal }) {
     if (username === "") setUserErr(true);
     if (pass === "") setPassErr(true);
     if (userErr || passErr) return;
+    localStorage.setItem("isLoggedin", "true");
     history.push("/");
   }
 

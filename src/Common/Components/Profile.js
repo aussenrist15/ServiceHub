@@ -1,6 +1,7 @@
-import React from "react";
+import React, { useEffect } from "react";
 // nodejs library that concatenates classes
 import classNames from "classnames";
+import { useHistory } from "react-router-dom";
 // @material-ui/core components
 import { makeStyles } from "@material-ui/core/styles";
 // @material-ui/icons
@@ -26,6 +27,15 @@ import { Rides } from "./Rides.js";
 
 const useStyles = makeStyles(styles);
 export const Profile = (props) => {
+  const history = useHistory();
+  useEffect(() => {
+    const chck = localStorage.getItem("isLoggedin");
+    if (chck && chck === "true") {
+    } else {
+      history.push("/landing");
+    }
+  }, []);
+
   const classes = useStyles();
   const { ...rest } = props;
   const imageClasses = classNames(
