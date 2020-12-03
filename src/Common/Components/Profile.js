@@ -77,8 +77,8 @@ export const Profile = (props) => {
             <div className={classes.description}>
               <p>Footballer at Manchester City. </p>
             </div>
-            <GridContainer>
-              <GridItem xs={12} sm={12} md={8} className={classes.navWrapper}>
+            <GridContainer justify="center">
+              <GridItem xs={12} sm={12} md={12} className={classes.navWrapper}>
                 <NavPills
                   alignCenter
                   color="primary"

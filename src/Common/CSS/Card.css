@@ -24,3 +24,13 @@ h3 {
 .signuptext {
   color: black;
 }
+
+.mtb {
+  margin-top: 20px;
+  margin-bottom: 40px;
+  width: 100%;
+}
+
+.bt {
+  border: transparent;
+}
