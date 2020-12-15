@@ -5,14 +5,20 @@
 
 h1 {
   font-family: "Nerko One", cursive;
-  font-size: 8em;
+  font-size: 6vw;
   padding-left: 10px;
   color: white;
 }
 h3 {
   padding-left: 15px;
   font-family: "Dancing Script", cursive;
-  font-size: 3em;
+  font-size: 2vw;
+  color: white;
+}
+h4 {
+  padding-left: 15px;
+  font-family: "Dancing Script", cursive;
+  font-size: 3vw;
   color: white;
 }
 

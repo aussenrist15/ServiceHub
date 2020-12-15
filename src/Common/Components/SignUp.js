@@ -66,6 +66,7 @@ export default function SignUp({ val, revertVal }) {
     if (email === "") setErrEmail(true);
     if (pass === "") setErrPass(true);
     if (errFname || errFname || errUname || errEmail || errPass) return;
+    console.log("test");
   }
 
   return (

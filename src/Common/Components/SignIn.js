@@ -54,19 +54,30 @@ export default function SignIn({ val, revertVal }) {
   const [userErr, setUserErr] = useState(false);
   const [passErr, setPassErr] = useState(false);
 
-  function validate() {
-    if (username === "") setUserErr(true);
-    if (pass === "") setPassErr(true);
-    if (userErr || passErr) return;
-    localStorage.setItem("isLoggedin", "true");
-    history.push("/");
+  function Validate() {
+    console.log("Function called");
+    console.log(username);
+    if (!username || 0 === username.length) {
+      setUserErr((err) => !err);
+      return;
+    }
+
+    if (!pass || 0 === pass.length) {
+      setPassErr((err) => !err);
+      return;
+    }
+
+    if (!userErr && !passErr) {
+      localStorage.setItem("isLoggedin", "true");
+      history.push("/");
+    }
   }
 
   return (
     <Container component="main" maxWidth="xs">
       <CssBaseline />
       <div className={classes.paper}>
-        <h3 className="signuptext">Sign In</h3>
+        <h4 className="signuptext">Sign In</h4>
         <form className={classes.form} noValidate>
           <TextField
             variant="outlined"
@@ -105,7 +116,7 @@ export default function SignIn({ val, revertVal }) {
             label="Remember me"
           />
           <Button
-            onClick={validate}
+            onClick={Validate}
             fullWidth
             variant="contained"
             color="primary"
