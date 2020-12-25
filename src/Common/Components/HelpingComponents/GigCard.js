@@ -7,7 +7,6 @@ import CardContent from "@material-ui/core/CardContent";
 import CardMedia from "@material-ui/core/CardMedia";
 import Button from "@material-ui/core/Button";
 import Typography from "@material-ui/core/Typography";
-import AUDI from "../../Static/audi.jpg";
 
 const useStyles = makeStyles({
   root: {
@@ -15,9 +14,9 @@ const useStyles = makeStyles({
   },
 });
 
-export const GigCard = () => {
+export const GigCard = (props) => {
   const classes = useStyles();
-
+  const { img, title, desc, price } = props;
   return (
     <Card className={classes.root}>
       <CardActionArea>
@@ -25,18 +24,18 @@ export const GigCard = () => {
           component="img"
           alt="Contemplative Reptile"
           height="140"
-          image={AUDI}
+          image={img}
           title="Contemplative Reptile"
         />
         <CardContent>
           <Typography gutterBottom variant="h5" component="h2">
-            Placeholder Text
+            {title}
           </Typography>
           <Typography variant="body2" color="textSecondary" component="p">
-            Explain here about the gig. For example description
+            {desc}
           </Typography>
           <Typography gutterBottom variant="h5" component="h2">
-            Price: $5
+            Price: {price}
           </Typography>
         </CardContent>
       </CardActionArea>

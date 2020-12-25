@@ -1,10 +1,12 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import "../CSS/Services.css";
 import { GigCard } from "./HelpingComponents/GigCard";
 import Grid from "@material-ui/core/Grid";
 import { makeStyles } from "@material-ui/core/styles";
 import TextField from "@material-ui/core/TextField";
 import "../CSS/Card.css";
+import AUDI from "../Static/audi.jpg";
+import { SkeletonLoader } from "./HelpingComponents/SkeletonLoader";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -20,8 +22,45 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 export const Services = () => {
+  useEffect(() => {
+    setTimeout(function () {
+      setLoading((load) => {
+        return !load;
+      });
+    }, 3000);
+  }, []);
+  const [loading, setLoading] = useState(false);
   const classes = useStyles();
-
+  const dummyData = [
+    {
+      id: 1,
+      img: AUDI,
+      title: "TITLE HERE",
+      desc: "Description about the gig here",
+      price: 10,
+    },
+    {
+      id: 2,
+      img: AUDI,
+      title: "TITLE HERE",
+      desc: "Description about the gig here",
+      price: 10,
+    },
+    {
+      id: 3,
+      img: AUDI,
+      title: "TITLE HERE",
+      desc: "Description about the gig here",
+      price: 10,
+    },
+    {
+      id: 4,
+      img: AUDI,
+      title: "TITLE HERE",
+      desc: "Description about the gig here",
+      price: 10,
+    },
+  ];
   return (
     <div className={classes.root}>
       <div className="mtb">
@@ -33,15 +72,22 @@ export const Services = () => {
         />
       </div>
       <Grid container spacing={1}>
-        <Grid item xs={12} sm={4}>
-          <GigCard />
-        </Grid>
-        <Grid item xs={12} sm={4}>
-          <GigCard />
-        </Grid>
-        <Grid item xs={12} sm={4}>
-          <GigCard />
-        </Grid>
+        {loading ? (
+          dummyData.map((data) => {
+            return (
+              <Grid item xs={12} sm={4} key={data.id}>
+                <GigCard
+                  img={data.img}
+                  title={data.title}
+                  desc={data.desc}
+                  price={data.price}
+                />
+              </Grid>
+            );
+          })
+        ) : (
+          <SkeletonLoader />
+        )}
       </Grid>
     </div>
   );
