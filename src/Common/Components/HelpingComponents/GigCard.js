@@ -7,6 +7,7 @@ import CardContent from "@material-ui/core/CardContent";
 import CardMedia from "@material-ui/core/CardMedia";
 import Button from "@material-ui/core/Button";
 import Typography from "@material-ui/core/Typography";
+import { useHistory } from "react-router-dom";
 
 const useStyles = makeStyles({
   root: {
@@ -15,10 +16,20 @@ const useStyles = makeStyles({
 });
 
 export const GigCard = (props) => {
+  const history = useHistory();
+  function gotoID(id) {
+    history.push(`/user/service/${id}`);
+  }
+
   const classes = useStyles();
-  const { img, title, desc, price } = props;
+  const { id, img, title, desc, price } = props;
   return (
-    <Card className={classes.root}>
+    <Card
+      className={classes.root}
+      onClick={() => {
+        gotoID(id);
+      }}
+    >
       <CardActionArea>
         <CardMedia
           component="img"

@@ -77,6 +77,7 @@ export const Services = () => {
             return (
               <Grid item xs={12} sm={4} key={data.id}>
                 <GigCard
+                  id={data.id}
                   img={data.img}
                   title={data.title}
                   desc={data.desc}

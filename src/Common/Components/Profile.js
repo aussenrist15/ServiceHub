@@ -46,17 +46,6 @@ export const Profile = (props) => {
 
   return (
     <div>
-      <Header
-        color="transparent"
-        brand="Material Kit React"
-        rightLinks={<HeaderLinks />}
-        fixed
-        changeColorOnScroll={{
-          height: 200,
-          color: "white",
-        }}
-        {...rest}
-      />
       <Parallax small filter image={DP} />
       <div className={classNames(classes.main, classes.mainRaised)}>
         <div>
