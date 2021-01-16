@@ -69,7 +69,7 @@ export default function SignIn({ val, revertVal }) {
 
     if (!userErr && !passErr) {
       localStorage.setItem("isLoggedin", "true");
-      history.push("/");
+      history.push("/user");
     }
   }
 

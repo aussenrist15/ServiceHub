@@ -1,20 +1,20 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import PARALLEX from "../Static/Parallex.png";
 import Parallax from "../../THEME/components/Parallax/Parallax.js";
 import "../CSS/ServiceInfo.css";
 import { makeStyles } from "@material-ui/core/styles";
-import classNames from "classnames";
 import Grid from "@material-ui/core/Grid";
-import Card from "@material-ui/core/Card";
-import CardActions from "@material-ui/core/CardActions";
-import CardContent from "@material-ui/core/CardContent";
 import Button from "@material-ui/core/Button";
-import Typography from "@material-ui/core/Typography";
+import { LoadingAnimation } from "./HelpingComponents/LoadingAnimation";
+import { GigInfo } from "./HelpingComponents/GigInfo";
 
 const useStyles = makeStyles((theme) => ({
   root: {
     flexGrow: 1,
-    minWidth: 275,
+    minWidth: 500,
+    maxWidth: 600,
+    margin: 50,
+    textAlign: "center",
   },
   paper: {
     padding: theme.spacing(2),
@@ -32,58 +32,57 @@ const useStyles = makeStyles((theme) => ({
   pos: {
     marginBottom: 12,
   },
+  parall: {
+    height: 250,
+  },
+  btn: {
+    height: 50,
+    marginBottom: 20,
+  },
 }));
 
 export const ServiceInfo = () => {
-  const classes = useStyles();
+  const [isLoading, setisLoading] = useState(true);
 
+  useEffect(() => {
+    setTimeout(() => {
+      setisLoading(false);
+    }, 2000);
+  }, []);
+  const classes = useStyles();
+  const gigDummyData = {
+    ownerName: "Name of creator",
+    title: "Title",
+    ratings: 4.6,
+    desc:
+      " Description of the gig will go here. Just mkaing this dummy text big to see how it will look on the screen. Bla bla bla blablaDescription of the gig will go here. Just mkaing this dummy textbig to see how it will look on the screen. Bla bla bla blablaDescription of the gig will go here. Just mkaing this dummy textbig to see how it will look on the screen. Bla bla bla bla bla",
+  };
   return (
     <div>
-      <Parallax small filter image={PARALLEX} />
+      <Parallax small filter image={PARALLEX} className={classes.parall} />
       <div>
-        <Grid container spacing={1}>
-          <Grid item xs={0} sm={2}></Grid>
-          <Grid item xs={8} sm={3}>
-            <h1>Title Here</h1>
-            <h4>Name of creator here</h4>
-            <p>
-              Description of the gig will go here. Writing a long paragraph just
-              to check the layout Description of the gig will go here. Writing a
-              long paragraph just to check the layoutDescription of the gig will
-              go here. Writing a long paragraph just to check the
-              layoutDescription of the gig will go here. Writing a long
-              paragraph just to check the layout
-            </p>
-            <br></br>
-            <br></br>
-            <h4>About the creator</h4>
-            <br></br>
-            <br></br>
-            <Card className={classes.root} variant="outlined">
-              <CardContent>
-                <Typography
-                  className={classes.title}
-                  color="textSecondary"
-                  gutterBottom
-                >
-                  Name of the creator
-                </Typography>
-                <Typography variant="h5" component="h2">
-                  Rating: 5 star
-                </Typography>
-                <Typography className={classes.pos} color="textSecondary">
-                  Country
-                </Typography>
-                <Typography variant="body2" component="p">
-                  Joined Since
-                  <br />
-                  {'"a benevolent smile"'}
-                </Typography>
-              </CardContent>
-              <CardActions>
-                <Button size="small">View More from Him</Button>
-              </CardActions>
-            </Card>
+        <Grid container spacing={1} justify="center">
+          <Grid>
+            {isLoading ? <LoadingAnimation /> : <GigInfo data={gigDummyData} />}
+          </Grid>
+          <Grid>
+            <Button
+              variant="contained"
+              color="primary"
+              disabled={isLoading}
+              className={classes.btn}
+            >
+              Buy Service
+            </Button>
+            <br />
+            <Button
+              variant="contained"
+              disabled={isLoading}
+              color="secondary"
+              className={classes.btn}
+            >
+              Message Seller
+            </Button>
           </Grid>
         </Grid>
       </div>

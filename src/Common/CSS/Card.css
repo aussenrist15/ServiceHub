@@ -3,24 +3,35 @@
   height: 50%;
 }
 
+.textWhite {
+  color: white;
+}
+
 h1 {
   font-family: "Nerko One", cursive;
   font-size: 6vw;
   padding-left: 10px;
-  color: white;
+  /* color: white; */
 }
 h3 {
   padding-left: 15px;
   font-family: "Dancing Script", cursive;
   font-size: 2vw;
-  color: white;
+  /* color: white; */
 }
 h4 {
   padding-left: 15px;
   font-family: "Dancing Script", cursive;
   font-size: 3vw;
-  color: white;
+  /* color: white; */
 }
+/* h1,
+h2,
+h3,
+h4,
+p {
+  color: white;
+} */
 
 .container {
   width: 80%;
