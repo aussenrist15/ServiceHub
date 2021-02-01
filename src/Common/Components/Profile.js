@@ -5,9 +5,9 @@ import { useHistory } from "react-router-dom";
 // @material-ui/core components
 import { makeStyles } from "@material-ui/core/styles";
 // @material-ui/icons
-import Camera from "@material-ui/icons/Camera";
-import Palette from "@material-ui/icons/Palette";
-import Favorite from "@material-ui/icons/Favorite";
+import LaptopIcon from "@material-ui/icons/Laptop";
+import HomeIcon from "@material-ui/icons/Home";
+import LocalTaxiIcon from "@material-ui/icons/LocalTaxi";
 
 // Core Comoponents
 import Header from "../../THEME/components/Header/Header.js";
@@ -32,7 +32,7 @@ export const Profile = (props) => {
     const chck = localStorage.getItem("isLoggedin");
     if (chck && chck === "true") {
     } else {
-      history.push("/landing");
+      history.push("/");
     }
   }, []);
 
@@ -74,17 +74,17 @@ export const Profile = (props) => {
                   tabs={[
                     {
                       tabButton: "Services",
-                      tabIcon: Camera,
+                      tabIcon: LaptopIcon,
                       tabContent: <Services />,
                     },
                     {
                       tabButton: "Places",
-                      tabIcon: Palette,
+                      tabIcon: HomeIcon,
                       tabContent: <Places />,
                     },
                     {
                       tabButton: "Rides",
-                      tabIcon: Favorite,
+                      tabIcon: LocalTaxiIcon,
                       tabContent: <Rides />,
                     },
                   ]}

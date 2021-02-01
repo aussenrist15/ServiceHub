@@ -6,6 +6,8 @@ import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import { Profile } from "./Profile";
 import { Rides } from "./Rides.js";
 import { ServiceInfo } from "./ServiceInfo.js";
+import { CreateGig } from "./CreateServices/CreateGig.js";
+import { MyServices } from "./MyServices.js";
 
 export const User = () => {
   return (
@@ -23,6 +25,8 @@ export const User = () => {
 
       <Route path="/user/" exact component={Profile}></Route>
       <Route path="/user/service/:id" component={ServiceInfo}></Route>
+      <Route path="/user/create-gig" component={CreateGig}></Route>
+      <Route path="/user/user-services" component={MyServices}></Route>
     </div>
   );
 };
