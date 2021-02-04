@@ -8,6 +8,7 @@ import { Rides } from "./Rides.js";
 import { ServiceInfo } from "./ServiceInfo.js";
 import { CreateGig } from "./CreateServices/CreateGig.js";
 import { MyServices } from "./MyServices.js";
+import { RentPlace } from "./CreateServices/RentPlace";
 
 export const User = () => {
   return (
@@ -27,6 +28,7 @@ export const User = () => {
       <Route path="/user/service/:id" component={ServiceInfo}></Route>
       <Route path="/user/create-gig" component={CreateGig}></Route>
       <Route path="/user/user-services" component={MyServices}></Route>
+      <Route path="/user/create-place" component={RentPlace}></Route>
     </div>
   );
 };
