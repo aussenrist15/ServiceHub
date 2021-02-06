@@ -8,8 +8,8 @@ import { Rides } from "./Rides.js";
 import { ServiceInfo } from "./ServiceInfo.js";
 import { CreateGig } from "./CreateServices/CreateGig.js";
 import { MyServices } from "./MyServices.js";
-import { BuyService } from "./BuyService.js";
 import { RentPlace } from "./CreateServices/RentPlace";
+import {BuyService} from "./BuyService.js"
 export const User = () => {
   return (
     <div>
