@@ -5,7 +5,7 @@ import { makeStyles } from "@material-ui/core/styles";
 import Grid from "@material-ui/core/Grid";
 
 import { PlaceDescription } from "./PlaceRegisteration/PlaceDescription";
-import { PlacePhotos } from "./PlaceRegisteration/PlacePhotos";
+import { PlaceAccomodation } from "./PlaceRegisteration/PlaceAccomodation";
 
 const useStyles = makeStyles((theme) => ({
   parall: {
@@ -20,7 +20,7 @@ export const RentPlace = () => {
 
       <Grid container spacing={0} justify="center">
         <Grid>
-          <PlacePhotos></PlacePhotos>
+          <PlaceAccomodation></PlaceAccomodation>
         </Grid>
       </Grid>
     </div>

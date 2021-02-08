@@ -51,58 +51,53 @@ const useStyles = makeStyles((theme) => ({
 
 export const PlacePhotos = () => {
   const classes = useStyles();
-
-  const [description, setDescription] = useState("");
-  const handleDescChange = (event) => {
-    setDescription(event.target.value);
-  };
-
-  return (
-    <div>
-      <h1 className={classes.marginBlock}>Liven up your listing with photos</h1>
-      <p className={classes.margintop}>
-        Take photos using a phone or camera. Upload at least one photo to
-        publish your listing and drag to reorder however you like. You can
-        always add or edit your photos later
-      </p>
-      <FormControl className={classes.formControl}>
-        <Card
-          className={classes.root}
-          variant="outlined"
-          className={classes.margintop}
-        >
-          <CardContent>
-            <label htmlFor="contained-button-file">
-              <Button
-                variant="outlined"
-                color="primary"
-                component="span"
-                className={classes.marginTopBottom}
-              >
-                Upload Image
-              </Button>
-            </label>
-          </CardContent>
-          <CardActions>
-            <Button
-              variant="contained"
-              size="small"
-              color="primary"
-              className={classes.buttonleft}
-            >
-              skip
-            </Button>
-            <Button
-              className={classes.button}
-              variant="contained"
-              color="secondary"
-              className={classes.top}
-            >
-              Back
-            </Button>
-          </CardActions>
-        </Card>
-      </FormControl>
-    </div>
-  );
 };
+
+return (
+  <div>
+    <h1 className={classes.marginBlock}>Liven up your listing with photos</h1>
+    <p className={classes.margintop}>
+      Take photos using a phone or camera. Upload at least one photo to publish
+      your listing and drag to reorder however you like. You can always add or
+      edit your photos later
+    </p>
+    <FormControl className={classes.formControl}>
+      <Card
+        className={classes.root}
+        variant="outlined"
+        className={classes.margintop}
+      >
+        <CardContent>
+          <label htmlFor="contained-button-file">
+            <Button
+              variant="outlined"
+              color="primary"
+              component="span"
+              className={classes.marginTopBottom}
+            >
+              Upload Image
+            </Button>
+          </label>
+        </CardContent>
+        <CardActions>
+          <Button
+            variant="contained"
+            size="small"
+            color="primary"
+            className={classes.buttonleft}
+          >
+            skip
+          </Button>
+          <Button
+            className={classes.button}
+            variant="contained"
+            color="secondary"
+            className={classes.top}
+          >
+            Back
+          </Button>
+        </CardActions>
+      </Card>
+    </FormControl>
+  </div>
+);

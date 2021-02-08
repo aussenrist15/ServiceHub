@@ -7,6 +7,9 @@ import Grid from "@material-ui/core/Grid";
 import Button from "@material-ui/core/Button";
 import { LoadingAnimation } from "./HelpingComponents/LoadingAnimation";
 import { GigInfo } from "./HelpingComponents/GigInfo";
+import { BuyService } from "./BuyService";
+import { useHistory } from "react-router-dom";
+import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -42,6 +45,11 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 export const ServiceInfo = () => {
+  const history = useHistory();
+  function gotoBuy() {
+    history.push(`/user/buy-service`);
+    //<a href="BuyService"></a>
+  }
   const [isLoading, setisLoading] = useState(true);
 
   useEffect(() => {
@@ -67,6 +75,9 @@ export const ServiceInfo = () => {
           </Grid>
           <Grid>
             <Button
+            onClick={() => {
+                gotoBuy();
+                          }}
               variant="contained"
               color="primary"
               disabled={isLoading}
@@ -86,6 +97,7 @@ export const ServiceInfo = () => {
           </Grid>
         </Grid>
       </div>
+ 
     </div>
   );
 };
