@@ -14,6 +14,9 @@ import LocalTaxiIcon from "@material-ui/icons/LocalTaxi";
 
 // My Components
 import Services from "./UserServices/Services.js";
+import Places from "./UserServices/Places.js";
+import Rides from "./UserServices/Rides.js";
+
 
 const myStyle = makeStyles(styles);
 
@@ -77,12 +80,12 @@ export const MyServices = () => {
                 {
                   tabButton: "Places",
                   tabIcon: HomeIcon,
-                  tabContent: "Hello There",
+                  tabContent: <Places />,
                 },
                 {
                   tabButton: "Rides",
                   tabIcon: LocalTaxiIcon,
-                  tabContent: "Hello there",
+                  tabContent: <Rides />,
                 },
               ]}
             />
