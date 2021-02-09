@@ -41,16 +41,29 @@
 
 .CENTER {
   margin: auto;
-  margin-top: 100px;
-  margin-bottom: -80px;
+  /* margin-top: 100px; */
+  /* margin-bottom: -80px; */
 }
 
 .WIDTH {
-  width: 200px;
-  height: 200px;
+  width: 12em;
+  height: 20em;
   margin: auto;
 }
 
+.CONTAINER {
+  height: 200px;
+  position: relative;
+}
+
+.VERTICAL {
+  margin: 0;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  -ms-transform: translate(-50%, -50%);
+  transform: translate(-50%, -50%);
+}
 .dot-elastic::before {
   left: -15px;
   width: 10px;

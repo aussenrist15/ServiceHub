@@ -1,19 +1,25 @@
 import React from "react";
 import PropTypes from "prop-types";
-import clsx from "clsx";
+
 import SwipeableViews from "react-swipeable-views";
 import { makeStyles, useTheme } from "@material-ui/core/styles";
 import AppBar from "@material-ui/core/AppBar";
 import Tabs from "@material-ui/core/Tabs";
 import Tab from "@material-ui/core/Tab";
 import Typography from "@material-ui/core/Typography";
-
-import AddIcon from "@material-ui/icons/Add";
-import EditIcon from "@material-ui/icons/Edit";
-import UpIcon from "@material-ui/icons/KeyboardArrowUp";
-import { green } from "@material-ui/core/colors";
+import Button from "@material-ui/core/Button";
+import Card from "@material-ui/core/Card";
+import CardActions from "@material-ui/core/CardActions";
+import CardContent from "@material-ui/core/CardContent";
+import FormHelperText from "@material-ui/core/FormHelperText";
 import Box from "@material-ui/core/Box";
 import Slider from "@material-ui/core/Slider";
+import FormGroup from "@material-ui/core/FormGroup";
+import FormControlLabel from "@material-ui/core/FormControlLabel";
+import Checkbox from "@material-ui/core/Checkbox";
+
+import Favorite from "@material-ui/icons/Favorite";
+import FavoriteBorder from "@material-ui/icons/FavoriteBorder";
 
 function TabPanel(props) {
   const { children, value, index, ...other } = props;
@@ -52,24 +58,15 @@ const useStyles = makeStyles((theme) => ({
     position: "relative",
     minHeight: 400,
   },
-
+  btn: {
+    height: 37,
+    marginleft: 50,
+  },
   root2: {
     width: 300,
   },
   margin: {
     height: theme.spacing(3),
-  },
-  fab: {
-    position: "absolute",
-    bottom: theme.spacing(2),
-    right: theme.spacing(2),
-  },
-  fabGreen: {
-    color: theme.palette.common.white,
-    backgroundColor: green[500],
-    "&:hover": {
-      backgroundColor: green[600],
-    },
   },
 }));
 
@@ -91,26 +88,6 @@ export const PlaceAccomodation = () => {
     exit: theme.transitions.duration.leavingScreen,
   };
 
-  const fabs = [
-    {
-      color: "primary",
-      className: classes.fab,
-      icon: <AddIcon />,
-      label: "Add",
-    },
-    {
-      color: "secondary",
-      className: classes.fab,
-      icon: <EditIcon />,
-      label: "Edit",
-    },
-    {
-      color: "inherit",
-      className: clsx(classes.fab, classes.fabGreen),
-      icon: <UpIcon />,
-      label: "Expand",
-    },
-  ];
   const marks = [
     {
       value: 1,
@@ -141,32 +118,7 @@ export const PlaceAccomodation = () => {
       label: "30",
     },
   ];
-  const beds = [
-    {
-      value: 1,
-      label: "1",
-    },
-    {
-      value: 10,
-      label: "10",
-    },
-    {
-      value: 20,
-      label: "20",
-    },
-    {
-      value: 30,
-      label: "30",
-    },
-    {
-      value: 40,
-      label: "40",
-    },
-    {
-      value: 50,
-      label: "50",
-    },
-  ];
+
   function valuetextguests(value) {
     return `${value}`;
   }
@@ -178,82 +130,311 @@ export const PlaceAccomodation = () => {
   }
   return (
     <div className={classes.root}>
-      <br></br>
-      <h3>Place Accomodation</h3>
-      <AppBar position="static" color="default">
-        <br></br>
-
-        <Tabs
-          value={value}
-          onChange={handleChange}
-          indicatorColor="primary"
-          textColor="primary"
-          variant="fullWidth"
-          aria-label="action tabs example"
-        >
-          <Tab label="Guests" {...a11yProps(0)} />
-          <Tab label="Bedrooms and Bathrooms" {...a11yProps(1)} />
-          <Tab label="Amenities" {...a11yProps(2)} />
-        </Tabs>
-      </AppBar>
-      <SwipeableViews
-        axis={theme.direction === "rtl" ? "x-reverse" : "x"}
-        index={value}
-        onChangeIndex={handleChangeIndex}
+      <Card
+        // className={classes.root}
+        variant="outlined"
+        className={classes.margintop}
       >
-        <TabPanel value={value} index={0} dir={theme.direction}>
-          <Typography id="slider_guests" gutterBottom className={classes.root1}>
-            <p>
-              <b>How many guests can your place accommodate?</b>
-            </p>
+        <CardContent>
+          <br></br>
+          <h3>Place Accomodation</h3>
+          <AppBar position="static" color="default">
             <br></br>
-            Check that you have enough beds to accommodate all your guests
-            comfortably.<br></br>
-            <br></br>
-            <p>
-              <b>GUESTS</b>
-            </p>
-            <br></br>
-            <br></br>
-          </Typography>
-          <Slider
-            defaultValue={0}
-            max={30}
-            getAriaValueText={valuetextguests}
-            aria-labelledby="discrete-slider-always"
-            step={1}
-            marks={marks}
-            valueLabelDisplay="on"
-          />
 
-          <Typography id="slider_beds" gutterBottom className={classes.root1}>
-            <br></br>
-            <br></br>
-            How many beds can guests use?<br></br>
-            <br></br>
-            <p>
-              <b>BEDS</b>
-            </p>
-            <br></br>
-            <br></br>
-          </Typography>
-          <Slider
-            defaultValue={0}
-            max={50}
-            getAriaValueText={valuetextbeds}
-            aria-labelledby="discrete-slider-always"
-            step={1}
-            beds={beds}
-            valueLabelDisplay="on"
-          />
-        </TabPanel>
-        <TabPanel value={value} index={1} dir={theme.direction}>
-          Item Two
-        </TabPanel>
-        <TabPanel value={value} index={2} dir={theme.direction}>
-          Item Three
-        </TabPanel>
-      </SwipeableViews>
+            <Tabs
+              value={value}
+              onChange={handleChange}
+              indicatorColor="primary"
+              textColor="primary"
+              variant="fullWidth"
+              aria-label="action tabs example"
+            >
+              <Tab label="Guests" {...a11yProps(0)} />
+              <Tab label="Amenities" {...a11yProps(1)} />
+              <Tab label="Spaces" {...a11yProps(2)} />
+            </Tabs>
+          </AppBar>
+          <SwipeableViews
+            axis={theme.direction === "rtl" ? "x-reverse" : "x"}
+            index={value}
+            onChangeIndex={handleChangeIndex}
+          >
+            <TabPanel value={value} index={0} dir={theme.direction}>
+              <Typography
+                id="slider_guests"
+                gutterBottom
+                className={classes.root1}
+              >
+                <p>
+                  <b>How many guests can your place accommodate?</b>
+                </p>
+                Check that you have enough beds to accommodate all your guests
+                comfortably.<br></br>
+                <br></br>
+                <p>
+                  <b>GUESTS</b>
+                </p>
+                <br></br>
+              </Typography>
+              <Slider
+                defaultValue={0}
+                max={30}
+                getAriaValueText={valuetextguests}
+                aria-labelledby="discrete-slider-always"
+                step={1}
+                marks={marks}
+                valueLabelDisplay="on"
+              />
+
+              <Typography
+                id="slider_beds"
+                gutterBottom
+                className={classes.root1}
+              >
+                <br></br>
+                <br></br>
+                <b> How many beds can guests use?</b>
+                <br></br>
+                <br></br>
+                <p>
+                  <b>BEDS</b>
+                </p>
+
+                <br></br>
+              </Typography>
+              <Slider
+                defaultValue={0}
+                max={30}
+                getAriaValueText={valuetextbeds}
+                aria-labelledby="discrete-slider-always"
+                step={1}
+                marks={marks}
+                valueLabelDisplay="on"
+              />
+
+              <Typography
+                id="slider_bathrooms"
+                gutterBottom
+                className={classes.root1}
+              >
+                <br></br>
+                <br></br>
+                <p>
+                  <b> How many bathrooms?</b>
+                </p>
+                Count bathrooms that don’t have a shower or bathtub as a half
+                bathroom.
+                <br></br>
+                <br></br>
+                <p>
+                  <b>BATHROOMS</b>
+                </p>
+                <br></br>
+              </Typography>
+              <Slider
+                defaultValue={0}
+                max={30}
+                getAriaValueText={valuetextbathrooms}
+                aria-labelledby="discrete-slider-always"
+                step={0.5}
+                marks={marks}
+                valueLabelDisplay="on"
+              />
+            </TabPanel>
+            <TabPanel value={value} index={1} dir={theme.direction}>
+              <FormGroup column>
+                <br></br>
+                <p>
+                  <b>What amenities do you offer?</b>
+                </p>
+                Check that you have enough beds to accommodate all your guests
+                comfortably.<br></br>
+                <br></br>
+                <FormControlLabel
+                  control={
+                    <Checkbox
+                      icon={<FavoriteBorder />}
+                      checkedIcon={<Favorite />}
+                      name="essentials"
+                    />
+                  }
+                  label="Essentials"
+                />
+                <FormHelperText>
+                  ____ Towels, bed sheets, soap, toilet paper, and pillows
+                </FormHelperText>
+                <FormControlLabel
+                  control={
+                    <Checkbox
+                      icon={<FavoriteBorder />}
+                      checkedIcon={<Favorite />}
+                      name="wifi"
+                    />
+                  }
+                  label="Wifi"
+                />
+                <FormControlLabel
+                  control={
+                    <Checkbox
+                      icon={<FavoriteBorder />}
+                      checkedIcon={<Favorite />}
+                      name="tv"
+                    />
+                  }
+                  label="TV"
+                />
+                <FormControlLabel
+                  control={
+                    <Checkbox
+                      icon={<FavoriteBorder />}
+                      checkedIcon={<Favorite />}
+                      name="heater"
+                    />
+                  }
+                  label="Heater/Fireplace"
+                />
+                <FormControlLabel
+                  control={
+                    <Checkbox
+                      icon={<FavoriteBorder />}
+                      checkedIcon={<Favorite />}
+                      name="checkedH"
+                    />
+                  }
+                  label="Air Conditioning"
+                />
+                <FormControlLabel
+                  control={
+                    <Checkbox
+                      icon={<FavoriteBorder />}
+                      checkedIcon={<Favorite />}
+                      name="shampoo"
+                    />
+                  }
+                  label="Shampoo"
+                />
+                <FormControlLabel
+                  control={
+                    <Checkbox
+                      icon={<FavoriteBorder />}
+                      checkedIcon={<Favorite />}
+                      name="iron"
+                    />
+                  }
+                  label="Iron"
+                />
+                <FormControlLabel
+                  control={
+                    <Checkbox
+                      icon={<FavoriteBorder />}
+                      checkedIcon={<Favorite />}
+                      name="hairdryer"
+                    />
+                  }
+                  label="Hair Dryer"
+                />
+                <FormControlLabel
+                  control={
+                    <Checkbox
+                      icon={<FavoriteBorder />}
+                      checkedIcon={<Favorite />}
+                      name="breakfast"
+                    />
+                  }
+                  label="Breakfast/coffee/tea"
+                />
+                <FormControlLabel
+                  control={
+                    <Checkbox
+                      icon={<FavoriteBorder />}
+                      checkedIcon={<Favorite />}
+                      name="cookingbasics"
+                    />
+                  }
+                  label="Cooking Basics"
+                />
+                <FormHelperText>
+                  ____ Pots and pans, oil, salt and pepper
+                </FormHelperText>
+                <br></br>
+                <br></br>
+                <p>
+                  <b>Safety Amenities</b>
+                </p>
+                <FormControlLabel
+                  control={
+                    <Checkbox
+                      icon={<FavoriteBorder />}
+                      checkedIcon={<Favorite />}
+                      name="smoke_detector"
+                    />
+                  }
+                  label="Smoke detector"
+                />
+                <FormHelperText>
+                  ____ Check your local laws, which may require a working smoke
+                  detector in every room
+                </FormHelperText>
+                <FormControlLabel
+                  control={
+                    <Checkbox
+                      icon={<FavoriteBorder />}
+                      checkedIcon={<Favorite />}
+                      name="first_aid"
+                    />
+                  }
+                  label="First aid kit"
+                />
+                <FormControlLabel
+                  control={
+                    <Checkbox
+                      icon={<FavoriteBorder />}
+                      checkedIcon={<Favorite />}
+                      name="fire_extinguisher"
+                    />
+                  }
+                  label="Fire extinguisher"
+                />
+                <FormControlLabel
+                  control={
+                    <Checkbox
+                      icon={<FavoriteBorder />}
+                      checkedIcon={<Favorite />}
+                      name="bedroomlock"
+                    />
+                  }
+                  label="Lock on bedroom door"
+                />
+                <FormHelperText>
+                  ____ Private room can be locked for safety and privacy
+                </FormHelperText>
+              </FormGroup>
+            </TabPanel>
+            <TabPanel value={value} index={2} dir={theme.direction}>
+              Item Three
+            </TabPanel>
+          </SwipeableViews>
+        </CardContent>
+        <CardActions>
+          <Button
+            className={classes.button}
+            variant="contained"
+            color="secondary"
+            className={classes.top}
+          >
+            Back
+          </Button>
+          <Button
+            variant="contained"
+            size="small"
+            color="primary"
+            className={classes.buttonleft}
+            className={classes.btn}
+          >
+            Next
+          </Button>
+        </CardActions>
+      </Card>
     </div>
   );
 };

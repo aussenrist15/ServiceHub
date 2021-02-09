@@ -44,10 +44,11 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-export const ServiceInfo = () => {
+export const ServiceInfo = (props) => {
   const history = useHistory();
   function gotoBuy() {
-    history.push(`/user/buy-service`);
+    let ID = props.match.params.id;
+    history.push(`/user/buy-service/${ID}`);
     //<a href="BuyService"></a>
   }
   const [isLoading, setisLoading] = useState(true);
@@ -75,9 +76,9 @@ export const ServiceInfo = () => {
           </Grid>
           <Grid>
             <Button
-            onClick={() => {
+              onClick={() => {
                 gotoBuy();
-                          }}
+              }}
               variant="contained"
               color="primary"
               disabled={isLoading}
@@ -97,7 +98,6 @@ export const ServiceInfo = () => {
           </Grid>
         </Grid>
       </div>
- 
     </div>
   );
 };
