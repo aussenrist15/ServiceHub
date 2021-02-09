@@ -28,10 +28,21 @@ const Notifications = () => {
     <div>
       {isLoading ? (
         <div className="WIDTH">
-          <div className="dot-pulse CENTER"></div>
+          <div className="CONTAINER">
+            <div className="VERTICAL">
+              <div className="dot-pulse CENTER"></div>
+            </div>
+          </div>
         </div>
       ) : (
-        <div className={classes.padding}>
+        <div className="WIDTH">
+          <Typography className={classes.padding}>
+            Notification 1: Text for the Notification will appear here
+          </Typography>
+          <Typography className={classes.padding}>Notification 1</Typography>
+          <Typography className={classes.padding}>Notification 1</Typography>
+          <Typography className={classes.padding}>Notification 1</Typography>
+          <Typography className={classes.padding}>Notification 1</Typography>
           <Typography className={classes.padding}>Notification 1</Typography>
           <Typography className={classes.padding}>Notification 1</Typography>
           <Typography className={classes.padding}>Notification 1</Typography>
