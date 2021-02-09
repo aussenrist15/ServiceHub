@@ -32,13 +32,8 @@ export const User = () => {
       <Route path="/user/service/:id" component={ServiceInfo}></Route>
       <Route path="/user/create-gig" component={CreateGig}></Route>
       <Route path="/user/user-services" component={MyServices}></Route>
-<<<<<<< HEAD
       <Route path="/user/buy-service" component={BuyService}></Route>
-=======
-
       <Route path="/user/buy-service/:id" component={BuyService}></Route>
-
->>>>>>> 34db546929bedfd325dc369ca23cb696cf699779
       <Route path="/user/create-place" component={RentPlace}></Route>
       <Route path="/user/create-ride" component={ShareRide}></Route>
     </div>
