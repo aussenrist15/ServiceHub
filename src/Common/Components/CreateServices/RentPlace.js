@@ -5,8 +5,9 @@ import { makeStyles } from "@material-ui/core/styles";
 import Grid from "@material-ui/core/Grid";
 
 import { PlaceDescription } from "./PlaceRegisteration/PlaceDescription";
+import { PlaceLocation } from "./PlaceRegisteration/PlaceLocation";
+import { PlaceKind } from "./PlaceRegisteration/PlaceKind";
 import { PlaceAccomodation } from "./PlaceRegisteration/PlaceAccomodation";
-
 const useStyles = makeStyles((theme) => ({
   parall: {
     height: 250,
