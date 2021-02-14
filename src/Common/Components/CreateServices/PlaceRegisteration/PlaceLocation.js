@@ -93,11 +93,14 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-export const PlaceLocation = () => {
+export const PlaceLocation = (props) => {
   const defaultProps = {
     options: CountryNames,
     getOptionLabel: (option) => option.title,
   };
+
+  const step = props.step;
+  const setStep = props.setStep;
 
   const flatProps = {
     options: CountryNames.map((option) => option.title),
@@ -206,19 +209,14 @@ export const PlaceLocation = () => {
               </CardContent>
               <CardActions>
                 <Button
-                  className={classes.button}
-                  variant="contained"
-                  color="secondary"
-                  className={classes.top}
-                >
-                  Back
-                </Button>
-                <Button
                   variant="contained"
                   size="small"
                   color="primary"
                   className={classes.buttonleft}
                   className={classes.btn}
+                  onClick={() => {
+                    setStep(step + 1);
+                  }}
                 >
                   Next
                 </Button>

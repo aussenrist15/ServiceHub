@@ -70,11 +70,12 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-export const PlaceAccomodation = () => {
+export const PlaceAccomodation = (props) => {
   const classes = useStyles();
   const theme = useTheme();
   const [value, setValue] = React.useState(0);
-
+  const step = props.step;
+  const setStep = props.setStep;
   const handleChange = (event, newValue) => {
     setValue(newValue);
   };
@@ -421,6 +422,9 @@ export const PlaceAccomodation = () => {
             variant="contained"
             color="secondary"
             className={classes.top}
+            onClick={() => {
+              setStep(step - 1);
+            }}
           >
             Back
           </Button>
@@ -430,6 +434,9 @@ export const PlaceAccomodation = () => {
             color="primary"
             className={classes.buttonleft}
             className={classes.btn}
+            onClick={() => {
+              setStep(step + 1);
+            }}
           >
             Next
           </Button>

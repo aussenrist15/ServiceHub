@@ -36,9 +36,10 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-export const PlaceDescription = () => {
+export const PlaceDescription = (props) => {
   const classes = useStyles();
-
+  const step = props.step;
+  const setStep = props.setStep;
   const [description, setDescription] = useState("");
   const handleDescChange = (event) => {
     setDescription(event.target.value);
@@ -69,6 +70,9 @@ export const PlaceDescription = () => {
           className={classes.marginTopBottom}
           className={classes.button}
           className={classes.buttonleft}
+          onClick={() => {
+            setStep(step + 1);
+          }}
         >
           Next
         </Button>
@@ -78,6 +82,9 @@ export const PlaceDescription = () => {
           color="secondary"
           //className={classes.marginTopBottom}
           className={classes.button}
+          onClick={() => {
+            setStep(step - 1);
+          }}
         >
           Back
         </Button>

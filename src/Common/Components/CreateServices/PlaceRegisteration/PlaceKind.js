@@ -75,11 +75,14 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-export const PlaceKind = () => {
+export const PlaceKind = (props) => {
   const classes = useStyles();
   const [PropertyType, setProperyType] = useState("");
   const [Rooms, setRooms] = useState("");
   const [PlaceType, setPLaceType] = useState("");
+
+  const step = props.step;
+  const setStep = props.setStep;
 
   const handleChange = (event) => {
     setProperyType(event.target.value);
@@ -227,6 +230,9 @@ export const PlaceKind = () => {
                   variant="contained"
                   color="secondary"
                   className={classes.top}
+                  onClick={() => {
+                    setStep(step - 1);
+                  }}
                 >
                   Back
                 </Button>
@@ -236,6 +242,9 @@ export const PlaceKind = () => {
                   color="primary"
                   className={classes.buttonleft}
                   className={classes.btn}
+                  onClick={() => {
+                    setStep(step + 1);
+                  }}
                 >
                   Next
                 </Button>
