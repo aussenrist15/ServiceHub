@@ -28,6 +28,7 @@ const useStyles = makeStyles((theme) => ({
   buttonleft: {
     marginLeft: 450,
     width: 50,
+    height: 38,
   },
   margintop: {
     margintop: 100,
