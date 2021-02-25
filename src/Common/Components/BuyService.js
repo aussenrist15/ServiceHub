@@ -67,15 +67,15 @@ export const BuyService = () => {
         <Grid>
           {isLoading ? <LoadingAnimation /> : 
             <Card className={classes.root} variant="outlined">
-        <CardContent>
-          <Typography
-            className="Price"
-            color="black"
-            gutterBottom
-          >
-           <h3> {serviceDummyData.price}</h3>
-          </Typography>
-          </CardContent>
+              <CardContent>
+                <Typography
+                  className="Price"
+                  color="black"
+                  gutterBottom
+                >
+                <h3> {serviceDummyData.price}</h3>
+                </Typography>
+              </CardContent>
           </Card>}
           <form className={classes.root} noValidate autoComplete="off">
           <div>
@@ -88,7 +88,7 @@ export const BuyService = () => {
           <div>
                     <TextField id="accountNumber"
                      required
-                     label="Enter Bank account number"
+                     label="Account Number"
                      variant="outlined" />
           </div>
             </form>
