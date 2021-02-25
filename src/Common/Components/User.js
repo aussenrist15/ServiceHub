@@ -32,7 +32,9 @@ export const User = () => {
       <Route path="/user/service/:id" component={ServiceInfo}></Route>
       <Route path="/user/create-gig" component={CreateGig}></Route>
       <Route path="/user/user-services" component={MyServices}></Route>
+
       {/* <Route path="/user/buy-service" component={BuyService}></Route> */}
+      
       <Route path="/user/buy-service/:id" component={BuyService}></Route>
       <Route path="/user/create-place" component={RentPlace}></Route>
       <Route path="/user/create-ride" component={ShareRide}></Route>

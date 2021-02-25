@@ -28,6 +28,7 @@ const useStyles = makeStyles((theme) => ({
   buttonleft: {
     marginLeft: 450,
     width: 50,
+    height: 38,
   },
   margintop: {
     margintop: 100,
@@ -49,55 +50,59 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-export const PlacePhotos = () => {
+export const PlacePhotos = (props) => {
   const classes = useStyles();
-};
-
-return (
-  <div>
-    <h1 className={classes.marginBlock}>Liven up your listing with photos</h1>
-    <p className={classes.margintop}>
-      Take photos using a phone or camera. Upload at least one photo to publish
-      your listing and drag to reorder however you like. You can always add or
-      edit your photos later
-    </p>
-    <FormControl className={classes.formControl}>
-      <Card
-        className={classes.root}
-        variant="outlined"
-        className={classes.margintop}
-      >
-        <CardContent>
-          <label htmlFor="contained-button-file">
+  const step = props.step;
+  const setStep = props.setStep;
+  return (
+    <div>
+      <h1 className={classes.marginBlock}>Liven up your listing with photos</h1>
+      <p className={classes.margintop}>
+        Take photos using a phone or camera. Upload at least one photo to
+        publish your listing and drag to reorder however you like. You can
+        always add or edit your photos later
+      </p>
+      <FormControl className={classes.formControl}>
+        <Card
+          className={classes.root}
+          variant="outlined"
+          className={classes.margintop}
+        >
+          <CardContent>
+            <label htmlFor="contained-button-file">
+              <Button
+                variant="outlined"
+                color="primary"
+                component="span"
+                className={classes.marginTopBottom}
+              >
+                Upload Image
+              </Button>
+            </label>
+          </CardContent>
+          <CardActions>
             <Button
-              variant="outlined"
+              variant="contained"
+              size="small"
               color="primary"
-              component="span"
-              className={classes.marginTopBottom}
+              className={classes.buttonleft}
             >
-              Upload Image
+              Finish
             </Button>
-          </label>
-        </CardContent>
-        <CardActions>
-          <Button
-            variant="contained"
-            size="small"
-            color="primary"
-            className={classes.buttonleft}
-          >
-            skip
-          </Button>
-          <Button
-            className={classes.button}
-            variant="contained"
-            color="secondary"
-            className={classes.top}
-          >
-            Back
-          </Button>
-        </CardActions>
-      </Card>
-    </FormControl>
-  </div>
-);
+            <Button
+              className={classes.button}
+              variant="contained"
+              color="secondary"
+              className={classes.top}
+              onClick={() => {
+                setStep(step - 1);
+              }}
+            >
+              Back
+            </Button>
+          </CardActions>
+        </Card>
+      </FormControl>
+    </div>
+  );
+};

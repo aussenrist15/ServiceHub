@@ -7,12 +7,22 @@ import Button from "@material-ui/core/Button";
 import TextField from "@material-ui/core/TextField";
 import { classNames } from "classnames";
 import Icon from "@material-ui/core/Icon";
+import Card from "@material-ui/core/Card";
+import CardActions from "@material-ui/core/CardActions";
+import CardContent from "@material-ui/core/CardContent";
 
 const useStyles = makeStyles((theme) => ({
   marginTopBottom: {
     marginTop: 20,
     marginBottom: 20,
     width: 500,
+  },
+  root: {
+    flexGrow: 1,
+    minWidth: 500,
+    maxWidth: 600,
+    margin: 50,
+    textAlign: "center",
   },
   paper: {
     padding: theme.spacing(2),
@@ -26,6 +36,7 @@ const useStyles = makeStyles((theme) => ({
   buttonleft: {
     marginLeft: 450,
     width: 50,
+    height: 37,
   },
   margintop: {
     margintop: 100,
@@ -34,11 +45,16 @@ const useStyles = makeStyles((theme) => ({
     marginBlock: 50,
     marginRight: 500,
   },
+  heading: {
+    position: "relative",
+    marginLeft: 190,
+  },
 }));
 
-export const PlaceDescription = () => {
+export const PlaceDescription = (props) => {
   const classes = useStyles();
-
+  const step = props.step;
+  const setStep = props.setStep;
   const [description, setDescription] = useState("");
   const handleDescChange = (event) => {
     setDescription(event.target.value);
@@ -46,42 +62,61 @@ export const PlaceDescription = () => {
 
   return (
     <div>
-      <p className={classes.margintop}>
-        <h1>Description About Place</h1>
-        Mention the best features of your space, any special amenities like fast
-        wifi or parking, and what you love about the neighborhood.
-      </p>
-      <FormControl className={classes.formControl}>
-        <TextField
-          id="outlined-multiline-static"
-          label="Description about the Place"
-          multiline
-          rows={8}
-          defaultValue=""
-          onChange={handleDescChange}
-          variant="outlined"
-          className={classes.marginTopBottom}
-        />
+      <Grid container spacing={1} justify="center">
+        <Grid>
+          <h1 className={classes.heading}>Description About Place</h1>
+          <p className={classes.margintop}>
+            Mention the best features of your space, any special amenities like
+            fast wifi or parking, and what you love about the neighborhood.
+          </p>
+          <Card
+            className={classes.root}
+            variant="outlined"
+            className={classes.margintop}
+          >
+            <CardContent>
+              <FormControl className={classes.formControl}>
+                <TextField
+                  id="outlined-multiline-static"
+                  label="Description about the Place"
+                  multiline
+                  rows={8}
+                  defaultValue=""
+                  onChange={handleDescChange}
+                  variant="outlined"
+                  className={classes.marginTopBottom}
+                />
 
-        <Button
-          variant="contained"
-          color="primary"
-          className={classes.marginTopBottom}
-          className={classes.button}
-          className={classes.buttonleft}
-        >
-          Next
-        </Button>
-
-        <Button
-          variant="contained"
-          color="secondary"
-          //className={classes.marginTopBottom}
-          className={classes.button}
-        >
-          Back
-        </Button>
-      </FormControl>
+                <CardActions>
+                  <Button
+                    className={classes.button}
+                    variant="contained"
+                    color="secondary"
+                    className={classes.top}
+                    onClick={() => {
+                      setStep(step - 1);
+                    }}
+                  >
+                    Back
+                  </Button>
+                  <Button
+                    variant="contained"
+                    size="small"
+                    color="primary"
+                    className={classes.buttonleft}
+                    //   className={classes.btn}
+                    onClick={() => {
+                      setStep(step + 1);
+                    }}
+                  >
+                    Next
+                  </Button>
+                </CardActions>
+              </FormControl>
+            </CardContent>
+          </Card>
+        </Grid>
+      </Grid>
     </div>
   );
 };

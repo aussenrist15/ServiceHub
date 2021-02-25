@@ -1,6 +1,5 @@
 import React from "react";
 import PropTypes from "prop-types";
-
 import SwipeableViews from "react-swipeable-views";
 import { makeStyles, useTheme } from "@material-ui/core/styles";
 import AppBar from "@material-ui/core/AppBar";
@@ -70,22 +69,18 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-export const PlaceAccomodation = () => {
+export const PlaceAccomodation = (props) => {
   const classes = useStyles();
   const theme = useTheme();
   const [value, setValue] = React.useState(0);
-
+  const step = props.step;
+  const setStep = props.setStep;
   const handleChange = (event, newValue) => {
     setValue(newValue);
   };
 
   const handleChangeIndex = (index) => {
     setValue(index);
-  };
-
-  const transitionDuration = {
-    enter: theme.transitions.duration.enteringScreen,
-    exit: theme.transitions.duration.leavingScreen,
   };
 
   const marks = [
@@ -411,7 +406,75 @@ export const PlaceAccomodation = () => {
               </FormGroup>
             </TabPanel>
             <TabPanel value={value} index={2} dir={theme.direction}>
-              Item Three
+              <FormGroup column>
+                <br></br>
+                <p>
+                  <b>What spaces can guests use?</b>
+                </p>
+                Include common areas, but don’t add spaces that aren’t on your
+                property.<br></br>
+                <br></br>
+                <FormControlLabel
+                  control={
+                    <Checkbox
+                      icon={<FavoriteBorder />}
+                      checkedIcon={<Favorite />}
+                      name="dryerlaundary"
+                    />
+                  }
+                  label="Laundary-dryer"
+                />
+                <FormControlLabel
+                  control={
+                    <Checkbox
+                      icon={<FavoriteBorder />}
+                      checkedIcon={<Favorite />}
+                      name="kitchen"
+                    />
+                  }
+                  label="Kitchen"
+                />
+                <FormControlLabel
+                  control={
+                    <Checkbox
+                      icon={<FavoriteBorder />}
+                      checkedIcon={<Favorite />}
+                      name="pool"
+                    />
+                  }
+                  label="Pool"
+                />
+                <FormControlLabel
+                  control={
+                    <Checkbox
+                      icon={<FavoriteBorder />}
+                      checkedIcon={<Favorite />}
+                      name="washer"
+                    />
+                  }
+                  label="Laundary-Washer"
+                />
+                <FormControlLabel
+                  control={
+                    <Checkbox
+                      icon={<FavoriteBorder />}
+                      checkedIcon={<Favorite />}
+                      name="parking"
+                    />
+                  }
+                  label="Parking"
+                />
+                <FormControlLabel
+                  control={
+                    <Checkbox
+                      icon={<FavoriteBorder />}
+                      checkedIcon={<Favorite />}
+                      name="gym"
+                    />
+                  }
+                  label="Gym"
+                />
+              </FormGroup>
             </TabPanel>
           </SwipeableViews>
         </CardContent>
@@ -421,6 +484,9 @@ export const PlaceAccomodation = () => {
             variant="contained"
             color="secondary"
             className={classes.top}
+            onClick={() => {
+              setStep(step - 1);
+            }}
           >
             Back
           </Button>
@@ -430,6 +496,9 @@ export const PlaceAccomodation = () => {
             color="primary"
             className={classes.buttonleft}
             className={classes.btn}
+            onClick={() => {
+              setStep(step + 1);
+            }}
           >
             Next
           </Button>
