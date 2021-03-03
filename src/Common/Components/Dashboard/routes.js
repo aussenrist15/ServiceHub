@@ -1,6 +1,6 @@
 
 import Dashboard from "./Dashboard";
-//import Profile from "views/examples/Profile.js";
+import Profile from "./Profile.js";
 import Balance from "./Balance";
 //import BillingInfo from "views/examples/BillingInfo.js";
 //import Orders from "views/examples/Orders.js";
@@ -55,7 +55,6 @@ var routes = [
     component: PostRequest,
     layout: "/dashboard",
   },
-  /*
   {
     path: "/user-profile",
     name: "User Profile",
@@ -63,6 +62,7 @@ var routes = [
     component: Profile,
     layout: "/dashboard",
   },
+  /*
   {
     path: "/orders",
     name: "Orders",
