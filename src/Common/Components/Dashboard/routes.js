@@ -5,7 +5,7 @@ import Balance from "./Balance.js";
 //import BillingInfo from "views/examples/BillingInfo.js";
 //import Orders from "views/examples/Orders.js";
 //import Gigs from "views/examples/Gigs.js";
-//import Security from "views/examples/Security";
+import Security from "./Security";
 //import Chat from "views/examples/Chat"
 //import Analytics from "views/examples/Analytics"
 //import ReachUs from "views/examples/ReachUs"
@@ -34,7 +34,6 @@ var routes = [
     component: Balance,
     layout: "/dashboard",
   },
-  /*
   {
     path: "/security",
     name: "Security",
@@ -42,6 +41,7 @@ var routes = [
     component: Security,
     layout: "/dashboard",
   },
+  /*
   {
     path: "/chatmessages",
     name: "Chat",
