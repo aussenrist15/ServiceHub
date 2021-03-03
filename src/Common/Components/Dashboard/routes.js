@@ -8,7 +8,7 @@ import Gigs from "./Gigs";
 import Security from "./Security";
 import Chat from "./Chat"
 //import Analytics from "views/examples/Analytics"
-//import ReachUs from "views/examples/ReachUs"
+import ReachUs from "./ReachUs"
 import PostRequest from "./PostRequest"
 
 var routes = [
@@ -83,7 +83,6 @@ var routes = [
     component: BillingInfo,
     layout: "/dashboard",
   },
-  /*
   {
     path: "/reachus",
     name: "Reach Us",
@@ -91,6 +90,5 @@ var routes = [
     component: ReachUs,
     layout: "/dashboard",
   },
-  */
 ];
 export default routes;
