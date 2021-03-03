@@ -96,6 +96,17 @@ export default function HeaderLinks(props) {
         />
       </ListItem>
       <ListItem className={classes.listItem}>
+        <Button color="transparent" className={classes.navLink}>
+          <Link
+            to="/dashboard"
+            style={{ textDecoration: "none" }}
+            className={classes.listItem}
+          >
+            <AccountCircleIcon className={classes.icons} /> Dashboard
+          </Link>
+        </Button>
+      </ListItem>
+      <ListItem className={classes.listItem}>
         <Button
           onClick={handleLogout}
           color="transparent"
@@ -104,7 +115,6 @@ export default function HeaderLinks(props) {
           <ExitToAppIcon className={classes.icons} /> Logout
         </Button>
       </ListItem>
-
       <ListItem className={classes.listItem}>
         {/**TODO Add Popover */}
         <div>
@@ -122,7 +132,7 @@ export default function HeaderLinks(props) {
                 className={classes.icons}
               ></NotificationsActiveIcon>
             )}
-            Notififactions
+            Notifications
           </Button>
           <Popover
             id={id}
