@@ -1,12 +1,12 @@
 
 import Dashboard from "./Dashboard";
 //import Profile from "views/examples/Profile.js";
-import Balance from "./Balance.js";
+import Balance from "./Balance";
 //import BillingInfo from "views/examples/BillingInfo.js";
 //import Orders from "views/examples/Orders.js";
 //import Gigs from "views/examples/Gigs.js";
 import Security from "./Security";
-//import Chat from "views/examples/Chat"
+import Chat from "./Chat"
 //import Analytics from "views/examples/Analytics"
 //import ReachUs from "views/examples/ReachUs"
 //import PostRequest from "views/examples/PostRequest"
@@ -41,7 +41,6 @@ var routes = [
     component: Security,
     layout: "/dashboard",
   },
-  /*
   {
     path: "/chatmessages",
     name: "Chat",
@@ -49,6 +48,7 @@ var routes = [
     component: Chat,
     layout: "/dashboard",
   },
+  /*
   {
     path: "/postrequest",
     name: "Post Request",
