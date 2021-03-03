@@ -122,7 +122,7 @@ export default function ScrollableTabsButtonAuto() {
                             <img
                               alt="..."
                               src={
-                                require("../../assets/img/theme/bootstrap.jpg")
+                                require("../assets/img/reimbursement.jpg")
                                   .default
                               }
                             />
@@ -193,7 +193,7 @@ export default function ScrollableTabsButtonAuto() {
                             <img
                               alt="..."
                               src={
-                                require("../../assets/img/theme/bootstrap.jpg")
+                                require("../assets/img/reimbursement.jpg")
                                   .default
                               }
                             />
@@ -265,7 +265,7 @@ export default function ScrollableTabsButtonAuto() {
                             <img
                               alt="..."
                               src={
-                                require("../../assets/img/theme/bootstrap.jpg")
+                                require("../assets/img/reimbursement.jpg")
                                   .default
                               }
                             />
@@ -337,7 +337,7 @@ export default function ScrollableTabsButtonAuto() {
                             <img
                               alt="..."
                               src={
-                                require("../../assets/img/theme/bootstrap.jpg")
+                                require("../assets/img/reimbursement.jpg")
                                   .default
                               }
                             />
@@ -409,7 +409,7 @@ export default function ScrollableTabsButtonAuto() {
                             <img
                               alt="..."
                               src={
-                                require("../../assets/img/theme/bootstrap.jpg")
+                                require("../assets/img/reimbursement.jpg")
                                   .default
                               }
                             />
@@ -481,7 +481,7 @@ export default function ScrollableTabsButtonAuto() {
                             <img
                               alt="..."
                               src={
-                                require("../../assets/img/theme/bootstrap.jpg")
+                                require("../assets/img/reimbursement.jpg")
                                   .default
                               }
                             />
@@ -553,7 +553,7 @@ export default function ScrollableTabsButtonAuto() {
                             <img
                               alt="..."
                               src={
-                                require("../../assets/img/theme/bootstrap.jpg")
+                                require("../assets/img/reimbursement.jpg")
                                   .default
                               }
                             />
@@ -625,7 +625,7 @@ export default function ScrollableTabsButtonAuto() {
                             <img
                               alt="..."
                               src={
-                                require("../../assets/img/theme/bootstrap.jpg")
+                                require("../assets/img/reimbursement.jpg")
                                   .default
                               }
                             />

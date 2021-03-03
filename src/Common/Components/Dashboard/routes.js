@@ -1,10 +1,10 @@
 
 import Dashboard from "./Dashboard";
-import Profile from "./Profile.js";
+import Profile from "./Profile";
 import Balance from "./Balance";
 //import BillingInfo from "views/examples/BillingInfo.js";
-//import Orders from "views/examples/Orders.js";
-//import Gigs from "views/examples/Gigs.js";
+import Orders from "./Orders";
+import Gigs from "./Gigs";
 import Security from "./Security";
 import Chat from "./Chat"
 //import Analytics from "views/examples/Analytics"
@@ -62,7 +62,6 @@ var routes = [
     component: Profile,
     layout: "/dashboard",
   },
-  /*
   {
     path: "/orders",
     name: "Orders",
@@ -77,6 +76,7 @@ var routes = [
     component: Gigs,
     layout: "/dashboard",
   },
+  /*
   {
     path: "/billinginfo",
     name: "Billing Info",
