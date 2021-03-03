@@ -9,7 +9,7 @@ import Security from "./Security";
 import Chat from "./Chat"
 //import Analytics from "views/examples/Analytics"
 //import ReachUs from "views/examples/ReachUs"
-//import PostRequest from "views/examples/PostRequest"
+import PostRequest from "./PostRequest"
 
 var routes = [
   {
@@ -48,7 +48,6 @@ var routes = [
     component: Chat,
     layout: "/dashboard",
   },
-  /*
   {
     path: "/postrequest",
     name: "Post Request",
@@ -56,6 +55,7 @@ var routes = [
     component: PostRequest,
     layout: "/dashboard",
   },
+  /*
   {
     path: "/user-profile",
     name: "User Profile",
