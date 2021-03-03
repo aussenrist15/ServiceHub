@@ -2,7 +2,7 @@
 import Dashboard from "./Dashboard";
 import Profile from "./Profile";
 import Balance from "./Balance";
-//import BillingInfo from "views/examples/BillingInfo.js";
+import BillingInfo from "./BillingInfo.js";
 import Orders from "./Orders";
 import Gigs from "./Gigs";
 import Security from "./Security";
@@ -76,7 +76,6 @@ var routes = [
     component: Gigs,
     layout: "/dashboard",
   },
-  /*
   {
     path: "/billinginfo",
     name: "Billing Info",
@@ -84,6 +83,7 @@ var routes = [
     component: BillingInfo,
     layout: "/dashboard",
   },
+  /*
   {
     path: "/reachus",
     name: "Reach Us",
