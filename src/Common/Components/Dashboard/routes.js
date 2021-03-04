@@ -7,7 +7,7 @@ import Orders from "./Orders";
 import Gigs from "./Gigs";
 import Security from "./Security";
 import Chat from "./Chat"
-//import Analytics from "views/examples/Analytics"
+import Analytics from "./Analytics"
 import ReachUs from "./ReachUs"
 import PostRequest from "./PostRequest"
 
@@ -19,14 +19,13 @@ var routes = [
     component: Dashboard,
     layout: "/dashboard",
   },
- /* {
+  {
     path: "/analytics",
     name: "Analytics",
     icon: "ni ni-chart-pie-35 text-dark",
     component: Analytics,
     layout: "/dashboard",
   },
-  */
   {
     path: "/balance",
     name: "Balance",
