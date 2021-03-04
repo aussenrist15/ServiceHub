@@ -13,7 +13,7 @@ const BillingHeader = () => {
       >
         {/* Mask */}
         <span className="mask bg-gradient-default opacity-7" />
-        {/* Header container */}
+        {/* Billing Header container */}
         
       </div>
     </>

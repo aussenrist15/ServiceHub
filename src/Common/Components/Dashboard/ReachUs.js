@@ -12,11 +12,14 @@ import {
  } from "reactstrap";
 
 
+// npm i react-device-detect --force -> ye krna he jab device detect krni ho to
+// browser b aese hi detect hoga
 //import {isMobile} from 'react-device-detect';
 
 
 const data = {
   title: "Frequently Asked Questions",
+  // dummy data filhal for the page baad me krlenge sahi
   rows: [
       {
           title: "Lorem ipsum dolor sit amet,",
@@ -45,23 +48,16 @@ const data = {
 };
 
 const styles = {
-  // bgColor: 'white',
   titleTextColor: "blue",
   rowTitleColor: "blue",
-  // rowContentColor: 'grey',
-  // arrowColor: "red",
-};
+  };
 
-const config = {
-  // animate: true,
-  // arrowIcon: "V",
-  // tabFocus: true
-};
-// reactstrap components
-// core components
-
-//const ReachUs = () => {
-  class ReachUs extends Component {
+  const config = {
+    // animate: true,
+    // arrowIcon: "V",
+    // tabFocus: true
+  };
+class ReachUs extends Component {
     componentDidMount() {
       addResponseMessage("Welcome! Do you have any query ? ");
     }
@@ -69,56 +65,49 @@ const config = {
     handleNewUserMessage = (newMessage) => {
       console.log(`New message incomig! ${newMessage}`);
       // Now send the message throught the backend API
+      // Basit handle kr lein yara
     }
   
-
-    
-
     render() {
-     
-  return (
-    <>
-      <div
-        className="header pb-8 pt-5 pt-lg-8 d-flex align-items-center"
-        style={{
-          minHeight: "50px",
-          backgroundSize: "cover",
-          backgroundPosition: "center top",
-        }}
-      >
-        {/* Mask */}
-        <span className="mask bg-gradient-blue opacity-7" />
-      {/* Page content */}
-
-
-      <Container className="mt--7" fluid>
-       
-      <Widget
-          handleNewUserMessage={this.handleNewUserMessage}
-          profileAvatar={logo}
-          title="ServiHUB Quarters"
-          subtitle="We care to serve. We go beyond merely communicating to connecting with people. Chat now!"
-        />
-        <br />
-      </Container>
-      
-      </div>
-      
-      <Card className="bg-secondary shadow">
-         <CardHeader className="bg-white border-0">
-           <h3 className="mb-0">Wanna Know About Us</h3>
-         </CardHeader>
-         <CardBody>
-      <Faq
-                data={data}
-                styles={styles}
-                config={config}
-            />
-</CardBody>
-</Card>
-    </>
-  );
-} 
-}
+      return (
+        <>
+          <div
+            className="header pb-8 pt-5 pt-lg-8 d-flex align-items-center"
+            style={{
+            minHeight: "50px",
+            backgroundSize: "cover",
+            backgroundPosition: "center top",
+            }}
+          >
+            {/* Mask */}
+            <span className="mask bg-gradient-blue opacity-7" />
+            {/* Page content */}
+            <Container className="mt--7" fluid> 
+              <Widget
+                handleNewUserMessage={this.handleNewUserMessage}
+                profileAvatar={logo}
+                title="ServiHUB Quarters"
+                subtitle="We care to serve. We go beyond merely communicating to connecting with people. Chat now!"
+              />
+              <br />
+            </Container>
+          </div>
+          
+          <Card className="bg-secondary shadow">
+            <CardHeader className="bg-white border-0">
+              <h3 className="mb-0">Wanna Know About Us</h3>
+            </CardHeader>
+            <CardBody>
+            <Faq
+              data={data}
+              styles={styles}
+              config={config}
+              />
+    </CardBody>
+    </Card>
+        </>
+      );
+    } 
+  }
 
 export default ReachUs;

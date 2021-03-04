@@ -5,8 +5,6 @@ import { Container } from "reactstrap";
 // core components
 import DashboardNavbar from "./Navbars/DashboardNavbar"
 import Sidebar from "./Sidebar/Sidebar"
-
-
 import routes from "./routes";
 
 const Dashboard = (props) => {
@@ -37,10 +35,8 @@ const Dashboard = (props) => {
 
   const getBrandText = (path) => {
     for (let i = 0; i < routes.length; i++) {
-      if (
-        props.location.pathname.indexOf(routes[i].layout + routes[i].path) !==
-        -1
-      ) {
+      if ( props.location.pathname.indexOf(routes[i].layout + routes[i].path) !== -1 ) 
+      {
         return routes[i].name;
       }
     }
@@ -53,7 +49,7 @@ const Dashboard = (props) => {
         {...props}
         routes={routes}
         logo={{
-          innerLink: "/dashboard/dashboard",
+          innerLink: "/dashboard/Index",
           imgSrc: require("./assets/img/logo.png").default,
           imgAlt: "...",
         }}
@@ -66,7 +62,7 @@ const Dashboard = (props) => {
         />
         <Switch>
           {getRoutes(routes)}
-          <Redirect from="*" to="/dashboard/dashboard" />
+          <Redirect from="*" to="/dashboard/Index" />
         </Switch>
         <Container fluid>
 

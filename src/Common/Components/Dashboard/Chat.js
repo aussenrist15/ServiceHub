@@ -46,25 +46,22 @@ const Chat = () => {
   const classes = useStyles();
 
   return (
-
-          <div className="header bg-gradient-info pb-10 pt-5 pt-md-8">
-        
-          <Row>
-          <div className="col">
-            <Card className="bg-default shadow">
-              <CardHeader className="bg-transparent border-0">
-                <h3 className="text-white mb-0">Welcome to our Servi-Chat Room</h3>
-              </CardHeader>
-              <Table
-                className="align-items-center table-dark table-flush"
-                responsive
-              >
-                </Table>
-            </Card>
-          </div>
+    <div className="header bg-gradient-info pb-10 pt-5 pt-md-8">
+        <Row>
+            <div className="col">
+                <Card className="bg-default shadow">
+                    <CardHeader className="bg-transparent border-0">
+                        <h3 className="text-white mb-0">Welcome to our Servi-Chat Room</h3>
+                    </CardHeader>
+                    <Table
+                        className="align-items-center table-dark table-flush"
+                        responsive
+                    >
+                    </Table>
+                </Card>
+            </div>
         </Row>
      
-
          <Grid container component={Paper} className={classes.chatSection}>
             <Grid item xs={3} className={classes.borderRight500}>
                 <List>

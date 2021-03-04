@@ -10,12 +10,10 @@ import HomeIcon from "@material-ui/icons/Home";
 import LocalTaxiIcon from "@material-ui/icons/LocalTaxi";
 
 // Core Comoponents
-import Header from "../../THEME/components/Header/Header.js";
 import Footer from "../../THEME/components/Footer/Footer.js";
 
 import GridContainer from "../../THEME/components/Grid/GridContainer.js";
 import GridItem from "../../THEME/components/Grid/GridItem.js";
-import HeaderLinks from "../../THEME/components/Header/HeaderLinks.js";
 import NavPills from "../../THEME/components/NavPills/NavPills.js";
 import Parallax from "../../THEME/components/Parallax/Parallax.js";
 

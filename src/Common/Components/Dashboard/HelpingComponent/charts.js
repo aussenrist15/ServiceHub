@@ -1,25 +1,5 @@
-/*!
-
-=========================================================
-* Argon Dashboard React - v1.2.0
-=========================================================
-
-* Product Page: https://www.creative-tim.com/product/argon-dashboard-react
-* Copyright 2021 Creative Tim (https://www.creative-tim.com)
-* Licensed under MIT (https://github.com/creativetimofficial/argon-dashboard-react/blob/master/LICENSE.md)
-
-* Coded by Creative Tim
-
-=========================================================
-
-* The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
-
-*/
 const Chart = require("chart.js");
-//
 // Chart extension for making the bars rounded
-// Code from: https://codepen.io/jedtrow/full/ygRYgo
-//
 
 Chart.elements.Rectangle.prototype.draw = function () {
   var ctx = this._chart.ctx;
@@ -147,7 +127,7 @@ Chart.elements.Rectangle.prototype.draw = function () {
   }
 };
 
-var mode = "light"; //(themeMode) ? themeMode : 'light';
+var mode = "light";
 var fonts = {
   base: "Open Sans",
 };
@@ -412,8 +392,8 @@ let chartExample2 = {
 };
 
 module.exports = {
-  chartOptions, // used inside src/views/Index.js
-  parseOptions, // used inside src/views/Index.js
-  chartExample1, // used inside src/views/Index.js
-  chartExample2, // used inside src/views/Index.js
+  chartOptions,  // used inside Components/Dashboard/Analytics.js
+  parseOptions,  // used inside Components/Dashboard/Analytics.js
+  chartExample1, // used inside Components/Dashboard/Analytics.js
+  chartExample2, // used inside Components/Dashboard/Analytics.js
 };

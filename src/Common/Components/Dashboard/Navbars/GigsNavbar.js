@@ -41,7 +41,7 @@ TabPanel.propTypes = {
   value: PropTypes.any.isRequired,
 };
 
-function a11yProps(index) {
+function allProps(index) {
   return {
     id: `scrollable-auto-tab-${index}`,
     'aria-controls': `scrollable-auto-tabpanel-${index}`,
@@ -76,13 +76,13 @@ export default function ScrollableTabsButtonAuto() {
           scrollButtons="auto"
           aria-label="scrollable auto tabs example"
         >
-          <Tab label="Active" {...a11yProps(0)} />
-          <Tab label="Pending Approval" {...a11yProps(1)} />
-          <Tab label="Requires Modification" {...a11yProps(2)} />
-          <Tab label="Draft" {...a11yProps(3)} />
-          <Tab label="Denied" {...a11yProps(4)} />
-          <Tab label="Paused" {...a11yProps(5)} />
-          <Tab label="Favorites" {...a11yProps(6)} />
+          <Tab label="Active" {...allProps(0)} />
+          <Tab label="Pending Approval" {...allProps(1)} />
+          <Tab label="Requires Modification" {...allProps(2)} />
+          <Tab label="Draft" {...allProps(3)} />
+          <Tab label="Denied" {...allProps(4)} />
+          <Tab label="Paused" {...allProps(5)} />
+          <Tab label="Favorites" {...allProps(6)} />
         </Tabs>
       </AppBar>
       <TabPanel value={value} index={0}>

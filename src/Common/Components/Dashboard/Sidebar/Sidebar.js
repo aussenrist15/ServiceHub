@@ -15,13 +15,6 @@ import {
 
 const Sidebar = (props) => {
   
-  //const handleNewUserMessage = (newMessage) => {
-  //  console.log(`New message incomig! ${newMessage}`);
-    // Now send the message throught the backend API
-  //}
-
-  
-
   // creates the links that appear in the left menu / Sidebar
   const createLinks = (routes) => {
     return routes.map((prop, key) => {
@@ -56,10 +49,7 @@ const Sidebar = (props) => {
       expand="md"
       id="sidenav-main"
     >
-       
-       
-       
-        {/* Brand */}
+      {/* ServiceHub */}
         <br></br>
         {logo ? (
           <NavbarBrand className="pt-0" {...navbarBrandProps}>
