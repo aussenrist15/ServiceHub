@@ -1,5 +1,4 @@
 
-import Dashboard from "./Dashboard";
 import Profile from "./Profile";
 import Balance from "./Balance";
 import BillingInfo from "./BillingInfo.js";
@@ -10,13 +9,14 @@ import Chat from "./Chat"
 import Analytics from "./Analytics"
 import ReachUs from "./ReachUs"
 import PostRequest from "./PostRequest"
+import Index from "./Index"
 
 var routes = [
   {
-    path: "/dashboard",
+    path: "/Index",
     name: "Dashboard",
     icon: "ni ni-tv-2 text-primary",
-    component: Dashboard,
+    component: Index,
     layout: "/dashboard",
   },
   {

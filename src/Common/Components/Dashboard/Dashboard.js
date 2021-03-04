@@ -53,7 +53,7 @@ const Dashboard = (props) => {
         {...props}
         routes={routes}
         logo={{
-          innerLink: "/dashboard/index",
+          innerLink: "/dashboard/dashboard",
           imgSrc: require("./assets/img/logo.png").default,
           imgAlt: "...",
         }}
@@ -66,7 +66,7 @@ const Dashboard = (props) => {
         />
         <Switch>
           {getRoutes(routes)}
-          <Redirect from="*" to="/dashboard/index" />
+          <Redirect from="*" to="/dashboard/dashboard" />
         </Switch>
         <Container fluid>
 
