@@ -1,5 +1,7 @@
 import React from "react";
+import { Box } from '@material-ui/core';
 
+import FormDialog from "./FormDialog";
 // reactstrap components
 import {
   Button,
@@ -287,6 +289,66 @@ const Profile = () => {
                       </Col>
                     </Row>
                   </div>
+
+                  <h6 className="heading-small text-muted mb-4">
+                    My Skills
+                  </h6>
+                  
+                  <div className="pl-lg-4">
+                    <Row>
+                    
+                      <Col lg="6">
+                      
+                        <FormGroup>
+                        
+                        <Box borderRadius="borderRadius" {...defaultProps} placeholder="Yours Skills" ></Box>
+                        <Input
+                        className="form-control-alternative"
+                        placeholder="Yours Added Skill"
+                        rows="4"
+                        type="textarea"/>
+                      
+                        
+
+                        </FormGroup>
+                        </Col>
+                        <Col lg="6">
+                        <FormGroup>
+                        <FormDialog />
+                        </FormGroup>
+                      </Col>
+                      
+                    </Row>
+                    
+                      
+                  </div>
+
+                  <h6 className="heading-small text-muted mb-4">
+                    Linked Accounts
+                  </h6>
+                  <div className="pl-lg-4">
+                    <Row>
+                      <Col lg="6">
+                        <FormGroup>
+                          <label
+                            className="form-control-label"
+                            htmlFor="input-username"
+                          >
+                            
+                          </label>
+                         
+                          
+                        </FormGroup>
+                        </Col>
+                        
+                        
+                      
+                      
+                    </Row>
+                    
+                      
+                  </div>
+
                   <hr className="my-4" />
                   {/* Description */}
                   <h6 className="heading-small text-muted mb-4">About me</h6>
@@ -305,13 +367,22 @@ const Profile = () => {
                   </div>
                 </Form>
               </CardBody>
+
             </Card>
             <br />
+
           </Col>
         </Row>
       </Container>
     </>
   );
 };
-
+const defaultProps = {
+  bgcolor: 'background.paper',
+  borderColor: 'text.primary',
+  marginBottom:12,
+  border: 1,
+  style: { width: '300px', height: '150x' },
+  
+};
 export default Profile;
