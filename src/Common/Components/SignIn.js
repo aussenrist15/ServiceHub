@@ -12,6 +12,7 @@ import { makeStyles } from "@material-ui/core/styles";
 import Container from "@material-ui/core/Container";
 import { useHistory } from "react-router-dom";
 import "../CSS/Card.css";
+import axios from 'axios';
 
 function Copyright() {
   return (
@@ -68,8 +69,16 @@ export default function SignIn({ val, revertVal }) {
     }
 
     if (!userErr && !passErr) {
-      localStorage.setItem("isLoggedin", "true");
-      history.push("/user");
+      axios.post('http://localhost:5000/api/v1/user/signin', {
+        username: username,
+        password: pass,
+      })
+      .then(res => {
+        if(!res.data['error']){
+          localStorage.setItem("isLoggedin", "true");
+          history.push("/user");
+        }
+      })
     }
   }
 

@@ -12,6 +12,7 @@ import { makeStyles } from "@material-ui/core/styles";
 import Container from "@material-ui/core/Container";
 import "../CSS/Card.css";
 import { useState } from "react";
+import axios from "axios";
 
 function Copyright() {
   return (
@@ -65,8 +66,19 @@ export default function SignUp({ val, revertVal }) {
     if (username === "") setErrUname(true);
     if (email === "") setErrEmail(true);
     if (pass === "") setErrPass(true);
-    if (errFname || errFname || errUname || errEmail || errPass) return;
-    console.log("test");
+    if (!(errFname || errFname || errUname || errEmail || errPass)){
+      axios.post('http://localhost:5000/api/v1/user/signup', {
+        username: username,
+        first_name: fname,
+        last_name: lname,
+        email: email,
+        password: pass,
+      })
+      .then(res => {
+        console.log("Response: ", res);
+        revertVal(!val);
+      })
+    }
   }
 
   return (
