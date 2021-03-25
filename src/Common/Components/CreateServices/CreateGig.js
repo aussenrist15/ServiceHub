@@ -10,6 +10,7 @@ import Select from "@material-ui/core/Select";
 import Button from "@material-ui/core/Button";
 import TextField from "@material-ui/core/TextField";
 import { Pricing } from "./BecomeSeller/Pricing";
+import { Overview } from "./BecomeSeller/Overview";
 
 const useStyles = makeStyles((theme) => ({
   root: {

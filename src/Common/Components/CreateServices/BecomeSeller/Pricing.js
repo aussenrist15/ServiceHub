@@ -56,13 +56,13 @@ export const Pricing = () => {
         <TableHead>
           <TableRow>
             <TableCell> </TableCell>
-            <TableCell align="center" colSpan={3}>
-              Basic
+            <TableCell align="center" colSpan={3} bgcolor="	#C8C8C8">
+              <h3>Basic</h3>
             </TableCell>
-            <TableCell align="center" colSpan={3}>
-              Standard
+            <TableCell align="center" colSpan={3} bgcolor="	#C8C8C8">
+              <h3></h3> Standard
             </TableCell>
-            <TableCell align="center" colSpan={3}>
+            <TableCell align="center" colSpan={3} bgcolor="	#C8C8C8">
               Premium
             </TableCell>
           </TableRow>
