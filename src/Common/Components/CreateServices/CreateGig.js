@@ -11,6 +11,7 @@ import Button from "@material-ui/core/Button";
 import TextField from "@material-ui/core/TextField";
 import { Pricing } from "./BecomeSeller/Pricing";
 import { Overview } from "./BecomeSeller/Overview";
+import FormHelperText from "@material-ui/core/FormHelperText";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -120,7 +121,45 @@ export const CreateGig = () => {
                 shrink: true,
               }}
             />
-
+            <br></br>
+            <form className={classes.root1} noValidate autoComplete="on">
+              <TextField
+                id="outlined-basic"
+                label="Type your Sub-Category "
+                variant="outlined"
+                multiline
+              />
+            </form>
+            <br></br>
+            <FormHelperText className={classes.marginLeft}>
+              Graphic And Design (Logo Design / Resume designs / Illustrations /
+              Brochure design / poster design / cartoons and comics / menu
+              design){" "}
+              <FormHelperText>
+                Digital Marketing (Social Media Advertising / Social Media
+                Marketing / SEO )
+              </FormHelperText>
+              <FormHelperText>
+                Writing And Translation (Articles and blog posts / Proofreading
+                And Editing / Transltion / Website Content / Book Editing /
+                Resume Writing / Technical Writing / Cover Letters / Case
+                Studies / ScriptWriting)
+              </FormHelperText>
+              <FormHelperText>
+                Video And Animation (Video Editing / Short Video Ads / Aimated
+                GIFS / LOGO Animation / Character Animation / Subtitles And
+                Captions / Visual Effects / SlideShow Video )
+              </FormHelperText>
+              <FormHelperText>
+                Programming And Tech (Wordpress / Website Builders and CMS /
+                Game Development / Web Programming / Mob Apps / Desktop
+                Applications )
+              </FormHelperText>
+              <FormHelperText>
+                Data (Databases / Data processing / Data Analytics / Data
+                Visualisation / Data Science / Data Entry )
+              </FormHelperText>
+            </FormHelperText>
             <input
               accept="image/*"
               className={classes.input}
