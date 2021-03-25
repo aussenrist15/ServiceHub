@@ -9,7 +9,7 @@ import FormControl from "@material-ui/core/FormControl";
 import Select from "@material-ui/core/Select";
 import Button from "@material-ui/core/Button";
 import TextField from "@material-ui/core/TextField";
-import { Overview } from "./BecomeSeller/Overview";
+import { Pricing } from "./BecomeSeller/Pricing";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -80,8 +80,7 @@ export const CreateGig = () => {
   return (
     <div>
       <Parallax small filter image={PARALLEX} className={classes.parall} />
-      {step === 1 && <CreateGig step={step} setStep={setStep} />}
-      {step === 2 && <Overview step={step} setStep={setStep} />}
+
       <Grid container spacing={1} justify="center">
         <Grid>
           <h1>Create A Gig</h1>
@@ -144,9 +143,6 @@ export const CreateGig = () => {
               color="primary"
               component="span"
               className={classes.marginTopBottom}
-              onClick={() => {
-                setStep(step + 1);
-              }}
             >
               Save
             </Button>
