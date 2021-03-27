@@ -56,13 +56,11 @@ export default function SignIn({ val, revertVal }) {
   const [passErr, setPassErr] = useState(false);
 
   function Validate() {
-    console.log("Function called");
-    console.log(username);
     if (!username || 0 === username.length) {
       setUserErr((err) => !err);
       return;
     }
-
+    
     if (!pass || 0 === pass.length) {
       setPassErr((err) => !err);
       return;
@@ -74,6 +72,7 @@ export default function SignIn({ val, revertVal }) {
         password: pass,
       })
       .then(res => {
+        console.log("RES : ", res)
         if(!res.data['error']){
           localStorage.setItem("isLoggedin", "true");
           history.push("/user");

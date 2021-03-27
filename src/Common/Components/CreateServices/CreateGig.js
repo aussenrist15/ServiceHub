@@ -12,6 +12,8 @@ import TextField from "@material-ui/core/TextField";
 import { Pricing } from "./BecomeSeller/Pricing";
 import { Overview } from "./BecomeSeller/Overview";
 import FormHelperText from "@material-ui/core/FormHelperText";
+import axios from "axios";
+import { useHistory } from "react-router-dom";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -67,6 +69,7 @@ export const CreateGig = () => {
   const [category, setCategory] = useState("");
   const [desc, setDesc] = useState("");
   const [price, setPrice] = useState(0);
+  const history = useHistory();
 
   const handleChange = (event) => {
     setCategory(event.target.value);
@@ -79,6 +82,19 @@ export const CreateGig = () => {
   const handlePriceChange = (event) => {
     setPrice(event.target.value);
   };
+
+  const addGig = () => {
+    axios.post("http://localhost:5000/api/v1/gigs/create-gig", {
+      category: category,
+      desc: desc,
+      price: price,
+    })
+    .then(res => {
+      console.log(res)
+      //history.push("/user/user-services");
+    })
+  };
+
   return (
     <div>
       <Parallax small filter image={PARALLEX} className={classes.parall} />
@@ -122,14 +138,14 @@ export const CreateGig = () => {
               }}
             />
             <br></br>
-            <form className={classes.root1} noValidate autoComplete="on">
+            {/* <form className={classes.root1} noValidate autoComplete="on">
               <TextField
                 id="outlined-basic"
                 label="Type your Sub-Category "
                 variant="outlined"
                 multiline
               />
-            </form>
+            </form> */}
             <br></br>
             <FormHelperText className={classes.marginLeft}>
               Graphic And Design (Logo Design / Resume designs / Illustrations /
@@ -179,6 +195,7 @@ export const CreateGig = () => {
             </label>
 
             <Button
+              onClick={addGig}
               variant="contained"
               color="primary"
               component="span"
