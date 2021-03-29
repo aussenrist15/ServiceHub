@@ -88,10 +88,11 @@ export const CreateGig = () => {
       category: category,
       desc: desc,
       price: price,
+    }, {
+      withCredentials: true
     })
     .then(res => {
-      console.log(res)
-      //history.push("/user/user-services");
+      history.push("/user/user-services");
     })
   };
 

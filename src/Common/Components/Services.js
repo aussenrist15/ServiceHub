@@ -7,6 +7,7 @@ import TextField from "@material-ui/core/TextField";
 import "../CSS/Card.css";
 import AUDI from "../Static/audi.jpg";
 import { SkeletonLoader } from "./HelpingComponents/SkeletonLoader";
+import axios from "axios";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -29,7 +30,20 @@ export const Services = () => {
       });
     }, 3000);
   }, []);
+
+  useEffect(() => {
+    axios.post("http://localhost:5000/api/v1/gigs/get-all-gigs",
+      {},
+      { withCredentials: true }
+    )
+    .then((res) => {
+      console.log("Response: ", res.data.data.results);
+      setGigData(() => res.data.data.results)
+    });
+  }, []);
+
   const [loading, setLoading] = useState(false);
+  const [gigData, setGigData] = useState([]);
   const classes = useStyles();
   const dummyData = [
     {
@@ -60,6 +74,27 @@ export const Services = () => {
       desc: "Description about the gig here",
       price: 10,
     },
+    {
+      id: 5,
+      img: AUDI,
+      title: "TITLE HERE",
+      desc: "Description about the gig here",
+      price: 10,
+    },
+    {
+      id: 6,
+      img: AUDI,
+      title: "TITLE HERE",
+      desc: "Description about the gig here",
+      price: 10,
+    },
+    {
+      id: 7,
+      img: AUDI,
+      title: "TITLE HERE",
+      desc: "Description about the gig here",
+      price: 10,
+    }
   ];
   return (
     <div className={classes.root}>
@@ -73,13 +108,13 @@ export const Services = () => {
       </div>
       <Grid container spacing={1}>
         {loading ? (
-          dummyData.map((data) => {
+          gigData.map((data) => {
             return (
               <Grid item xs={12} sm={4} key={data.id}>
                 <GigCard
-                  id={data.id}
-                  img={data.img}
-                  title={data.title}
+                  id={data._id}
+                  img={AUDI}
+                  title={data.category}
                   desc={data.desc}
                   price={data.price}
                 />

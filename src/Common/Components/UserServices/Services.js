@@ -7,6 +7,7 @@ import TextField from "@material-ui/core/TextField";
 import "../../CSS/Card.css";
 import AUDI from "../../Static/audi.jpg";
 import { SkeletonLoader } from "../HelpingComponents/SkeletonLoader";
+import axios from 'axios';
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -27,9 +28,38 @@ const Services = () => {
       setLoading((load) => {
         return !load;
       });
-    }, 3000);
+    }, 2000);
   }, []);
-  const [loading, setLoading] = useState(false);
+
+  const [reRender, setReRender] = useState(false);
+  useEffect(() => {
+    axios.post("http://localhost:5000/api/v1/gigs/get-user-gigs", {
+      
+    },
+      { withCredentials: true }
+    )
+    .then((res) => {
+      setGigData(() => res.data.data)
+    });
+  }, [reRender]);
+
+  function deleteGig(id){
+    console.log("Delete: ", id)
+    axios.post("http://localhost:5000/api/v1/gigs/delete-gig", {
+      gigID: id
+    }, {
+      withCredentials: true
+    })
+    .then(res => {
+      setReRender((prev) => {
+        return !prev
+      })
+    })
+  }
+
+  const [loading, setLoading] = useState(true);
+  
+  const [gigData, setGigData] = useState([]);
   const classes = useStyles();
   const dummyData = [
     {
@@ -73,15 +103,17 @@ const Services = () => {
       </div>
       <Grid container spacing={1}>
         {loading ? (
-          dummyData.map((data) => {
+          gigData.map((data) => {
             return (
               <Grid item xs={12} sm={4} key={data.id}>
                 <GigCard
-                  id={data.id}
-                  img={data.img}
-                  title={data.title}
+                  id={data._id}
+                  img={AUDI}
+                  title={data.category}
                   desc={data.desc}
                   price={data.price}
+                  deleteBtnShow={true}
+                  deleteGig={deleteGig}
                 />
               </Grid>
             );

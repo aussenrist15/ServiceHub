@@ -22,15 +22,14 @@ export const GigCard = (props) => {
   }
 
   const classes = useStyles();
-  const { id, img, title, desc, price } = props;
+  const { id, img, title, desc, price, deleteBtnShow, deleteGig } = props;
   return (
     <Card
       className={classes.root}
-      onClick={() => {
-        gotoID(id);
-      }}
     >
-      <CardActionArea>
+      <CardActionArea onClick={() => {
+        gotoID(id);
+      }}>
         <CardMedia
           component="img"
           alt="Contemplative Reptile"
@@ -50,14 +49,25 @@ export const GigCard = (props) => {
           </Typography>
         </CardContent>
       </CardActionArea>
-      <CardActions>
-        <Button size="small" color="primary">
-          Button 1
-        </Button>
-        <Button size="small" color="primary">
-          Button 2
-        </Button>
-      </CardActions>
+      {deleteBtnShow ? (
+        <CardActions>
+          {/* <Button size="small" color="primary">
+            Button 1
+          </Button> */}
+          <Button size="small" color="secondary"  onClick={() => deleteGig(id)}>
+            Delete
+          </Button>
+        </CardActions>
+      ) : (
+        <CardActions>
+          <Button size="small" color="primary">
+            Button 1
+          </Button>
+          <Button size="small" color="primary">
+            Button 2
+          </Button>
+        </CardActions>
+      )}
     </Card>
   );
 };
