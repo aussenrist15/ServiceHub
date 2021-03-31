@@ -15,6 +15,9 @@ import {
   KeyboardTimePicker,
   KeyboardDatePicker,
 } from "@material-ui/pickers";
+import roundToNearestMinutes from "date-fns/roundToNearestMinutes/index.js";
+import axios from 'axios';
+import { useHistory } from "react-router-dom";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -66,10 +69,60 @@ const useStyles = makeStyles((theme) => ({
 
 export const ShareRide = () => {
   const classes = useStyles();
-  const [selectedDate, setSelectedDate] = useState(new Date());
-  const handleDateChange = (date) => {
-    setSelectedDate(date);
+  const [source, setSource] = useState("")
+  const [destination, setDestination] = useState("")
+  const [pickupDate, setPickupDate] = useState(new Date())
+  const [pickupTime, setPickupTime] = useState(new Date())
+  const [passengers, setPassengers] = useState()
+  const [fare, setFare] = useState()
+  const [description, setDescription] = useState("")
+  const history = useHistory();
+
+  const handleSourceChange = (value) => {
+    setSource(value);
   };
+
+  const handleDestinationChange = (value) => {
+    setDestination(value);
+  };
+
+  const handleDateChange = (date) => {
+    setPickupDate(date);
+  };
+
+  const handleTimeChange = (time) => {
+    setPickupTime(time)
+  }
+
+  const handlePassengersChange = (value) => {
+    setPassengers(value);
+  };
+
+  const handleFareChange = (value) => {
+    setFare(value);
+  };
+
+  const handleDescriptionChange = (value) => {
+    setDescription(value);
+  };
+
+  const handleSubmit = () => {
+    axios.post("http://localhost:5000/api/v1/ride/add-ride", {
+      source: source,
+      destination: destination,
+      desc: description,
+			pickupDate: pickupDate,
+			pickupTime: pickupTime,
+			passengers: passengers,
+			fare: fare,
+    }, {
+      withCredentials: true
+    })
+    .then(res => {
+      history.push("/user/user-services");
+    })
+  }
+
   return (
     <div>
       <Parallax small filter image={PARALLEX} className={classes.parall} />
@@ -81,6 +134,7 @@ export const ShareRide = () => {
               id="outlined-basic"
               label="Starting Location"
               variant="outlined"
+              onChange={(e) => handleSourceChange(e.target.value)}
             />
             <br />
             <br />
@@ -89,6 +143,7 @@ export const ShareRide = () => {
               id="outlined-basic"
               label="Destination"
               variant="outlined"
+              onChange={(e) => handleDestinationChange(e.target.value)}
             />
             <br />
             <MuiPickersUtilsProvider utils={DateFnsUtils}>
@@ -97,8 +152,8 @@ export const ShareRide = () => {
                 id="date-picker-dialog"
                 label="Pickup Date"
                 format="MM/dd/yyyy"
-                value={selectedDate}
-                onChange={handleDateChange}
+                value={pickupDate}
+                onChange={(e) => handleDateChange(e)}
                 KeyboardButtonProps={{
                   "aria-label": "change date",
                 }}
@@ -107,8 +162,8 @@ export const ShareRide = () => {
                 margin="normal"
                 id="time-picker"
                 label="Pickup Time"
-                value={selectedDate}
-                onChange={handleDateChange}
+                value={pickupTime}
+                onChange={(e) => handleTimeChange(e)}
                 KeyboardButtonProps={{
                   "aria-label": "change time",
                 }}
@@ -122,6 +177,7 @@ export const ShareRide = () => {
               InputLabelProps={{
                 shrink: true,
               }}
+              onChange={(e) => handlePassengersChange(e.target.value)}
             />
             <TextField
               id="standard-number"
@@ -131,6 +187,7 @@ export const ShareRide = () => {
               InputLabelProps={{
                 shrink: true,
               }}
+              onChange={(e) => handleFareChange(e.target.value)}
             />
             <TextField
               id="outlined-multiline-static"
@@ -140,12 +197,14 @@ export const ShareRide = () => {
               defaultValue=""
               variant="outlined"
               className={classes.marginTopBottom}
+              onChange={(e) => handleDescriptionChange(e.target.value)}
             />
             <Button
               variant="contained"
               color="primary"
               component="span"
               className={classes.marginTopBottom}
+              onClick={handleSubmit}
             >
               Save
             </Button>

@@ -43,8 +43,8 @@ const Services = () => {
     });
   }, [reRender]);
 
-  function deleteGig(id) {
-    console.log("Delete: ", id)
+  function deleteFunction(id) {
+    console.log("Gig Delete: ", id)
     axios.post("http://localhost:5000/api/v1/gigs/delete-gig", {
       gigID: id
     }, {
@@ -113,7 +113,7 @@ const Services = () => {
                   desc={data.desc}
                   price={data.price}
                   deleteBtnShow={true}
-                  deleteGig={deleteGig}
+                  deleteFunction={deleteFunction}
                 />
               </Grid>
             );

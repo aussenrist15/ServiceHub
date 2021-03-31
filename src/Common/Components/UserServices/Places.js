@@ -43,8 +43,8 @@ const Places = () => {
     });
   }, [reRender]);
 
-  function deletePlace(id) {
-    console.log("Delete: ", id)
+  function deleteFunction(id) {
+    console.log("Place Delete: ", id)
     axios.post("http://localhost:5000/api/v1/place/delete-place", {
       placeID: id
     }, {
@@ -112,7 +112,7 @@ const Places = () => {
                   desc={data.desc}
                   price={data.rent}
                   deleteBtnShow={true}
-                  deletePlace={deletePlace}
+                  deleteFunction={deleteFunction}
                 />
               </Grid>
             );
