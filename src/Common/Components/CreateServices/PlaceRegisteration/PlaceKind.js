@@ -77,24 +77,10 @@ const useStyles = makeStyles((theme) => ({
 
 export const PlaceKind = (props) => {
   const classes = useStyles();
-  const [PropertyType, setProperyType] = useState("");
-  const [Rooms, setRooms] = useState("");
-  const [PlaceType, setPLaceType] = useState("");
 
   const step = props.step;
   const setStep = props.setStep;
 
-  const handleChange = (event) => {
-    setProperyType(event.target.value);
-  };
-
-  const handleRoomsChange = (event) => {
-    setRooms(event.target.value);
-  };
-
-  const handlePlaceTypeChange = (event) => {
-    setPLaceType(event.target.value);
-  };
   return (
     <div>
       <Grid container spacing={1} justify="center">
@@ -116,8 +102,8 @@ export const PlaceKind = (props) => {
                   <Select
                     labelId="demo-simple-select-label"
                     id="demo-simple-select"
-                    value={PropertyType}
-                    onChange={handleChange}
+                    value={props.PropertyType}
+                    onChange={(e) => props.handlePropertyTypeChange(e.target.value)}
                     className={classes.marginTopBottom}
                   >
                     <MenuItem value="Appartment" className={classes.textAlign}>
@@ -172,8 +158,8 @@ export const PlaceKind = (props) => {
                   <Select
                     labelId="demo-simple-select-label"
                     id="demo-simple-select"
-                    value={Rooms}
-                    onChange={handleChange}
+                    value={props.Rooms}
+                    onChange={(e) => props.handleRoomsChange(e.target.value)}
                     className={classes.marginTopBottom}
                   >
                     <MenuItem value="2-5" className={classes.textAlign}>
@@ -200,8 +186,8 @@ export const PlaceKind = (props) => {
                   <Select
                     labelId="demo-simple-select-label"
                     id="demo-simple-select"
-                    value={PlaceType}
-                    onChange={handleChange}
+                    value={props.PlaceType}
+                    onChange={(e) => props.handlePlaceTypeChange(e.target.value)}
                     className={classes.marginTopBottom}
                   >
                     <MenuItem

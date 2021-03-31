@@ -7,6 +7,7 @@ import TextField from "@material-ui/core/TextField";
 import "../../CSS/Card.css";
 import AUDI from "../../Static/audi.jpg";
 import { SkeletonLoader } from "../HelpingComponents/SkeletonLoader";
+import axios from 'axios';
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -29,38 +30,66 @@ const Places = () => {
       });
     }, 3000);
   }, []);
+
+  const [reRender, setReRender] = useState(false);
+
+  useEffect(() => {
+    axios.post("http://localhost:5000/api/v1/place/user-places", {
+    },
+      { withCredentials: true }
+    )
+    .then((res) => {
+      setPlaceData(() => res.data.data)
+    });
+  }, [reRender]);
+
+  function deletePlace(id) {
+    console.log("Delete: ", id)
+    axios.post("http://localhost:5000/api/v1/place/delete-place", {
+      placeID: id
+    }, {
+      withCredentials: true
+    })
+    .then(res => {
+      setReRender((prev) => {
+        return !prev
+      })
+    })
+  }
+
   const [loading, setLoading] = useState(false);
+  const [placeData, setPlaceData] = useState([]);
   const classes = useStyles();
-  const dummyData = [
-    {
-      id: 1,
-      img: AUDI,
-      title: "TITLE HERE",
-      desc: "Description about the gig here",
-      price: 10,
-    },
-    {
-      id: 2,
-      img: AUDI,
-      title: "TITLE HERE",
-      desc: "Description about the gig here",
-      price: 10,
-    },
-    {
-      id: 3,
-      img: AUDI,
-      title: "TITLE HERE",
-      desc: "Description about the gig here",
-      price: 10,
-    },
-    {
-      id: 4,
-      img: AUDI,
-      title: "TITLE HERE",
-      desc: "Description about the gig here",
-      price: 10,
-    },
-  ];
+  // const dummyData = [
+  //   {
+  //     id: 1,
+  //     img: AUDI,
+  //     title: "TITLE HERE",
+  //     desc: "Description about the gig here",
+  //     price: 10,
+  //   },
+  //   {
+  //     id: 2,
+  //     img: AUDI,
+  //     title: "TITLE HERE",
+  //     desc: "Description about the gig here",
+  //     price: 10,
+  //   },
+  //   {
+  //     id: 3,
+  //     img: AUDI,
+  //     title: "TITLE HERE",
+  //     desc: "Description about the gig here",
+  //     price: 10,
+  //   },
+  //   {
+  //     id: 4,
+  //     img: AUDI,
+  //     title: "TITLE HERE",
+  //     desc: "Description about the gig here",
+  //     price: 10,
+  //   },
+  // ];
   return (
     <div className={classes.root}>
       <div className="mtb">
@@ -73,15 +102,17 @@ const Places = () => {
       </div>
       <Grid container spacing={1}>
         {loading ? (
-          dummyData.map((data) => {
+          placeData.map((data) => {
             return (
-              <Grid item xs={12} sm={4} key={data.id}>
+              <Grid item xs={12} sm={4} key={data._id}>
                 <GigCard
-                  id={data.id}
-                  img={data.img}
-                  title={data.title}
+                  id={data._id}
+                  img={AUDI}
+                  title={data.city}
                   desc={data.desc}
-                  price={data.price}
+                  price={data.rent}
+                  deleteBtnShow={true}
+                  deletePlace={deletePlace}
                 />
               </Grid>
             );

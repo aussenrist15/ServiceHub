@@ -55,10 +55,6 @@ export const PlaceDescription = (props) => {
   const classes = useStyles();
   const step = props.step;
   const setStep = props.setStep;
-  const [description, setDescription] = useState("");
-  const handleDescChange = (event) => {
-    setDescription(event.target.value);
-  };
 
   return (
     <div>
@@ -82,7 +78,7 @@ export const PlaceDescription = (props) => {
                   multiline
                   rows={8}
                   defaultValue=""
-                  onChange={handleDescChange}
+                  onChange={(e) => props.handleDescChange(e.target.value)}
                   variant="outlined"
                   className={classes.marginTopBottom}
                 />

@@ -28,13 +28,13 @@ const Services = () => {
       setLoading((load) => {
         return !load;
       });
-    }, 2000);
+    }, 3000);
   }, []);
 
   const [reRender, setReRender] = useState(false);
+
   useEffect(() => {
     axios.post("http://localhost:5000/api/v1/gigs/get-user-gigs", {
-      
     },
       { withCredentials: true }
     )
@@ -43,7 +43,7 @@ const Services = () => {
     });
   }, [reRender]);
 
-  function deleteGig(id){
+  function deleteGig(id) {
     console.log("Delete: ", id)
     axios.post("http://localhost:5000/api/v1/gigs/delete-gig", {
       gigID: id
@@ -57,40 +57,40 @@ const Services = () => {
     })
   }
 
-  const [loading, setLoading] = useState(true);
+  const [loading, setLoading] = useState(false);
   
   const [gigData, setGigData] = useState([]);
   const classes = useStyles();
-  const dummyData = [
-    {
-      id: 1,
-      img: AUDI,
-      title: "TITLE HERE",
-      desc: "Description about the gig here",
-      price: 10,
-    },
-    {
-      id: 2,
-      img: AUDI,
-      title: "TITLE HERE",
-      desc: "Description about the gig here",
-      price: 10,
-    },
-    {
-      id: 3,
-      img: AUDI,
-      title: "TITLE HERE",
-      desc: "Description about the gig here",
-      price: 10,
-    },
-    {
-      id: 4,
-      img: AUDI,
-      title: "TITLE HERE",
-      desc: "Description about the gig here",
-      price: 10,
-    },
-  ];
+  // const dummyData = [
+  //   {
+  //     id: 1,
+  //     img: AUDI,
+  //     title: "TITLE HERE",
+  //     desc: "Description about the gig here",
+  //     price: 10,
+  //   },
+  //   {
+  //     id: 2,
+  //     img: AUDI,
+  //     title: "TITLE HERE",
+  //     desc: "Description about the gig here",
+  //     price: 10,
+  //   },
+  //   {
+  //     id: 3,
+  //     img: AUDI,
+  //     title: "TITLE HERE",
+  //     desc: "Description about the gig here",
+  //     price: 10,
+  //   },
+  //   {
+  //     id: 4,
+  //     img: AUDI,
+  //     title: "TITLE HERE",
+  //     desc: "Description about the gig here",
+  //     price: 10,
+  //   },
+  // ];
   return (
     <div className={classes.root}>
       <div className="mtb">
@@ -105,7 +105,7 @@ const Services = () => {
         {loading ? (
           gigData.map((data) => {
             return (
-              <Grid item xs={12} sm={4} key={data.id}>
+              <Grid item xs={12} sm={4} key={data._id}>
                 <GigCard
                   id={data._id}
                   img={AUDI}

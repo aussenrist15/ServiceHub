@@ -22,7 +22,7 @@ export const GigCard = (props) => {
   }
 
   const classes = useStyles();
-  const { id, img, title, desc, price, deleteBtnShow, deleteGig } = props;
+  const { id, img, title, desc, price, deleteBtnShow, deleteGig, deletePlace } = props;
   return (
     <Card
       className={classes.root}
@@ -54,7 +54,7 @@ export const GigCard = (props) => {
           {/* <Button size="small" color="primary">
             Button 1
           </Button> */}
-          <Button size="small" color="secondary"  onClick={() => deleteGig(id)}>
+          <Button size="small" color="secondary"  onClick={() => deletePlace(id)}>
             Delete
           </Button>
         </CardActions>

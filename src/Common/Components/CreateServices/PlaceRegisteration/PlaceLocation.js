@@ -105,22 +105,21 @@ export const PlaceLocation = (props) => {
   const flatProps = {
     options: CountryNames.map((option) => option.title),
   };
+
+  const conNames = [
+    { title: "Pakistan" },
+    { title: "India" },
+    { title: "Canada" },
+    { title: "USA" },
+    { title: "Germany" },
+    { title: "Saudia Arabia" },
+    { title: "Australia" },
+    { title: "Bangladesh" },
+    { title: "China" },
+  ];
+
   const classes = useStyles();
-  const [Country, setCountry] = useState("");
-  const [Street, setStreet] = useState("");
-  const [Cities, setCities] = useState("");
 
-  const handleChange = (event) => {
-    setCountry(event.target.value);
-  };
-
-  const handleStreet = (event) => {
-    setStreet(event.target.value);
-  };
-
-  const handleCities = (event) => {
-    setCities(event.target.value);
-  };
   return (
     <div>
       <Grid container spacing={1} justify="center">
@@ -165,11 +164,16 @@ export const PlaceLocation = (props) => {
                   <Select
                     labelId="demo-simple-select-label"
                     id="demo-simple-select"
-                    value={Country}
-                    onChange={handleChange}
+                    value={props.Country}
+                    onChange={(e) => props.handleCountry(e.target.value)}
                     className={classes.marginTopBottom}
                   >
-                    <Autocomplete
+                    {
+                      conNames.map(name => {
+                        return <MenuItem value={name.title}>{name.title}</MenuItem>
+                      })
+                    }
+                    {/* <Autocomplete
                       {...defaultProps}
                       id="auto-complete"
                       autoComplete
@@ -182,7 +186,7 @@ export const PlaceLocation = (props) => {
                           className={classes.marginLeft}
                         />
                       )}
-                    />
+                    /> */}
                   </Select>
                   <br></br>
                 </FormControl>
@@ -192,6 +196,7 @@ export const PlaceLocation = (props) => {
                     id="outlined-basic"
                     label="Enter your Street Address"
                     variant="outlined"
+                    onChange={(e) => props.handleStreet(e.target.value)}
                   />
                 </form>
                 <FormHelperText className={classes.marginLeft}>
@@ -204,6 +209,7 @@ export const PlaceLocation = (props) => {
                     id="outlined-basic"
                     label="City"
                     variant="outlined"
+                    onChange={(e) => props.handleCities(e.target.value)}
                   />
                 </form>
               </CardContent>

@@ -86,6 +86,7 @@ export const PlacePhotos = (props) => {
               size="small"
               color="primary"
               className={classes.buttonleft}
+              onClick={() => props.submitPlaceDetails()}
             >
               Finish
             </Button>

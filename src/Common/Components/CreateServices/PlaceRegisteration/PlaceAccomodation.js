@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import PropTypes from "prop-types";
 import SwipeableViews from "react-swipeable-views";
 import { makeStyles, useTheme } from "@material-ui/core/styles";
@@ -123,6 +123,7 @@ export const PlaceAccomodation = (props) => {
   function valuetextbathrooms(value) {
     return `${value}`;
   }
+
   return (
     <div className={classes.root}>
       <Card
@@ -179,6 +180,7 @@ export const PlaceAccomodation = (props) => {
                 step={1}
                 marks={marks}
                 valueLabelDisplay="on"
+                onChange={(e, n) => props.handleGuests(n)}
               />
 
               <Typography
@@ -205,6 +207,7 @@ export const PlaceAccomodation = (props) => {
                 step={1}
                 marks={marks}
                 valueLabelDisplay="on"
+                onChange={(e, n) => props.handleBeds(n)}
               />
 
               <Typography
@@ -234,6 +237,7 @@ export const PlaceAccomodation = (props) => {
                 step={0.5}
                 marks={marks}
                 valueLabelDisplay="on"
+                onChange={(e, n) => props.handleBathrooms(n)}
               />
             </TabPanel>
             <TabPanel value={value} index={1} dir={theme.direction}>
@@ -245,7 +249,24 @@ export const PlaceAccomodation = (props) => {
                 Check that you have enough beds to accommodate all your guests
                 comfortably.<br></br>
                 <br></br>
-                <FormControlLabel
+                {
+                  props.basicAmentities.map((amentity) => {
+                    return (
+                      <FormControlLabel
+                        control={
+                          <Checkbox
+                            icon={<FavoriteBorder />}
+                            checkedIcon={<Favorite />}
+                            name={amentity.label}
+                            onChange={() => props.handleCheckedBasic(amentity.label)}
+                          />
+                        }
+                        label={amentity.label}
+                      />
+                    )
+                  })
+                }
+                {/* <FormControlLabel
                   control={
                     <Checkbox
                       icon={<FavoriteBorder />}
@@ -304,6 +325,9 @@ export const PlaceAccomodation = (props) => {
                       icon={<FavoriteBorder />}
                       checkedIcon={<Favorite />}
                       name="shampoo"
+                      onChange={(curr) => {
+                        console.log("Shampoooooo ", curr)
+                      }}
                     />
                   }
                   label="Shampoo"
@@ -350,13 +374,30 @@ export const PlaceAccomodation = (props) => {
                 />
                 <FormHelperText>
                   ____ Pots and pans, oil, salt and pepper
-                </FormHelperText>
+                </FormHelperText> */}
                 <br></br>
                 <br></br>
                 <p>
                   <b>Safety Amenities</b>
                 </p>
-                <FormControlLabel
+                {
+                  props.safetyAmentities.map((amentity) => {
+                    return (
+                      <FormControlLabel
+                        control={
+                          <Checkbox
+                            icon={<FavoriteBorder />}
+                            checkedIcon={<Favorite />}
+                            name={amentity.label}
+                            onChange={() => props.handleCheckedSafety(amentity.label)}
+                          />
+                        }
+                        label={amentity.label}
+                      />
+                    )
+                  })
+                }
+                {/* <FormControlLabel
                   control={
                     <Checkbox
                       icon={<FavoriteBorder />}
@@ -402,7 +443,7 @@ export const PlaceAccomodation = (props) => {
                 />
                 <FormHelperText>
                   ____ Private room can be locked for safety and privacy
-                </FormHelperText>
+                </FormHelperText> */}
               </FormGroup>
             </TabPanel>
             <TabPanel value={value} index={2} dir={theme.direction}>
@@ -414,7 +455,24 @@ export const PlaceAccomodation = (props) => {
                 Include common areas, but don’t add spaces that aren’t on your
                 property.<br></br>
                 <br></br>
-                <FormControlLabel
+                {
+                  props.spaces.map((space) => {
+                    return (
+                      <FormControlLabel
+                        control={
+                          <Checkbox
+                            icon={<FavoriteBorder />}
+                            checkedIcon={<Favorite />}
+                            name={space.label}
+                            onChange={() => props.handleSpaces(space.label)}
+                          />
+                        }
+                        label={space.label}
+                      />
+                    )
+                  })
+                }
+                {/* <FormControlLabel
                   control={
                     <Checkbox
                       icon={<FavoriteBorder />}
@@ -473,7 +531,7 @@ export const PlaceAccomodation = (props) => {
                     />
                   }
                   label="Gym"
-                />
+                /> */}
               </FormGroup>
             </TabPanel>
           </SwipeableViews>

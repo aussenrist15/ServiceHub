@@ -37,7 +37,6 @@ export const Services = () => {
       { withCredentials: true }
     )
     .then((res) => {
-      console.log("Response: ", res.data.data.results);
       setGigData(() => res.data.data.results)
     });
   }, []);
@@ -110,7 +109,7 @@ export const Services = () => {
         {loading ? (
           gigData.map((data) => {
             return (
-              <Grid item xs={12} sm={4} key={data.id}>
+              <Grid item xs={12} sm={4} key={data._id}>
                 <GigCard
                   id={data._id}
                   img={AUDI}
