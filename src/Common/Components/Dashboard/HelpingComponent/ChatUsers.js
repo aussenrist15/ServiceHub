@@ -5,11 +5,22 @@ import ListItemText from "@material-ui/core/ListItemText";
 import Avatar from "@material-ui/core/Avatar";
 import Item from "antd/lib/list/Item";
 import List from "@material-ui/core/List";
+import { useHistory } from "react-router-dom";
 
 export const ChatUsers = () => {
-  const [users, setUsers] = useState([]);
+  const history = useHistory();
+  const [users, setUsers] = useState(["Sherry", "Hamza", "Basit", "Ayesha"]);
+  function openChat(name) {
+    history.push(`/dashboard/chatmessages/:${name}`);
+  }
   const Data = users.map((user) => (
-    <ListItem button key="RemySharp">
+    <ListItem
+      button
+      key="RemySharp"
+      onClick={() => {
+        openChat(user);
+      }}
+    >
       <ListItemIcon>
         <Avatar
           alt={user}

@@ -70,7 +70,7 @@ const Chat = () => {
                   src="https://material-ui.com/static/images/avatar/1.jpg"
                 />
               </ListItemIcon>
-              <ListItemText primary="John Wick"></ListItemText>
+              <ListItemText primary="Abdul Basit"></ListItemText>
             </ListItem>
           </List>
           <Divider />
