@@ -12,7 +12,7 @@ import Avatar from "@material-ui/core/Avatar";
 import Fab from "@material-ui/core/Fab";
 import SendIcon from "@material-ui/icons/Send";
 import { Route, Link } from "react-router-dom";
-import { io } from "socket.io-client";
+// import { io } from "socket.io-client";
 
 // reactstrap components
 import { Card, CardHeader, Table, Row } from "reactstrap";
@@ -43,16 +43,26 @@ const useStyles = makeStyles({
 const Chat = () => {
   const classes = useStyles();
   let socket;
-  useEffect(() => {
-    var connectionOptions = {
-      "force new connection": true,
-      reconnectionAttempts: "Infinity",
-      timeout: 10000,
-      transports: ["websocket"],
-    };
-    socket = io("http://localhost:3001", connectionOptions);
-    console.log("HELLO BHAI ME CHAL RAHA HUN");
-  }, []);
+  var connectionOptions = {
+    transports: ["websocket"],
+    autoConnect: false,
+  };
+  // socket = io("http://localhost:3001", { autoConnect: false });
+  // useEffect(() => {
+  //   var connectionOptions = {
+  //     "force new connection": true,
+  //     reconnectionAttempts: "Infinity",
+  //     timeout: 10000,
+  //     transports: ["websocket"],
+  //     autoConnect: false,
+  //   };
+  //   socket = io("http://localhost:3001", connectionOptions);
+  //   console.log("HELLO BHAI ME CHAL RAHA HUN");
+  // }, []);
+
+  // socket.onAny((event, ...args) => {
+  //   console.log(event);
+  // });
 
   return (
     <div className="header bg-gradient-info pb-10 pt-5 pt-md-8">

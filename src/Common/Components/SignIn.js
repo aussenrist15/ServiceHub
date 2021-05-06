@@ -80,6 +80,7 @@ export default function SignIn({ val, revertVal }) {
           console.log("RES : ", res);
           if (!res.data["error"]) {
             localStorage.setItem("isLoggedin", "true");
+            localStorage.setItem("username", username);
             history.push("/user");
           }
         });
