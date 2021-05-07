@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState, useRef } from "react";
 import { makeStyles } from "@material-ui/core/styles";
 import Paper from "@material-ui/core/Paper";
 import Grid from "@material-ui/core/Grid";
@@ -12,7 +12,7 @@ import Avatar from "@material-ui/core/Avatar";
 import Fab from "@material-ui/core/Fab";
 import SendIcon from "@material-ui/icons/Send";
 import { Route, Link } from "react-router-dom";
-// import { io } from "socket.io-client";
+import { io } from "socket.io-client";
 
 // reactstrap components
 import { Card, CardHeader, Table, Row } from "reactstrap";
@@ -41,28 +41,67 @@ const useStyles = makeStyles({
 });
 
 const Chat = () => {
+  const [users, setUsers] = useState([]);
+  const [selectChatUser, setSelectedUser] = useState(null);
+
   const classes = useStyles();
   let socket;
   var connectionOptions = {
     transports: ["websocket"],
     autoConnect: false,
   };
-  // socket = io("http://localhost:3001", { autoConnect: false });
-  // useEffect(() => {
-  //   var connectionOptions = {
-  //     "force new connection": true,
-  //     reconnectionAttempts: "Infinity",
-  //     timeout: 10000,
-  //     transports: ["websocket"],
-  //     autoConnect: false,
-  //   };
-  //   socket = io("http://localhost:3001", connectionOptions);
-  //   console.log("HELLO BHAI ME CHAL RAHA HUN");
-  // }, []);
+  socket = io("http://localhost:3001", connectionOptions);
 
-  // socket.onAny((event, ...args) => {
-  //   console.log(event);
-  // });
+  socket.on("connection _error", (err) => {
+    if (err.message === "invalid username") {
+      console.log("ERROR");
+    }
+  });
+
+  socket.on("users", (users) => {
+    users.forEach((user) => {
+      user.self = user.userID === socket.id;
+      //initReactiveProperties(user);
+    });
+
+    socket.on("user connected", (user) => {
+      // TODO
+      setUsers((existingusers) => [...existingusers, user]);
+      console.log(user);
+    });
+    // put the current user first, and then sort by username
+    users = users.sort((a, b) => {
+      if (a.self) return -1;
+      if (b.self) return 1;
+      if (a.username < b.username) return -1;
+      return a.username > b.username ? 1 : 0;
+    });
+    //console.log(users);
+  });
+
+  socket.on("private message", ({ content, from }) => {
+    console.log(content);
+  });
+
+  useEffect(() => {
+    const username = localStorage.getItem("username");
+    console.log(username);
+    socket.auth = { username };
+    socket.connect();
+  }, []);
+
+  function SendMessage() {
+    socket.emit("test", "hello");
+    // selectedChatUser
+    console.log(socket.connected);
+    if (selectChatUser) {
+      socket.emit("private message", {
+        content: "hello there",
+        to: selectChatUser.userID,
+      });
+      console.log("Message Sent");
+    }
+  }
 
   return (
     <div className="header bg-gradient-info pb-10 pt-5 pt-md-8">
@@ -105,7 +144,7 @@ const Chat = () => {
             />
           </Grid>
           <Divider />
-          <ChatUsers />
+          <ChatUsers users={users} setSelectedUser={setSelectedUser} />
         </Grid>
 
         {/* Right Panel Msg Area Starts Here */}
@@ -116,7 +155,7 @@ const Chat = () => {
         </Route>
 
         <Route path="/dashboard/chatmessages/:username">
-          <ChatMessageArea />
+          <ChatMessageArea SendMessage={SendMessage} />
         </Route>
       </Grid>
     </div>

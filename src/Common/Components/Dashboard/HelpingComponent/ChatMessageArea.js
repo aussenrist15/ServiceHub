@@ -29,7 +29,7 @@ const useStyles = makeStyles({
   },
 });
 
-export const ChatMessageArea = () => {
+export const ChatMessageArea = ({ SendMessage }) => {
   const classes = useStyles();
 
   return (
@@ -85,7 +85,13 @@ export const ChatMessageArea = () => {
           />
         </Grid>
         <Grid xs={1} align="right">
-          <Fab color="primary" aria-label="add">
+          <Fab
+            color="primary"
+            aria-label="add"
+            onClick={() => {
+              SendMessage();
+            }}
+          >
             <SendIcon />
           </Fab>
         </Grid>
