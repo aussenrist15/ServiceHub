@@ -41,62 +41,34 @@ const useStyles = makeStyles({
 });
 
 const Chat = () => {
-  const [users, setUsers] = useState([]);
+  const [users, setUsers] = useState([
+    { username: "hamzaakram", name: "Hamza Akram" },
+  ]);
   const [selectChatUser, setSelectedUser] = useState(null);
-
+  const [socket, setSocket] = useState(null);
   const classes = useStyles();
-  let socket;
-  var connectionOptions = {
-    transports: ["websocket"],
-    autoConnect: false,
-  };
-  socket = io("http://localhost:3001", connectionOptions);
-
-  socket.on("connection _error", (err) => {
-    if (err.message === "invalid username") {
-      console.log("ERROR");
-    }
-  });
-
-  socket.on("users", (users) => {
-    users.forEach((user) => {
-      user.self = user.userID === socket.id;
-      //initReactiveProperties(user);
-    });
-
-    socket.on("user connected", (user) => {
-      // TODO
-      setUsers((existingusers) => [...existingusers, user]);
-      console.log(user);
-    });
-    // put the current user first, and then sort by username
-    users = users.sort((a, b) => {
-      if (a.self) return -1;
-      if (b.self) return 1;
-      if (a.username < b.username) return -1;
-      return a.username > b.username ? 1 : 0;
-    });
-    //console.log(users);
-  });
-
-  socket.on("private message", ({ content, from }) => {
-    console.log(content);
-  });
 
   useEffect(() => {
     const username = localStorage.getItem("username");
     console.log(username);
-    socket.auth = { username };
-    socket.connect();
+    const newSocket = io("http://localhost:3001", {
+      query: { username },
+      transports: ["websocket"],
+      autoConnect: true,
+    });
+    newSocket.connect();
+    console.log(newSocket);
+    setSocket(newSocket);
+
+    return () => newSocket.close();
   }, []);
 
   function SendMessage() {
-    socket.emit("test", "hello");
     // selectedChatUser
     console.log(socket.connected);
     if (selectChatUser) {
-      socket.emit("private message", {
-        content: "hello there",
+      socket.emit("message-send", {
+        text: "hello there",
         to: selectChatUser.userID,
       });
       console.log("Message Sent");
