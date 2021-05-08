@@ -81,6 +81,10 @@ export default function SignIn({ val, revertVal }) {
           if (!res.data["error"]) {
             localStorage.setItem("isLoggedin", "true");
             localStorage.setItem("username", username);
+            //console.log(res.data.data.first_name);
+            let fullname =
+              res.data.data.first_name + " " + res.data.data.last_name;
+            localStorage.setItem("fullname", fullname);
             history.push("/user");
           }
         });

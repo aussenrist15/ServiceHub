@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 // reactstrap components
 import {
@@ -19,6 +19,12 @@ import {
 } from "reactstrap";
 
 const DashboardNavbar = (props) => {
+  const [fullName, setFullName] = useState("");
+
+  useEffect(() => {
+    let Name = localStorage.getItem("fullname");
+    setFullName(Name);
+  }, []);
   return (
     <>
       <Navbar className="navbar-top navbar-dark" expand="md" id="navbar-main">
@@ -48,15 +54,12 @@ const DashboardNavbar = (props) => {
                   <span className="avatar avatar-sm rounded-circle">
                     <img
                       alt="..."
-                      src={
-                        require("../assets/img/team-4-800x800.jpg")
-                          .default
-                      }
+                      src={require("../assets/img/team-1-800x800.jpg").default}
                     />
                   </span>
                   <Media className="ml-2 d-none d-lg-block">
                     <span className="mb-0 text-sm font-weight-bold">
-                      Areej Ehsan
+                      {fullName}
                     </span>
                   </Media>
                 </Media>

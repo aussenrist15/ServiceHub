@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 // nodejs library that concatenates classes
 import classNames from "classnames";
 import { useHistory } from "react-router-dom";
@@ -25,6 +25,7 @@ import { Rides } from "./Rides.js";
 
 const useStyles = makeStyles(styles);
 export const Profile = (props) => {
+  const [fullName, setFullName] = useState("");
   const history = useHistory();
   useEffect(() => {
     const chck = localStorage.getItem("isLoggedin");
@@ -32,6 +33,9 @@ export const Profile = (props) => {
     } else {
       history.push("/");
     }
+
+    let Name = localStorage.getItem("fullname");
+    setFullName(Name);
   }, []);
 
   const classes = useStyles();
@@ -55,7 +59,7 @@ export const Profile = (props) => {
                     <img src={DP} alt="..." className={imageClasses} />
                   </div>
                   <div className={classes.name}>
-                    <h3 className={classes.title}>Kevin De Bruyne</h3>
+                    <h1 className={classes.title}>{fullName}</h1>
                     <h6>Footballer</h6>
                   </div>
                 </div>
