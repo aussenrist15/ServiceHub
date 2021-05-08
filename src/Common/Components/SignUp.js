@@ -81,6 +81,11 @@ export default function SignUp({ val, revertVal }) {
         )
         .then((res) => {
           console.log("Response: ", res);
+          if (res.data.error) {
+            document.getElementById("error-message").innerHTML =
+              "You were not signed up. Please enter all fields correctly";
+            return;
+          }
           revertVal(!val);
         });
     }
@@ -90,7 +95,9 @@ export default function SignUp({ val, revertVal }) {
     <Container component="main" maxWidth="xs">
       <CssBaseline />
       <div className={classes.paper}>
-        <h3 className="signuptext">Sign Up</h3>
+        <h3 className="cardH1" style={{ color: "black" }}>
+          Sign Up
+        </h3>
         <form className={classes.form} noValidate>
           <Grid container spacing={2}>
             <Grid item xs={12}>
@@ -191,6 +198,7 @@ export default function SignUp({ val, revertVal }) {
           >
             Sign Up
           </Button>
+          <span id="error-message" style={{ color: "red" }}></span>
           <Grid container justify="flex-end">
             <Grid item>
               <Link

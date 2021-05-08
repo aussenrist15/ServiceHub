@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { makeStyles } from "@material-ui/core/styles";
 import Grid from "@material-ui/core/Grid";
 import Divider from "@material-ui/core/Divider";
@@ -29,56 +29,71 @@ const useStyles = makeStyles({
   },
 });
 
-export const ChatMessageArea = ({ SendMessage }) => {
+export const ChatMessageArea = ({
+  SendMessage,
+  setTextMessage,
+  messages,
+  TextArea,
+}) => {
   const classes = useStyles();
 
+  const Style1 = {
+    backgroundColor: "#0063B2FF",
+    color: "white",
+    fontSize: "18px",
+    padding: "10px",
+    borderRadius: "30px",
+    fontWeight: "bold",
+    width: "max-content",
+    maxWidth: "100%",
+  };
+
+  const Style2 = {
+    backgroundColor: "#9CC3D5FF",
+    color: "white",
+    fontSize: "18px",
+    padding: "10px",
+    borderRadius: "30px",
+    fontWeight: "bold",
+    width: "max-content",
+    maxWidth: "100%",
+  };
+
+  let Messages = messages.map((msg) => {
+    return (
+      <ListItem key="1">
+        <Grid container>
+          <Grid item xs={12}>
+            <ListItemText
+              align={msg.type === "sent" ? "right" : "left"}
+              primary={
+                <p style={msg.type === "sent" ? Style1 : Style2}>{msg.text}</p>
+              }
+            ></ListItemText>
+          </Grid>
+          <Grid item xs={12}>
+            <ListItemText
+              align={msg.type === "sent" ? "right" : "left"}
+              secondary={msg.from}
+            ></ListItemText>
+          </Grid>
+        </Grid>
+      </ListItem>
+    );
+  });
+
   return (
-    <Grid item xs={9}>
-      <List className={classes.messageArea}>
-        <ListItem key="1">
-          <Grid container>
-            <Grid item xs={12}>
-              <ListItemText
-                align="right"
-                primary="Hey man, What's up ?"
-              ></ListItemText>
-            </Grid>
-            <Grid item xs={12}>
-              <ListItemText align="right" secondary="09:30"></ListItemText>
-            </Grid>
-          </Grid>
-        </ListItem>
-        <ListItem key="2">
-          <Grid container>
-            <Grid item xs={12}>
-              <ListItemText
-                align="left"
-                primary="Hey, Iam Good! What about you ?"
-              ></ListItemText>
-            </Grid>
-            <Grid item xs={12}>
-              <ListItemText align="left" secondary="09:31"></ListItemText>
-            </Grid>
-          </Grid>
-        </ListItem>
-        <ListItem key="3">
-          <Grid container>
-            <Grid item xs={12}>
-              <ListItemText
-                align="right"
-                primary="Cool. i am good, let's catch up!"
-              ></ListItemText>
-            </Grid>
-            <Grid item xs={12}>
-              <ListItemText align="right" secondary="10:30"></ListItemText>
-            </Grid>
-          </Grid>
-        </ListItem>
-      </List>
+    <Grid item xs={9} style={{ overflowY: "hidden", overflowX: "hidden" }}>
+      <List className={classes.messageArea}>{Messages}</List>
       <Divider />
       <Grid container style={{ padding: "10px" }}>
         <Grid item xs={11}>
           <TextField
+            onChange={(e) => {
+              setTextMessage(e.target.value);
+              console.log(e.target.value);
+            }}
+            value={TextArea}
             id="outlined-basic-email"
             label="Type Something"
             fullWidth

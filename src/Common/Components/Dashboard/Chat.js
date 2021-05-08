@@ -1,4 +1,4 @@
-import React, { useEffect, useState, useRef } from "react";
+import React, { useEffect, useState, useCallback } from "react";
 import { makeStyles } from "@material-ui/core/styles";
 import Paper from "@material-ui/core/Paper";
 import Grid from "@material-ui/core/Grid";
@@ -43,9 +43,12 @@ const useStyles = makeStyles({
 const Chat = () => {
   const [users, setUsers] = useState([
     { username: "hamzaakram", name: "Hamza Akram" },
+    { username: "sheikh", name: "Abdul Basit" },
   ]);
   const [selectChatUser, setSelectedUser] = useState(null);
   const [socket, setSocket] = useState(null);
+  const [textMessage, setTextMessage] = useState(null);
+  const [messages, setMessages] = useState([]);
   const classes = useStyles();
 
   useEffect(() => {
@@ -58,22 +61,41 @@ const Chat = () => {
     });
     newSocket.connect();
     console.log(newSocket);
+    newSocket.on("receive-message", handleNewIncomingMessage);
     setSocket(newSocket);
 
-    return () => newSocket.close();
+    return () => {
+      newSocket.close();
+    };
   }, []);
 
   function SendMessage() {
     // selectedChatUser
+    console.log(textMessage);
+    if (!textMessage) {
+      return;
+    }
+    let username = localStorage.getItem("username");
     console.log(socket.connected);
     if (selectChatUser) {
       socket.emit("message-send", {
-        text: "hello there",
-        to: selectChatUser.userID,
+        text: textMessage,
+        to: selectChatUser.username,
+        from: username,
       });
       console.log("Message Sent");
+      setTextMessage("");
+      const newMsg = { type: "sent", text: textMessage, from: "You" };
+      setMessages((mesArr) => [...mesArr, newMsg]);
     }
   }
+
+  const handleNewIncomingMessage = useCallback(({ text, from }) => {
+    console.log("abc");
+    console.log(text);
+    const newMessage = { type: "received", text, from };
+    setMessages((mesArr) => [...mesArr, newMessage]);
+  }, []);
 
   return (
     <div className="header bg-gradient-info pb-10 pt-5 pt-md-8">
@@ -127,7 +149,12 @@ const Chat = () => {
         </Route>
 
         <Route path="/dashboard/chatmessages/:username">
-          <ChatMessageArea SendMessage={SendMessage} />
+          <ChatMessageArea
+            SendMessage={SendMessage}
+            setTextMessage={setTextMessage}
+            messages={messages}
+            TextArea={textMessage}
+          />
         </Route>
       </Grid>
     </div>

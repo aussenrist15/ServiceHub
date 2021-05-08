@@ -95,7 +95,9 @@ export default function SignIn({ val, revertVal }) {
     <Container component="main" maxWidth="xs">
       <CssBaseline />
       <div className={classes.paper}>
-        <h4 className="signuptext">Sign In</h4>
+        <h2 className="cardH1" style={{ color: "black" }}>
+          Sign In
+        </h2>
         <form className={classes.form} noValidate>
           <TextField
             variant="outlined"

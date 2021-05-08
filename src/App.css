@@ -6,3 +6,7 @@
 h1 {
   size: 10px;
 }
+
+.example::-webkit-scrollbar {
+  display: none;
+}
