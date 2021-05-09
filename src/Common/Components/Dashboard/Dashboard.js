@@ -1,11 +1,10 @@
 import React from "react";
 import { useLocation, Route, Switch, Redirect } from "react-router-dom";
-// reactstrap components
 import { Container } from "reactstrap";
-// core components
 import DashboardNavbar from "./Navbars/DashboardNavbar"
 import Sidebar from "./Sidebar/Sidebar"
 import routes from "./routes";
+import "@fortawesome/fontawesome-free/css/all.min.css";
 
 const Dashboard = (props) => {
   const mainContent = React.useRef(null);
