@@ -7,17 +7,10 @@ import {
     Row,
     Col,
     FormGroup,
-    NavItem, 
-    NavLink, 
-    Nav,
     Form,
     Input,
     Container,
-    DropdownItem,
-    UncontrolledDropdown,
-    DropdownToggle,
-    DropdownMenu,
-  } from "reactstrap";
+    } from "reactstrap";
 <link href="/assets/vendor/nucleo/css/nucleo.css" rel="stylesheet"></link>
 
 export const PlaceDetails = () => {
@@ -264,7 +257,7 @@ export const PlaceDetails = () => {
               <div class="form-group form-file-upload form-file-multiple">
                   <div class="input-group">
                       <span class="input-group-btn">
-                          <Button outline color="default" type="button" class="btn btn-fab btn-round btn-primary">
+                          <Button outline color="info" type="button" class="btn btn-fab btn-round btn-primary">
                           <i class="ni ni-bold-left"><br /> Go Back</i>
                           </Button>
                           &emsp;&emsp;&emsp;
