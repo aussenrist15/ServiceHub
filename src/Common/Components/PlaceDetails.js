@@ -11,6 +11,7 @@ import {
     Input,
     Container,
     } from "reactstrap";
+import GoogleMapReact from 'google-map-react';
 <link href="/assets/vendor/nucleo/css/nucleo.css" rel="stylesheet"></link>
 
 export const PlaceDetails = () => {

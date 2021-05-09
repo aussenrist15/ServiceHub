@@ -67,7 +67,7 @@ export const RideDetails = () => {
                   </div>
 
                   <h6 className="heading-small text-muted mb-4">
-                    Property Details
+                    Details
                   </h6>
                   <div className="pl-lg-4">
                     <Row>
@@ -109,7 +109,7 @@ export const RideDetails = () => {
                   </div>
 
                   <h6 className="heading-small text-muted mb-4">
-                    Place Accomodation
+                    Accomodation & Charges
                   </h6>
                   <div className="pl-lg-4">
                     <Row>
