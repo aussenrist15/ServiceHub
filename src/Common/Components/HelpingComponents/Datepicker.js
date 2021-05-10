@@ -28,7 +28,7 @@ export class Datepicker extends React.Component {
                 </InputGroupAddon>
                 <ReactDatetime
                   inputProps={{
-                    placeholder: "Date Picker Here"
+                    placeholder: "Check-in"
                   }}
                   timeFormat={false}
                   renderDay={(props, currentDate, selectedDate) => {
@@ -75,7 +75,7 @@ export class Datepicker extends React.Component {
                 </InputGroupAddon>
                 <ReactDatetime
                   inputProps={{
-                    placeholder: "Date Picker Here"
+                    placeholder: "Check-out"
                   }}
                   timeFormat={false}
                   renderDay={(props, currentDate, selectedDate) => {

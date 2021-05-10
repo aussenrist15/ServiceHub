@@ -1,5 +1,6 @@
 import React from "react";
-// reactstrap components
+import {Datepicker} from "./Datepicker";
+import {Guestpicker} from "./Guestpicker";
 import {
   Button,
   Card,
@@ -13,19 +14,21 @@ export class Cards extends React.Component {
   render() {
     return (
       <>
-        <Card style={{ width: "18rem" }}>
+        <Card style={{ width: "23rem" }}>
           <CardBody>
-            <CardTitle>Card title</CardTitle>
-            <CardText>
-              Some quick example text to build on the card title and make up
-              the bulk of the card's content.
-            </CardText>
+            <CardTitle> <p className="display-4">$14 / night</p>
+            <p className="h5"><u><em>
+              Rating : 4.7  (21 reviews)
+              </em></u></p>
+              </CardTitle>
+            <Datepicker />
+            <Guestpicker />
             <Button
               color="primary"
               href="#pablo"
               onClick={e => e.preventDefault()}
             >
-              Go somewhere
+              Reserve
             </Button>
           </CardBody>
         </Card>
