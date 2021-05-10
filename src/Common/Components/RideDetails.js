@@ -10,7 +10,7 @@ import { RideInfo } from "./HelpingComponents/RideInfo";
 import { BuyService } from "./BuyService";
 import { useHistory } from "react-router-dom";
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
-import {Cards} from "./HelpingComponents/Cards"
+import {RideCard} from "./HelpingComponents/RideCard"
 const useStyles = makeStyles((theme) => ({
   root: {
     flexGrow: 1,
@@ -86,7 +86,7 @@ export const RideDetails = (props) => {
           {isLoading ? <LoadingAnimation /> : <RideInfo data={rideDummyData} />}
           </Grid>
           <Grid>
-          {isLoading ? <LoadingAnimation /> : <Cards />}
+          {isLoading ? <LoadingAnimation /> : <RideCard />}
             <br />
             <Button
               variant="contained"
