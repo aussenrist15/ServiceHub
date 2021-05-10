@@ -69,7 +69,7 @@ export const PlaceInfo = (props) => {
                             className="form-control-label"
                             htmlFor="input-country"
                           >
-                            Country/Region
+                            Country
                           </label>
                           <p>
                           <small>{data.country}</small>
@@ -159,13 +159,26 @@ export const PlaceInfo = (props) => {
                   </div>
 
                   <hr className="my-4" />
+                    <h6 className="heading-small text-muted mb-4">
+                      Description
+                    </h6>
+                    <div className="pl-lg-4">
+                    <FormGroup>
+                          <label
+                            className="form-control-label"
+                            htmlFor="input-country"
+                          >
+                            {data.desc}
+                          </label>
+                          </FormGroup>
+                      </div>
+                      
+                  <hr className="my-4" />
                   <h6 className="heading-small text-muted mb-4">
                     Place Accomodation
                   </h6>
                   <div className="pl-lg-4">
-                    <Row>
-                     <Col lg="4">
-                        <FormGroup>
+                       <FormGroup>
                           <label
                             className="form-control-label"
                             htmlFor="input-country"
@@ -177,9 +190,7 @@ export const PlaceInfo = (props) => {
                             </small>
                         </p>
                         </FormGroup>
-                      </Col>
-                      <Col lg="4">
-                        <FormGroup>
+                       <FormGroup>
                           <label
                             className="form-control-label"
                             htmlFor="input-city"
@@ -191,9 +202,7 @@ export const PlaceInfo = (props) => {
                             </small>
                         </p>
                         </FormGroup>
-                      </Col>
-                      <Col lg="4">
-                        <FormGroup>
+                     <FormGroup>
                           <label
                             className="form-control-label"
                             htmlFor="input-country"
@@ -205,10 +214,8 @@ export const PlaceInfo = (props) => {
                             </small>
                         </p>
                         </FormGroup>
-                      </Col>
-                    </Row>
-                  </div>
-
+                      </div>
+                       
                   <hr className="my-4" />
                   <h6 className="heading-small text-muted mb-4">
                     Some Extras
@@ -231,7 +238,7 @@ export const PlaceInfo = (props) => {
                             className="form-control-label"
                             htmlFor="input-country"
                           >
-                            Safety Amenities
+                            Securty Amenities
                           </label>
                           <p>
                           <small>{data.safetyAmenities}

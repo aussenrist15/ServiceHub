@@ -83,10 +83,10 @@ export const PlaceDetails = (props) => {
       <div>
         <Grid container spacing={1} justify="center">
           <Grid>
-            {isLoading ? <LoadingAnimation /> : <PlaceInfo data={placeDummyData} />}
+          {isLoading ? <LoadingAnimation /> : <PlaceInfo data={placeDummyData} />}
           </Grid>
           <Grid>
-            <Cards />
+          {isLoading ? <LoadingAnimation /> : <Cards />}
             <br />
             <Button
               variant="contained"
