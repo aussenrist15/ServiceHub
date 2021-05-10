@@ -63,7 +63,7 @@ export const RideInfo = (props) => {
                   </h6>
                   <div className="pl-lg-4">
                     <Row>
-                     <Col lg="4">
+                     <Col lg="6">
                         <FormGroup>
                           <label
                             className="form-control-label"
@@ -73,12 +73,12 @@ export const RideInfo = (props) => {
                           </label>
                           <p>
                           <small>
-                            {data.address}
+                            {data.source}
                             </small>
                         </p>
                         </FormGroup>
                       </Col>
-                      <Col lg="4">
+                      <Col lg="6">
                         <FormGroup>
                           <label
                             className="form-control-label"
@@ -88,7 +88,7 @@ export const RideInfo = (props) => {
                           </label>
                           <p>
                           <small>
-                            {data.address}
+                            {data.destination}
                             </small>
                         </p>
                         </FormGroup>
@@ -98,11 +98,11 @@ export const RideInfo = (props) => {
                   <hr className="my-4" />
 
                   <h6 className="heading-small text-muted mb-4">
-                    Details
+                    Pick-up Details
                   </h6>
                   <div className="pl-lg-4">
                     <Row>
-                     <Col lg="4">
+                     <Col lg="6">
                         <FormGroup>
                           <label
                             className="form-control-label"
@@ -112,12 +112,12 @@ export const RideInfo = (props) => {
                           </label>
                           <p>
                           <small>
-                            {data.address}
+                            {data.pickupDate}
                             </small>
                         </p>
                         </FormGroup>
                       </Col>
-                      <Col lg="4">
+                      <Col lg="6">
                         <FormGroup>
                           <label
                             className="form-control-label"
@@ -127,7 +127,7 @@ export const RideInfo = (props) => {
                           </label>
                           <p>
                           <small>
-                            {data.address}
+                            {data.pickupTime}
                             </small>
                         </p>
                         </FormGroup>
@@ -141,7 +141,7 @@ export const RideInfo = (props) => {
                   </h6>
                   <div className="pl-lg-4">
                     <Row>
-                     <Col lg="4">
+                     <Col lg="6">
                         <FormGroup>
                           <label
                             className="form-control-label"
@@ -151,12 +151,12 @@ export const RideInfo = (props) => {
                           </label>
                           <p>
                           <small>
-                            {data.address}
+                            {data.passengers}
                             </small>
                         </p>
                         </FormGroup>
                       </Col>
-                      <Col lg="4">
+                      <Col lg="6">
                         <FormGroup>
                           <label
                             className="form-control-label"
@@ -166,7 +166,7 @@ export const RideInfo = (props) => {
                           </label>
                           <p>
                           <small>
-                            {data.address}
+                            {data.fare}
                             </small>
                         </p>
                         </FormGroup>

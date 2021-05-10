@@ -61,19 +61,12 @@ export const RideDetails = (props) => {
   const classes = useStyles();
   const rideDummyData = {
     username: "Name of creator",
-    country: "Title",
-    city: "Title",
-    address: "Title",
-    propertyType: "Title",
-    totalRooms: "Title",
-    guestPlaceType: "Title",
-    totalGuests: "Title",
-    totalBeds: "Title",
-    totalBathrooms: "Title",
-    basicAmenities: "Title",
-    safetyAmenities: "Title",
-    rent: "Title",
-    reviews: "Title",
+    source: "Title",
+    destination: "Title",
+    pickupDate: "Title",
+    pickupTime: "Title",
+    passengers: "Title",
+    fare: "Title",
     desc:
       " Description of the gig will go here. Just mkaing this dummy text big to see how it will look on the screen. Bla bla bla blablaDescription of the gig will go here. Just mkaing this dummy textbig to see how it will look on the screen. Bla bla bla blablaDescription of the gig will go here. Just mkaing this dummy textbig to see how it will look on the screen. Bla bla bla bla bla",
   };

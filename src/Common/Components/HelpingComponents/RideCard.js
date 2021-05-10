@@ -1,6 +1,5 @@
 import React from "react";
-import {Datepicker} from "./Datepicker";
-import {Guestpicker} from "./Guestpicker";
+import {RideDateTimepicker} from "./RideDateTimepicker";
 import {
   Button,
   Card,
@@ -21,8 +20,7 @@ export class RideCard extends React.Component {
               Rating : 4.7  (21 reviews)
               </em></u></p>
               </CardTitle>
-            <Datepicker />
-            <Guestpicker />
+            <RideDateTimepicker />
             <Button
               color="primary"
               href="#pablo"
