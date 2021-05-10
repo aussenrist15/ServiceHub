@@ -3,6 +3,19 @@ import { makeStyles } from "@material-ui/core/styles";
 import Card from "@material-ui/core/Card";
 import CardContent from "@material-ui/core/CardContent";
 import Typography from "@material-ui/core/Typography";
+import {
+  Button,
+  CardHeader,
+  CardBody,
+  Row,
+  Col,
+  FormGroup,
+  Form,
+  Input,
+  Container,
+  } from "reactstrap";
+import GoogleMapReact from 'google-map-react';
+<link href="/assets/vendor/nucleo/css/nucleo.css" rel="stylesheet"></link>
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -44,25 +57,86 @@ export const GigInfo = (props) => {
     <div>
       <Card className={classes.root} variant="outlined">
         <CardContent>
-          <Typography
-            className={classes.title}
-            color="textSecondary"
-            gutterBottom
-          >
-            {data.ownerName}
-          </Typography>
-          <Typography variant="h5" component="h2">
-            {data.title}
-          </Typography>
-          <Typography className={classes.pos} color="textSecondary">
-            Rating: {data.ratings}
-          </Typography>
-          <Typography variant="body2" component="p">
-            About
-            <br />
-            {data.desc}
-          </Typography>
-        </CardContent>
+        <Form>
+            <h6 className="heading-small text-muted mb-4">
+                    Gig 
+                  </h6>
+                  <div className="pl-lg-4">
+                    <Row>
+                     <Col lg="4">
+                        <FormGroup>
+                          <label
+                            className="form-control-label"
+                            htmlFor="input-country"
+                          >
+                            Name of Creator
+                          </label>
+                          <p>
+                          <small>
+                            {data.ownerName}
+                            </small>
+                        </p>
+                        </FormGroup>
+                      </Col>
+                      <Col lg="4">
+                        <FormGroup>
+                          <label
+                            className="form-control-label"
+                            htmlFor="input-city"
+                          >
+                            Title
+                          </label>
+                          <p>
+                          <small>
+                            {data.title}
+                            </small>
+                        </p>
+                        </FormGroup>
+                      </Col>
+                      <Col lg="4">
+                        <FormGroup>
+                          <label
+                            className="form-control-label"
+                            htmlFor="input-country"
+                          >
+                            Rating
+                          </label>
+                          <p>
+                          <small>
+                            {data.ratings}
+                            </small>
+                        </p>
+                        </FormGroup>
+                      </Col>
+                    </Row>
+                  </div>
+
+                  <hr className="my-4" />
+                <h6 className="heading-small text-muted mb-4">
+                    About
+                  </h6>
+                  <div className="pl-lg-4">
+                      <FormGroup>
+                          <label
+                            className="form-control-label"
+                            htmlFor="input-country"
+                          >
+                            Description
+                          </label>
+                            <p>
+                          <small>
+                            {data.desc}
+                            </small>
+                        </p>
+                        </FormGroup>
+                      </div>
+                 <hr className="my-4" />
+                
+                 <br />
+                <br />
+         </Form>
+       
+          </CardContent>
       </Card>
     </div>
   );
