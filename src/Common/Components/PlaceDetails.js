@@ -1,281 +1,104 @@
-import React from 'react';
-import {
-    Button,
-    Card,
-    CardHeader,
-    CardBody,
-    Row,
-    Col,
-    FormGroup,
-    Form,
-    Input,
-    Container,
-    } from "reactstrap";
-import GoogleMapReact from 'google-map-react';
-<link href="/assets/vendor/nucleo/css/nucleo.css" rel="stylesheet"></link>
+import React, { useState, useEffect } from "react";
+import PARALLEX from "../Static/Parallex.png";
+import Parallax from "../../THEME/components/Parallax/Parallax.js";
+import "../CSS/ServiceInfo.css";
+import { makeStyles } from "@material-ui/core/styles";
+import Grid from "@material-ui/core/Grid";
+import Button from "@material-ui/core/Button";
+import { LoadingAnimation } from "./HelpingComponents/LoadingAnimation";
+import { PlaceInfo } from "./HelpingComponents/PlaceInfo";
+import { BuyService } from "./BuyService";
+import { useHistory } from "react-router-dom";
+import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
+import {Cards} from "./HelpingComponents/Cards"
+const useStyles = makeStyles((theme) => ({
+  root: {
+    flexGrow: 1,
+    minWidth: 500,
+    maxWidth: 600,
+    margin: 50,
+    textAlign: "center",
+  },
+  paper: {
+    padding: theme.spacing(2),
+    textAlign: "center",
+    color: theme.palette.text.secondary,
+  },
+  bullet: {
+    display: "inline-block",
+    margin: "0 2px",
+    transform: "scale(0.8)",
+  },
+  title: {
+    fontSize: 14,
+  },
+  pos: {
+    marginBottom: 12,
+  },
+  parall: {
+    height: 250,
+  },
+  btn: {
+    height: 50,
+    marginBottom: 20,
+  },
+}));
 
-export const PlaceDetails = () => {
- return (
+export const PlaceDetails = (props) => {
+  const history = useHistory();
+  function gotoBuy() {
+    let ID = props.match.params.id;
+    history.push(`/user/buy-service/${ID}`);
+    //<a href="BuyService"></a>
+  }
+  const [isLoading, setisLoading] = useState(true);
 
-    <div className="header bg-gradient-info shadow pb-10 pt-5 pt-md-8 ">
-      <Container className="mt--10" fluid>
-        <Card className="bg-secondary shadow">
-          <CardHeader className="bg-white border-0">
-            <h3 className="mb-0">Your Place Details</h3>
-          </CardHeader>
-          <CardBody>
-            <Form>
-            <h6 className="heading-small text-muted mb-4">
-                    Reservation Address
-                  </h6>
-                  <div className="pl-lg-4">
-                    <Row>
-                     <Col lg="4">
-                        <FormGroup>
-                          <label
-                            className="form-control-label"
-                            htmlFor="input-country"
-                          >
-                            Country/Region
-                          </label>
-                          <Input
-                            disabled
-                            className="form-control-alternative"
-                            id="input-country"
-                            defaultValue="ABC"
-                            variant="filled"
-                          />
-                        </FormGroup>
-                      </Col>
-                      <Col lg="4">
-                        <FormGroup>
-                          <label
-                            className="form-control-label"
-                            htmlFor="input-city"
-                          >
-                            City
-                          </label>
-                          <Input
-                            disabled
-                            className="form-control-alternative"
-                            id="input-city"
-                            defaultValue="ABC"
-                            variant="filled"
-                          />
-                        </FormGroup>
-                      </Col>
-                      <Col lg="4">
-                        <FormGroup>
-                          <label
-                            className="form-control-label"
-                            htmlFor="input-country"
-                          >
-                            Street
-                          </label>
-                          <Input
-                            disabled
-                            className="form-control-alternative"
-                            id="input-postal-code"
-                            defaultValue="ABC"
-                            variant="filled"
-                          />
-                        </FormGroup>
-                      </Col>
-                    </Row>
-                  </div>
-
-                  <h6 className="heading-small text-muted mb-4">
-                    Property Details
-                  </h6>
-                  <div className="pl-lg-4">
-                    <Row>
-                     <Col lg="4">
-                        <FormGroup>
-                          <label
-                            className="form-control-label"
-                            htmlFor="input-country"
-                          >
-                            Property Type
-                          </label>
-                          <Input
-                            disabled
-                            className="form-control-alternative"
-                            id="input-country"
-                            defaultValue="ABC"
-                            variant="filled"
-                          />
-                        </FormGroup>
-                      </Col>
-                      <Col lg="4">
-                        <FormGroup>
-                          <label
-                            className="form-control-label"
-                            htmlFor="input-city"
-                          >
-                            Number of Rooms
-                          </label>
-                          <Input
-                            disabled
-                            className="form-control-alternative"
-                            id="input-city"
-                            defaultValue="ABC"
-                            variant="filled"
-                          />
-                        </FormGroup>
-                      </Col>
-                      <Col lg="4">
-                        <FormGroup>
-                          <label
-                            className="form-control-label"
-                            htmlFor="input-country"
-                          >
-                            Type of Place
-                          </label>
-                          <Input
-                            disabled
-                            className="form-control-alternative"
-                            id="input-postal-code"
-                            defaultValue="ABC"
-                            variant="filled"
-                          />
-                        </FormGroup>
-                      </Col>
-                    </Row>
-                  </div>
-
-                  <h6 className="heading-small text-muted mb-4">
-                    Place Accomodation
-                  </h6>
-                  <div className="pl-lg-4">
-                    <Row>
-                     <Col lg="4">
-                        <FormGroup>
-                          <label
-                            className="form-control-label"
-                            htmlFor="input-country"
-                          >
-                            Number of Guests
-                          </label>
-                          <Input
-                            disabled
-                            className="form-control-alternative"
-                            id="input-country"
-                            defaultValue="ABC"
-                            variant="filled"
-                          />
-                        </FormGroup>
-                      </Col>
-                      <Col lg="4">
-                        <FormGroup>
-                          <label
-                            className="form-control-label"
-                            htmlFor="input-city"
-                          >
-                            Number of Beds
-                          </label>
-                          <Input
-                            disabled
-                            className="form-control-alternative"
-                            id="input-city"
-                            defaultValue="ABC"
-                            variant="filled"
-                          />
-                        </FormGroup>
-                      </Col>
-                      <Col lg="4">
-                        <FormGroup>
-                          <label
-                            className="form-control-label"
-                            htmlFor="input-country"
-                          >
-                            Number of Bathrooms
-                          </label>
-                          <Input
-                            disabled
-                            className="form-control-alternative"
-                            id="input-postal-code"
-                            defaultValue="ABC"
-                            variant="filled"
-                          />
-                        </FormGroup>
-                      </Col>
-                    </Row>
-                  </div>
-
-                  <h6 className="heading-small text-muted mb-4">
-                    Some Extras
-                  </h6>
-                  <div className="pl-lg-4">
-                      <Row>
-                        <Col lg="6">
-                          <FormGroup>
-                          <label
-                            className="form-control-label"
-                            htmlFor="input-country"
-                          >
-                            Amenities
-                          </label>
-                            <Input 
-                            disabled
-                            type="textarea" 
-                            name="text" 
-                            id="exampleText" 
-                            rows={4}
-                            //label="Decribe what you want"
-                            multiline
-                            defaultValue="bJJANJdDkmD"
-                            //variant="outlined"
-                        />
-                        </FormGroup>
-                          </Col>
-                      
-                          <Col lg="6">
-                          <FormGroup>
-                          <label
-                            className="form-control-label"
-                            htmlFor="input-country"
-                          >
-                            Spaces
-                          </label>
-                            <Input 
-                            disabled
-                            type="textarea" 
-                            name="text" 
-                            id="exampleText" 
-                            rows={4}
-                            //label="Decribe what you want"
-                            multiline
-                            defaultValue="bJJANJdDkmD"
-                            //variant="outlined"
-                        />
-                        </FormGroup>
-                          </Col>
-                      </Row> 
-                 </div>
-                 <hr className="my-4" />
-                <div className="pl-lg-4">
-                
-              <div class="form-group form-file-upload form-file-multiple">
-                  <div class="input-group">
-                      <span class="input-group-btn">
-                          <Button outline color="info" type="button" class="btn btn-fab btn-round btn-primary">
-                          <i class="ni ni-bold-left"><br /> Go Back</i>
-                          </Button>
-                          &emsp;&emsp;&emsp;
-                          <Button outline color="default" type="button" class="btn btn-fab btn-round btn-primary">
-                            <i class="ni ni-bold-right"><br /> Go for it</i>
-                          </Button>
-                      </span>
-                  </div>
-                </div>
-                <br />
-                <br />
-                </div>
-         </Form>
-        </CardBody>
-      </Card>
-      <br />
-    </Container>
-  </div>
+  useEffect(() => {
+    setTimeout(() => {
+      setisLoading(false);
+    }, 2000);
+  }, []);
+  const classes = useStyles();
+  const placeDummyData = {
+    username: "Name of creator",
+    country: "Title",
+    city: "Title",
+    address: "Title",
+    propertyType: "Title",
+    totalRooms: "Title",
+    guestPlaceType: "Title",
+    totalGuests: "Title",
+    totalBeds: "Title",
+    totalBathrooms: "Title",
+    basicAmenities: "Title",
+    safetyAmenities: "Title",
+    rent: "Title",
+    reviews: "Title",
+    desc:
+      " Description of the gig will go here. Just mkaing this dummy text big to see how it will look on the screen. Bla bla bla blablaDescription of the gig will go here. Just mkaing this dummy textbig to see how it will look on the screen. Bla bla bla blablaDescription of the gig will go here. Just mkaing this dummy textbig to see how it will look on the screen. Bla bla bla bla bla",
+  };
+  return (
+    <div>
+      <Parallax small filter image={PARALLEX} className={classes.parall} />
+      <div>
+        <Grid container spacing={1} justify="center">
+          <Grid>
+            {isLoading ? <LoadingAnimation /> : <PlaceInfo data={placeDummyData} />}
+          </Grid>
+          <Grid>
+            <Cards />
+            <br />
+            <Button
+              variant="contained"
+              disabled={isLoading}
+              color="secondary"
+              className={classes.btn}
+            >
+              Message Seller
+            </Button>
+          </Grid>
+        </Grid>
+      </div>
+    </div>
   );
 };
