@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import "../CSS/Services.css";
 import { GigCard } from "./HelpingComponents/GigCard";
+import { RideCard } from "./HelpingComponents/RideCard";
 import Grid from "@material-ui/core/Grid";
 import { makeStyles } from "@material-ui/core/styles";
 import TextField from "@material-ui/core/TextField";
@@ -28,7 +29,7 @@ export const Rides = () => {
       setLoading((load) => {
         return !load;
       });
-    }, 3000);
+    }, 3);
   }, []);
 
   useEffect(() => {
@@ -90,7 +91,7 @@ export const Rides = () => {
           rideData.map((data) => {
             return (
               <Grid item xs={12} sm={4} key={data._id}>
-                <GigCard
+                <RideCard
                   id={data._id}
                   img={AUDI}
                   title={data.source}

@@ -14,6 +14,9 @@ import { BuyService } from "./BuyService.js";
 
 import { ShareRide } from "./CreateServices/ShareRide";
 
+import { RideDetails } from "./RideDetails";
+import { PlaceDetails } from "./PlaceDetails";
+
 export const User = () => {
   return (
     <div>
@@ -38,6 +41,9 @@ export const User = () => {
       <Route path="/user/buy-service/:id" component={BuyService}></Route>
       <Route path="/user/create-place" component={RentPlace}></Route>
       <Route path="/user/create-ride" component={ShareRide}></Route>
+
+      <Route path="/user/ride/:id" component={RideDetails}></Route>
+      <Route path="/user/place/:id" component={PlaceDetails}></Route>
     </div>
   );
 };

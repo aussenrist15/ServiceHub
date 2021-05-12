@@ -52,7 +52,8 @@ const useStyles = makeStyles((theme) => ({
 
 export const GigInfo = (props) => {
   const classes = useStyles();
-  const { data } = props;
+  const { username, category, desc, price, rating } = props.data;
+  console.log("Prop: ", props)
   return (
     <div>
       <Card className={classes.root} variant="outlined">
@@ -73,7 +74,7 @@ export const GigInfo = (props) => {
                           </label>
                           <p>
                           <small>
-                            {data.ownerName}
+                            {username}
                             </small>
                         </p>
                         </FormGroup>
@@ -88,7 +89,7 @@ export const GigInfo = (props) => {
                           </label>
                           <p>
                           <small>
-                            {data.title}
+                            {category}
                             </small>
                         </p>
                         </FormGroup>
@@ -103,7 +104,7 @@ export const GigInfo = (props) => {
                           </label>
                           <p>
                           <small>
-                            {data.ratings}
+                            {rating}
                             </small>
                         </p>
                         </FormGroup>
@@ -125,7 +126,7 @@ export const GigInfo = (props) => {
                           </label>
                             <p>
                           <small>
-                            {data.desc}
+                            {desc}
                             </small>
                         </p>
                         </FormGroup>

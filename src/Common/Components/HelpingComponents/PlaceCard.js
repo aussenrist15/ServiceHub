@@ -9,18 +9,17 @@ import Button from "@material-ui/core/Button";
 import Typography from "@material-ui/core/Typography";
 import { useHistory } from "react-router-dom";
 
-import axios from 'axios';
-
 const useStyles = makeStyles({
   root: {
     maxWidth: 345,
   },
 });
 
-export const GigCard = (props) => {
+export const PlaceCard = (props) => {
   const history = useHistory();
   function gotoID(id) {
-    history.push(`/user/service/${id}`);
+    //history.push(`/user/service/${id}`);
+    history.push(`/user/place/${id}`);
   }
 
   const classes = useStyles();
@@ -63,10 +62,10 @@ export const GigCard = (props) => {
       ) : (
         <CardActions>
           <Button size="small" color="primary">
-            Button 1
+            Buttonssss 1
           </Button>
           <Button size="small" color="primary">
-            Button 2
+            Buttonssss 2
           </Button>
         </CardActions>
       )}

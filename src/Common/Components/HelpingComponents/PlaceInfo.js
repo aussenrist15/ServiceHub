@@ -53,6 +53,7 @@ const useStyles = makeStyles((theme) => ({
 export const PlaceInfo = (props) => {
   const classes = useStyles();
   const { data } = props;
+  console.log(data)
   return (
     <div>
       <Card className={classes.root} variant="outlined">
@@ -228,9 +229,15 @@ export const PlaceInfo = (props) => {
                           >
                             Basic Amenities
                           </label>
-                          <p>
-                          <small>{data.basicAmenities}
-                            </small></p>
+                          <ul class="list-group list-group-flush">
+                            {
+                              data.basicAmenities.map(amenity => {
+                                return(
+                                  <li class="list-group-item">{amenity}</li>
+                                )
+                              })
+                            }
+                          </ul>
                         </FormGroup>
                       
                           <FormGroup>
@@ -240,10 +247,15 @@ export const PlaceInfo = (props) => {
                           >
                             Securty Amenities
                           </label>
-                          <p>
-                          <small>{data.safetyAmenities}
-                            </small>
-                            </p>
+                          <ul class="list-group list-group-flush">
+                            {
+                              data.safetyAmenities.map(amenity => {
+                                return(
+                                  <li class="list-group-item">{amenity}</li>
+                                )
+                              })
+                            }
+                          </ul>
                         </FormGroup>
 
                  </div>

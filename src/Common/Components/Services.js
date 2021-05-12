@@ -28,7 +28,7 @@ export const Services = () => {
       setLoading((load) => {
         return !load;
       });
-    }, 3000);
+    }, 3);
   }, []);
 
   useEffect(() => {

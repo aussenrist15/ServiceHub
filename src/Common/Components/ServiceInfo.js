@@ -11,6 +11,8 @@ import { BuyService } from "./BuyService";
 import { useHistory } from "react-router-dom";
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 
+import axios from 'axios';
+
 const useStyles = makeStyles((theme) => ({
   root: {
     flexGrow: 1,
@@ -52,13 +54,28 @@ export const ServiceInfo = (props) => {
     //<a href="BuyService"></a>
   }
   const [isLoading, setisLoading] = useState(true);
+  const [gigData, setGigData] = useState({})
 
   useEffect(() => {
     setTimeout(() => {
       setisLoading(false);
-    }, 2000);
+    }, 2);
   }, []);
+
+  useEffect(() => {
+    axios.post("http://localhost:5000/api/v1/gigs/get-gig",
+      {
+        gigID: history.location.pathname.split("/")[3],
+      },
+      { withCredentials: true }
+    )
+    .then(res => {
+      console.log(res)
+      setGigData(() => res.data.gigData)
+    })
+  }, [])
   const classes = useStyles();
+
   const gigDummyData = {
     ownerName: "Name of creator",
     title: "Title",
@@ -66,13 +83,15 @@ export const ServiceInfo = (props) => {
     desc:
       " Description of the gig will go here. Just mkaing this dummy text big to see how it will look on the screen. Bla bla bla blablaDescription of the gig will go here. Just mkaing this dummy textbig to see how it will look on the screen. Bla bla bla blablaDescription of the gig will go here. Just mkaing this dummy textbig to see how it will look on the screen. Bla bla bla bla bla",
   };
+
+  console.log("Data: ", gigData)
   return (
     <div>
       <Parallax small filter image={PARALLEX} className={classes.parall} />
       <div>
         <Grid container spacing={1} justify="center">
           <Grid>
-            {isLoading ? <LoadingAnimation /> : <GigInfo data={gigDummyData} />}
+            {isLoading ? <LoadingAnimation /> : <GigInfo data={gigData} />}
           </Grid>
           <Grid>
             <Button

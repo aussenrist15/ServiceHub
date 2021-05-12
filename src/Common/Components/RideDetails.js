@@ -10,7 +10,9 @@ import { RideInfo } from "./HelpingComponents/RideInfo";
 import { BuyService } from "./BuyService";
 import { useHistory } from "react-router-dom";
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
-import {RideCard} from "./HelpingComponents/RideCard"
+import {RideDatesCard} from "./HelpingComponents/RideDatesCard"
+import axios from 'axios';
+
 const useStyles = makeStyles((theme) => ({
   root: {
     flexGrow: 1,
@@ -52,12 +54,26 @@ export const RideDetails = (props) => {
     //<a href="BuyService"></a>
   }
   const [isLoading, setisLoading] = useState(true);
+  const [rideData, setRideData] = useState({});
 
   useEffect(() => {
     setTimeout(() => {
       setisLoading(false);
-    }, 2000);
+    }, 2);
   }, []);
+
+  useEffect(() => {
+    axios.post("http://localhost:5000/api/v1/ride/get-ride",
+      {
+        rideID: history.location.pathname.split("/")[3],
+      },
+      { withCredentials: true }
+    )
+    .then(res => {
+      setRideData(() => res.data.rideData)
+    })
+  }, [])
+
   const classes = useStyles();
   const rideDummyData = {
     username: "Name of creator",
@@ -76,10 +92,10 @@ export const RideDetails = (props) => {
       <div>
         <Grid container spacing={1} justify="center">
           <Grid>
-          {isLoading ? <LoadingAnimation /> : <RideInfo data={rideDummyData} />}
+          {isLoading ? <LoadingAnimation /> : <RideInfo data={rideData} />}
           </Grid>
           <Grid>
-          {isLoading ? <LoadingAnimation /> : <RideCard />}
+          {isLoading ? <LoadingAnimation /> : <RideDatesCard />}
             <br />
             <Button
               variant="contained"

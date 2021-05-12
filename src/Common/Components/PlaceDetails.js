@@ -11,6 +11,7 @@ import { BuyService } from "./BuyService";
 import { useHistory } from "react-router-dom";
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import {Cards} from "./HelpingComponents/Cards"
+import axios from 'axios';
 const useStyles = makeStyles((theme) => ({
   root: {
     flexGrow: 1,
@@ -52,12 +53,27 @@ export const PlaceDetails = (props) => {
     //<a href="BuyService"></a>
   }
   const [isLoading, setisLoading] = useState(true);
+  const [placeData, setPlaceData] = useState({});
 
   useEffect(() => {
     setTimeout(() => {
       setisLoading(false);
     }, 2000);
   }, []);
+
+  useEffect(() => {
+    axios.post("http://localhost:5000/api/v1/place/get-place",
+      {
+        placeID: history.location.pathname.split("/")[3],
+      },
+      { withCredentials: true }
+    )
+    .then(res => {
+      console.log(res.data.placeData)
+      setPlaceData(() => res.data.placeData)
+    })
+  }, [])
+
   const classes = useStyles();
   const placeDummyData = {
     username: "Name of creator",
@@ -83,7 +99,7 @@ export const PlaceDetails = (props) => {
       <div>
         <Grid container spacing={1} justify="center">
           <Grid>
-          {isLoading ? <LoadingAnimation /> : <PlaceInfo data={placeDummyData} />}
+          {isLoading ? <LoadingAnimation /> : <PlaceInfo data={placeData} />}
           </Grid>
           <Grid>
           {isLoading ? <LoadingAnimation /> : <Cards />}

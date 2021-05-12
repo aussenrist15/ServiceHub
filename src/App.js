@@ -15,8 +15,6 @@ function App() {
       <Switch>
         <Route path="/" exact component={Home}></Route>
         <Route path="/user" component={User}></Route>
-        <Route path="/placedetails" component={PlaceDetails}></Route>
-        <Route path="/ridedetails" component={RideDetails}></Route>
         <Route path="/dashboard" render={(props) => <Dashboard {...props} />}></Route>
       </Switch>
     </div>

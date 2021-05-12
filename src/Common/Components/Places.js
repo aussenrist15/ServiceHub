@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import "../CSS/Services.css";
 import { GigCard } from "./HelpingComponents/GigCard";
+import { PlaceCard } from "./HelpingComponents/PlaceCard";
 import Grid from "@material-ui/core/Grid";
 import { makeStyles } from "@material-ui/core/styles";
 import TextField from "@material-ui/core/TextField";
@@ -28,7 +29,7 @@ export const Places = () => {
       setLoading((load) => {
         return !load;
       });
-    }, 3000);
+    }, 3);
   }, []);
 
   useEffect(() => {
@@ -89,7 +90,7 @@ export const Places = () => {
           placeData.map((data) => {
             return (
               <Grid item xs={12} sm={4} key={data._id}>
-                <GigCard
+                <PlaceCard
                   id={data._id}
                   img={AUDI}
                   title={data.city}
