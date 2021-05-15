@@ -18,6 +18,7 @@ import CardActions from "@material-ui/core/CardActions";
 import CardContent from "@material-ui/core/CardContent";
 import AddLocationOutlinedIcon from "@material-ui/icons/AddLocationOutlined";
 import Autocomplete from "@material-ui/lab/Autocomplete";
+import Googlemap from "./Googlemap";
 
 const useStyles = makeStyles((theme) => ({
   root1: {
@@ -29,7 +30,7 @@ const useStyles = makeStyles((theme) => ({
   root: {
     flexGrow: 1,
     minWidth: 500,
-    maxWidth: 600,
+    maxWidth: 100,
     margin: 50,
     textAlign: "center",
   },
@@ -45,7 +46,7 @@ const useStyles = makeStyles((theme) => ({
   },
   title: {
     fontSize: 20,
-    marginLeft: 70,
+    // marginLeft: 70,
   },
   pos: {
     marginBottom: 12,
@@ -55,12 +56,12 @@ const useStyles = makeStyles((theme) => ({
   },
   btn: {
     height: 37,
-    marginleft: 50,
+    // marginleft: 50,
   },
   formControl: {
     margin: theme.spacing(1),
     minWidth: 160,
-    marginLeft: 100,
+    // marginLeft: 100,
   },
   formControl1: {
     margin: theme.spacing(0),
@@ -78,13 +79,13 @@ const useStyles = makeStyles((theme) => ({
   input: {
     display: "none",
   },
-  marginLeft: {
-    marginLeft: 10,
-    marginBlock: 15,
-  },
-  marginleft1: {
-    marginLeft: 100,
-  },
+  // marginLeft: {
+  //   marginLeft: 10,
+  //   marginBlock: 15,
+  // },
+  // marginleft1: {
+  //   marginLeft: 100,
+  // },
   textAlign: {
     textAlign: "Center",
   },
@@ -118,13 +119,38 @@ export const PlaceLocation = (props) => {
     { title: "China" },
   ];
 
+  const [position, setPosition] = useState(null);
   const classes = useStyles();
 
+  function handleClick() {
+    navigator.geolocation.getCurrentPosition((pos) => {
+      console.log(pos.coords.latitude);
+      let lat = pos.coords.latitude;
+      console.log(pos.coords.longitude);
+      let lont = pos.coords.longitude;
+      props.setPosition({ lat, lont });
+      console.log(props.Position);
+      setPosition(props.Position);
+    });
+  }
   return (
-    <div>
-      <Grid container spacing={1} justify="center">
+    <div className={classes.root}>
+      <Googlemap position={position} />
+      <Grid container spacing={1}>
         <Grid>
           <h1>Where is your place located?</h1>
+
+          <br></br>
+          <br></br>
+          <br></br>
+          <br></br>
+          <br></br>
+          <br></br>
+          <br></br>
+          <br></br>
+          <br></br>
+          <br></br>
+          <br></br>
           <br></br>
           <p className={classes.marginleft1} className={classes.title}>
             Guests will only get your exact address once they’ve booked a
@@ -140,6 +166,7 @@ export const PlaceLocation = (props) => {
               <CardActions>
                 <br></br>
                 <Button
+                  onClick={handleClick}
                   className={classes.button}
                   variant="outlined"
                   //color="secondary"
@@ -168,11 +195,11 @@ export const PlaceLocation = (props) => {
                     onChange={(e) => props.handleCountry(e.target.value)}
                     className={classes.marginTopBottom}
                   >
-                    {
-                      conNames.map(name => {
-                        return <MenuItem value={name.title}>{name.title}</MenuItem>
-                      })
-                    }
+                    {conNames.map((name) => {
+                      return (
+                        <MenuItem value={name.title}>{name.title}</MenuItem>
+                      );
+                    })}
                     {/* <Autocomplete
                       {...defaultProps}
                       id="auto-complete"
