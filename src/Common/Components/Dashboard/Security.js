@@ -101,8 +101,8 @@ const Security = () => {
                   </Col>
                 </Row>
               </div>
-              <hr className="my-4" />
-                {/* PHONE VERIFICATION */}
+              {/* <hr className="my-4" />
+                
                 <h6 className="heading-small text-muted mb-4">
                   Phone Verification
                 </h6>
@@ -144,12 +144,12 @@ const Security = () => {
                 </div>
                 
                 <hr className="my-4" />
-                  {/* Connected Devices */}
+                  
                   <h6 className="heading-small text-muted mb-4">
                     Connected Devices
                   </h6>
                   
-                  {/* Dark table */}
+                  
                   <div className="col">
                     <Card className="bg-default shadow">
                       <Table
@@ -180,7 +180,7 @@ const Security = () => {
                                   }
                                   else
                                   <p>Laptop</p>
-                                */}
+                                
                                   Chrome 88, Windows
                                   <br></br>
                                   <small>
@@ -209,7 +209,7 @@ const Security = () => {
                       </Table>
                     </Card>
                   </div>
-                  <hr className="my-4" />
+                  <hr className="my-4" /> */}
                 </Form>
               </CardBody>
             </Card>

@@ -23,7 +23,7 @@ export const RideCard = (props) => {
   }
 
   const classes = useStyles();
-  const { id, img, title, desc, price, deleteBtnShow, deleteFunction } = props;
+  const { id, img, title, desc, price, status, deleteBtnShow, deleteFunction } = props;
   return (
     <Card
       className={classes.root}
@@ -50,7 +50,7 @@ export const RideCard = (props) => {
           </Typography>
         </CardContent>
       </CardActionArea>
-      {deleteBtnShow ? (
+      {deleteBtnShow &&
         <CardActions>
           {/* <Button size="small" color="primary">
             Button 1
@@ -59,16 +59,16 @@ export const RideCard = (props) => {
             Delete
           </Button>
         </CardActions>
-      ) : (
-        <CardActions>
-          <Button size="small" color="primary">
-            Buttonssss 1
-          </Button>
-          <Button size="small" color="primary">
-            Button 2
-          </Button>
-        </CardActions>
-      )}
+      }
+        {/* <CardActions>
+           <Button size="small" color="primary">
+             Buttonssss 1
+           </Button>
+           <Button size="small" color="primary">
+             Button 2
+           </Button>
+        </CardActions> */}
+        {status === "Booked" && <h4>Booked!</h4>}
     </Card>
   );
 };

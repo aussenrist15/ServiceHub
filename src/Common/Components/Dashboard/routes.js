@@ -7,7 +7,7 @@ import Security from "./Security";
 import Chat from "./Chat"
 import Analytics from "./Analytics"
 import ReachUs from "./ReachUs"
-import PostRequest from "./PostRequest"
+import Places from "./PostRequest"
 import Index from "./Index"
 
 var routes = [
@@ -47,17 +47,17 @@ var routes = [
     layout: "/dashboard",
   },
   {
-    path: "/postrequest",
-    name: "Post Request",
-    icon: "ni ni-cloud-upload-96 text-gray",
-    component: PostRequest,
-    layout: "/dashboard",
-  },
-  {
     path: "/user-profile",
     name: "User Profile",
     icon: "ni ni-single-02 text-yellow",
     component: Profile,
+    layout: "/dashboard",
+  },
+  {
+    path: "/places",
+    name: "Places",
+    icon: "ni ni-cloud-upload-96 text-gray",
+    component: Places,
     layout: "/dashboard",
   },
   {
@@ -69,7 +69,7 @@ var routes = [
   },
   {
     path: "/gigs",
-    name: "Gigs",
+    name: "Rides",
     icon: "ni ni-spaceship text-default",
     component: Gigs,
     layout: "/dashboard",

@@ -14,6 +14,8 @@ import Card from "@material-ui/core/Card";
 import CardContent from "@material-ui/core/CardContent";
 import Autocomplete from '@material-ui/lab/Autocomplete';
 import { Box } from '@material-ui/core';
+import { useHistory } from 'react-router-dom';
+import axios from 'axios';
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -64,6 +66,7 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 export const BuyService = () => {
+  const history = useHistory();
   const [isLoading, setisLoading] = useState(true);
 
   useEffect(() => {
@@ -71,11 +74,24 @@ export const BuyService = () => {
       setisLoading(false);
     }, 2000);
   }, []);
+
   const classes = useStyles();
   const serviceDummyData = {
     price:"Price of Service",
    
   };
+
+  const buyService = () => {
+    axios.post("http://localhost:5000/api/v1/order/place-order", {
+      gigID: history.location.pathname.split("/")[3],
+      dueDate: new Date(),
+    }, { 
+      withCredentials: true 
+    })
+    .then(res => {
+      console.log("BUY: ", res)
+    })
+  }
   return (
     <div>
       <Parallax small filter image={PARALLEX} className={classes.parall} />
@@ -155,7 +171,7 @@ export const BuyService = () => {
             <br></br>
             <Box textAlign='center'>
             <Button
-
+              onClick={buyService}
               variant="contained"
               color="primary"
               disabled={isLoading}

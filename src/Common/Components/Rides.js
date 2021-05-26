@@ -38,8 +38,8 @@ export const Rides = () => {
       { withCredentials: true }
     )
     .then((res) => {
-      console.log(res)
-      setRideData(() => res.data.data.results)
+      console.log("RIDES ::: ", res)
+      setRideData(() => res.data.data)
     });
   }, []);
 
@@ -90,6 +90,7 @@ export const Rides = () => {
         {loading ? (
           rideData.map((data) => {
             return (
+              data.status !== "Completed" &&
               <Grid item xs={12} sm={4} key={data._id}>
                 <RideCard
                   id={data._id}
@@ -97,6 +98,7 @@ export const Rides = () => {
                   title={data.source}
                   desc={data.desc}
                   price={data.fare}
+                  status={data.status}
                 />
               </Grid>
             );

@@ -52,7 +52,7 @@ const useStyles = makeStyles((theme) => ({
 
 export const RideInfo = (props) => {
   const classes = useStyles();
-  const { data } = props;
+  const { data} = props;
   return (
     <div>
       <Card className={classes.root} variant="outlined">

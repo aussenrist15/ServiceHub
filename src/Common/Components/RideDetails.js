@@ -48,18 +48,24 @@ const useStyles = makeStyles((theme) => ({
 
 export const RideDetails = (props) => {
   const history = useHistory();
-  function gotoBuy() {
-    let ID = props.match.params.id;
-    history.push(`/user/buy-service/${ID}`);
-    //<a href="BuyService"></a>
+  function bookRide() {
+    axios.post("http://localhost:5000/api/v1/order/book-ride", {
+      rideID: history.location.pathname.split("/")[3],
+    }, {
+      withCredentials: true,
+    })
+    .then(res => {
+      console.log(res)
+    })
   }
   const [isLoading, setisLoading] = useState(true);
   const [rideData, setRideData] = useState({});
+  const [reviews, setReviews] = useState([]);
 
   useEffect(() => {
     setTimeout(() => {
       setisLoading(false);
-    }, 2);
+    }, 1000);
   }, []);
 
   useEffect(() => {
@@ -69,8 +75,10 @@ export const RideDetails = (props) => {
       },
       { withCredentials: true }
     )
-    .then(res => {
+    .then(res => {  
+      console.log("Check ", res.data.reviews)
       setRideData(() => res.data.rideData)
+      setReviews(() => res.data.reviews)
     })
   }, [])
 
@@ -92,19 +100,22 @@ export const RideDetails = (props) => {
       <div>
         <Grid container spacing={1} justify="center">
           <Grid>
-          {isLoading ? <LoadingAnimation /> : <RideInfo data={rideData} />}
+          {isLoading ? <LoadingAnimation /> : <RideInfo data={rideData}/>}
           </Grid>
           <Grid>
-          {isLoading ? <LoadingAnimation /> : <RideDatesCard />}
+          {isLoading ? <LoadingAnimation /> : <RideDatesCard reviews={reviews}/>}
             <br />
+            {rideData.status !== "Booked" &&
             <Button
+              onClick={bookRide}
               variant="contained"
               disabled={isLoading}
               color="secondary"
               className={classes.btn}
             >
-              Message Seller
+              Book Ride
             </Button>
+            }
           </Grid>
         </Grid>
       </div>

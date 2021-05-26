@@ -38,7 +38,7 @@ export const Places = () => {
       { withCredentials: true }
     )
     .then((res) => {
-      setPlaceData(() => res.data.data.results)
+      setPlaceData(() => res.data.data)
     });
   }, []);
 

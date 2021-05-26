@@ -132,7 +132,25 @@ export const GigInfo = (props) => {
                         </FormGroup>
                       </div>
                  <hr className="my-4" />
-                
+                  <h6 className="heading-small text-muted mb-4">
+                    Pricing
+                  </h6>
+                  <div className="pl-lg-4">
+                      <FormGroup>
+                          <label
+                            className="form-control-label"
+                            htmlFor="input-country"
+                          >
+                            Cost
+                          </label>
+                            <p>
+                          <small>
+                            {price}
+                            </small>
+                        </p>
+                        </FormGroup>
+                      </div>
+                      <hr className="my-4" />
                  <br />
                 <br />
          </Form>
