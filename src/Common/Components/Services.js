@@ -37,64 +37,13 @@ export const Services = () => {
       { withCredentials: true }
     )
     .then((res) => {
-      setGigData(() => res.data.data.results)
+      setGigData(() => res.data.data)
     });
   }, []);
 
   const [loading, setLoading] = useState(false);
   const [gigData, setGigData] = useState([]);
   const classes = useStyles();
-  const dummyData = [
-    {
-      id: 1,
-      img: AUDI,
-      title: "TITLE HERE",
-      desc: "Description about the gig here",
-      price: 10,
-    },
-    {
-      id: 2,
-      img: AUDI,
-      title: "TITLE HERE",
-      desc: "Description about the gig here",
-      price: 10,
-    },
-    {
-      id: 3,
-      img: AUDI,
-      title: "TITLE HERE",
-      desc: "Description about the gig here",
-      price: 10,
-    },
-    {
-      id: 4,
-      img: AUDI,
-      title: "TITLE HERE",
-      desc: "Description about the gig here",
-      price: 10,
-    },
-    {
-      id: 5,
-      img: AUDI,
-      title: "TITLE HERE",
-      desc: "Description about the gig here",
-      price: 10,
-    },
-    {
-      id: 6,
-      img: AUDI,
-      title: "TITLE HERE",
-      desc: "Description about the gig here",
-      price: 10,
-    },
-    {
-      id: 7,
-      img: AUDI,
-      title: "TITLE HERE",
-      desc: "Description about the gig here",
-      price: 10,
-    }
-  ];
   return (
     <div className={classes.root}>
       <div className="mtb">

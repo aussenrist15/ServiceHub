@@ -56,8 +56,10 @@ export const Cards = (props) => {
     props.reviews.map(review => {
       avgRating += review.rating
     })
-    avgRating /= props.reviews.length
-
+    if(avgRating > 0){
+      avgRating /= props.reviews.length
+    }
+    
     const handleRequest = () => {
       axios.post("http://localhost:5000/api/v1/place/request-place", {
         owner: props.name,

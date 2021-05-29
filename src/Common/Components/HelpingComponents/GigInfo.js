@@ -53,7 +53,6 @@ const useStyles = makeStyles((theme) => ({
 export const GigInfo = (props) => {
   const classes = useStyles();
   const { username, category, desc, price, rating } = props.data;
-  console.log("Prop: ", props)
   return (
     <div>
       <Card className={classes.root} variant="outlined">

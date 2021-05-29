@@ -10,6 +10,7 @@ import { GigInfo } from "./HelpingComponents/GigInfo";
 import { BuyService } from "./BuyService";
 import { useHistory } from "react-router-dom";
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
+import { OrderCard } from "./HelpingComponents/OrderCard"
 
 import axios from 'axios';
 
@@ -76,15 +77,6 @@ export const ServiceInfo = (props) => {
   }, [])
   const classes = useStyles();
 
-  const gigDummyData = {
-    ownerName: "Name of creator",
-    title: "Title",
-    ratings: 4.6,
-    desc:
-      " Description of the gig will go here. Just mkaing this dummy text big to see how it will look on the screen. Bla bla bla blablaDescription of the gig will go here. Just mkaing this dummy textbig to see how it will look on the screen. Bla bla bla blablaDescription of the gig will go here. Just mkaing this dummy textbig to see how it will look on the screen. Bla bla bla bla bla",
-  };
-
-  console.log("Data: ", gigData)
   return (
     <div>
       <Parallax small filter image={PARALLEX} className={classes.parall} />
@@ -94,7 +86,9 @@ export const ServiceInfo = (props) => {
             {isLoading ? <LoadingAnimation /> : <GigInfo data={gigData} />}
           </Grid>
           <Grid>
-            <Button
+          {isLoading ? <LoadingAnimation /> : <OrderCard name={gigData.username} gID={gigData._id} reviews={gigData.reviews}/>}
+            <br />
+            {/* <Button
               onClick={() => {
                 gotoBuy();
               }}
@@ -113,7 +107,7 @@ export const ServiceInfo = (props) => {
               className={classes.btn}
             >
               Message Seller
-            </Button>
+            </Button> */}
           </Grid>
         </Grid>
       </div>
