@@ -20,7 +20,7 @@ export function Guestpicker() {
   const classes = useStyles();
   const [state, setState] = React.useState({
     age: '',
-    name: 'hai',
+    name: '',
   });
 
   const handleChange = (event) => {

@@ -53,7 +53,6 @@ const useStyles = makeStyles((theme) => ({
 export const PlaceInfo = (props) => {
   const classes = useStyles();
   const { data } = props;
-  console.log(data)
   return (
     <div>
       <Card className={classes.root} variant="outlined">

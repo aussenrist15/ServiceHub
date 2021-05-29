@@ -102,7 +102,8 @@ export const PlaceDetails = (props) => {
           {isLoading ? <LoadingAnimation /> : <PlaceInfo data={placeData} />}
           </Grid>
           <Grid>
-          {isLoading ? <LoadingAnimation /> : <Cards />}
+          {isLoading ? <LoadingAnimation /> : <Cards name={placeData.username} pID={placeData._id} dates={placeData.bookingDates
+          } reviews={placeData.reviews}/>}
             <br />
             <Button
               variant="contained"

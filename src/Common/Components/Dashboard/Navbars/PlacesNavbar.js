@@ -28,6 +28,7 @@ import {
   Media,
   Table
 } from "reactstrap";
+import { setDate } from 'date-fns/esm';
 
 function TabPanel(props) {
   const { children, value, index, ...other } = props;
@@ -73,13 +74,18 @@ const useStyles = makeStyles((theme) => ({
 export default function ScrollableTabsButtonAuto() {
   const classes = useStyles();
   const [value, setValue] = React.useState(0);
-  const [myBookings, setMyBookings] = useState([]);
-  const [myRides, setMyRides] = useState([]);
+  const [myRequests, setMyRequests] = useState([]);
+  const [myPlaces, setMyPlaces] = useState([]);
 
   const [open, setOpen] = useState(false);
   const [ratingValue, setRatingValue] = useState(3);
 
   const [review, setReview] = useState("")
+  const [desc, setDesc] = useState({
+    address: "12312313",
+    city: "123",
+    country: "12312",
+  })
 
   const handleClickOpen = () => {
     setOpen(true);
@@ -89,34 +95,34 @@ export default function ScrollableTabsButtonAuto() {
     setOpen(false);
   };
 
-  const handleSubmit = (name, id) => {
-    console.log(ratingValue, review, name, id)
-    axios.post("http://localhost:5000/api/v1/order/complete-ride", {
-      name: name,
+  const handleSubmit = (pID, bID) => {
+    axios.post("http://localhost:5000/api/v1/order/complete-stay", {
+      placeID: pID,
       review: review,
       rating: ratingValue,
-      rideID: id,
+      bookingID: bID,
     }, {
       withCredentials: true,
     })
     .then(res => {
       handleClose()
-      window.location.reload(true)
+      console.log(res)
+      //window.location.reload(true)
     })
   }
 
   useEffect(() => {
-    axios.post("http://localhost:5000/api/v1/ride/get-my-bookings", {}, {
+    axios.post("http://localhost:5000/api/v1/place/get-my-requests", {}, {
       withCredentials: true,
     })
     .then(res => {
-      setMyBookings(() => res.data.data)
+      setMyRequests(() => res.data.data)
     })
-    axios.post("http://localhost:5000/api/v1/ride/get-my-rides", {}, {
+    axios.post("http://localhost:5000/api/v1/place/get-my-places", {}, {
       withCredentials: true,
     })
     .then(res => {
-      setMyRides(() => res.data.data)
+      setMyPlaces(() => res.data.data)
     })
   }, [])
 
@@ -126,6 +132,51 @@ export default function ScrollableTabsButtonAuto() {
 
   const handleReview = (e) => {
     setReview(e.target.value)
+  }
+
+  const [openDes, setOpenDes] = React.useState(false);
+
+  const handleClickOpenDes = () => {
+    setOpenDes(true);
+  };
+
+  const handleCloseDes = () => {
+    setOpenDes(false);
+  };
+
+  const handleShowDesc = (id) => {
+    axios.post("http://localhost:5000/api/v1/place/get-description", {
+      placeID: id,
+    }, {
+      withCredentials: true,
+    })
+    .then(res => {
+      setDesc(res.data.data)
+      setTimeout(() => {
+        handleClickOpenDes()
+      }, 100)
+    })
+  }
+
+  const handleCancel = (bookingID) => {
+    axios.post("http://localhost:5000/api/v1/place/cancel-place", {
+      bookingID: bookingID,
+    }, {
+      withCredentials: true,
+    })
+    .then(res => console.log(res))
+  }
+
+  const handleApprove = (bookingID, placeID, checkIn, checkOut) => {
+    axios.post("http://localhost:5000/api/v1/place/book-place", {
+      bookingID: bookingID,
+      placeID: placeID,
+      checkIn: checkIn,
+      checkOut: checkOut,
+    }, {
+      withCredentials: true,
+    })
+    .then(res => console.log(res))
   }
 
   return (
@@ -140,8 +191,8 @@ export default function ScrollableTabsButtonAuto() {
           scrollButtons="auto"
           aria-label="scrollable auto tabs example"
         >
-          <Tab label="My Rides" {...allProps(0)} />
-          <Tab label="My Bookings" {...allProps(1)} />
+          <Tab label="Requests" {...allProps(0)} />
+          <Tab label="My Requests" {...allProps(1)} />
         </Tabs>
       </AppBar>
       <TabPanel value={value} index={0}>
@@ -151,23 +202,24 @@ export default function ScrollableTabsButtonAuto() {
             <div className="col">
               <Card className="shadow">
                 <CardHeader className="border-0">
-                  <h3 className="mb-0">My Rides</h3>
+                  <h3 className="mb-0">Requests</h3>
                 </CardHeader>
                 <Table className="align-items-center table-flush" responsive>
                   <thead className="thead-light">
                     <tr>
-                      <th scope="col">Buyer Name</th>
-                      <th scope="col">Source</th>
-                      <th scope="col">Destination</th>
-                      <th scope="col">Fare</th>
+                      <th scope="col">Rentee</th>
+                      <th scope="col">Check In</th>
+                      <th scope="col">Check Out</th>
+                      <th scope="col">Guests</th>
                       <th scope="col">Status</th>
                       <th scope="col" />
                     </tr>
                   </thead>
                   <tbody>
                     {
-                      myRides.map(ride => {
+                      myPlaces.map(place => {
                         return (
+                          <>
                           <tr>
                       <th scope="row">
                         <Media className="align-items-center">
@@ -186,22 +238,22 @@ export default function ScrollableTabsButtonAuto() {
                           </a>
                           <Media>
                             <span className="mb-0 text-sm">
-                              {ride.buyer}
+                              {place.rentee}
                             </span>
                           </Media>
                         </Media>
                       </th>
                       <td>
-                      {ride.source}
+                      {place.checkIn}
                       </td>
                       <td>
-                      {ride.destination}
+                      {place.checkOut}
                       </td>
                       <td>
-                      {ride.fare}
+                      {place.guests}
                       </td>
                       <td>
-                      {ride.status}
+                      {place.status}
                       </td>
                       {/* <td className="text">
                         <Badge color="" className="badge-dot mr-4">
@@ -210,6 +262,30 @@ export default function ScrollableTabsButtonAuto() {
                         </Badge>
                       </td> */}
                     </tr>
+                    <tr>
+                      <td></td>
+                      <td onClick={() => handleShowDesc(place.placeID)}>
+                      <span className="mb-0 text-sm">
+                             <b> Place Description</b>
+                      </span>
+                      </td>
+                      <td>
+                        { place.status === "Pending" &&
+                      <Button variant="contained" color="primary" onClick={() => handleCancel(place._id)}>
+                        Cancel
+                      </Button>
+                      }
+                      </td>
+                      <td>
+                        { place.status === "Pending" &&
+                      <Button variant="contained" color="primary" onClick={() => handleApprove(place._id, place.placeID, place.checkIn, place.checkOut)}>
+                        Approve
+                      </Button>
+                      }
+                      </td>
+                    </tr>
+                    <br/><br/>
+                    </>
                         )
                       })
                     }
@@ -227,23 +303,24 @@ export default function ScrollableTabsButtonAuto() {
               <div className="col">
                 <Card className="shadow">
                   <CardHeader className="border-0">
-                    <h3 className="mb-0">My Bookings</h3>
+                    <h3 className="mb-0">My Requests</h3>
                   </CardHeader>
                   <Table className="align-items-center table-flush" responsive>
                   <thead className="thead-light">
                     <tr>
-                      <th scope="col">Rider Name</th>
-                      <th scope="col">Source</th>
-                      <th scope="col">Destination</th>
-                      <th scope="col">Fare</th>
+                      <th scope="col">Owner</th>
+                      <th scope="col">Check In</th>
+                      <th scope="col">Check Out</th>
+                      <th scope="col">Guests</th>
                       <th scope="col">Status</th>
                       <th scope="col" />
                     </tr>
                   </thead>
                   <tbody>
                     {
-                      myBookings.map(booking => {
+                      myRequests.map(request => {
                         return (
+                          <>
                           <tr>
                       <th scope="row">
                         <Media className="align-items-center">
@@ -262,34 +339,34 @@ export default function ScrollableTabsButtonAuto() {
                           </a>
                           <Media>
                             <span className="mb-0 text-sm">
-                              {booking.username}
+                              {request.owner}
                             </span>
                           </Media>
                         </Media>
                       </th>
                       <td>
-                      {booking.source}
+                      {request.checkIn}
                       </td>
                       <td>
-                      {booking.destination}
+                      {request.checkOut}
                       </td>
                       <td>
-                      {booking.fare}
+                      {request.guests}
                       </td>
                       <td>
-                      {booking.status}
+                      {request.status}
                       </td>
                       <td className="text">
-                        {booking.status === "Booked" && 
+                        {request.status === "Booked" && 
                         <>
                       <Button variant="contained" color="primary" onClick={handleClickOpen}>
-                        Complete Ride
+                        Complete Stay
                       </Button>
                       <Dialog open={open} onClose={handleClose} aria-labelledby="form-dialog-title">
-                        <DialogTitle id="form-dialog-title">Review Ride</DialogTitle>
+                        <DialogTitle id="form-dialog-title">Review Place</DialogTitle>
                         <DialogContent>
                           <DialogContentText>
-                            Give your review about the ride
+                            Give your review about your stay
                           </DialogContentText>
                           <TextField
                             autoFocus
@@ -315,7 +392,7 @@ export default function ScrollableTabsButtonAuto() {
                           <Button onClick={handleClose} color="primary">
                             Cancel
                           </Button>
-                          <Button onClick={() => handleSubmit(booking.username, booking._id)} color="primary">
+                          <Button onClick={() => handleSubmit(request.placeID, request._id)} color="primary">
                             Submit
                           </Button>
                         </DialogActions>
@@ -324,6 +401,16 @@ export default function ScrollableTabsButtonAuto() {
                       }
                       </td>
                     </tr>
+                    <tr>
+                    <td></td>
+                    <td onClick={() => handleShowDesc(request.placeID)}>
+                    <span className="mb-0 text-sm">
+                           <b> Place Description</b>
+                    </span>
+                    </td>
+                  </tr>
+                  <br/><br/>
+                  </>
                         )
                       })
                     }
@@ -335,6 +422,21 @@ export default function ScrollableTabsButtonAuto() {
           </Container>
       
       </TabPanel>
+      <Dialog
+        open={openDes}
+        onClose={handleCloseDes}
+        aria-labelledby="alert-dialog-title"
+        aria-describedby="alert-dialog-description"
+      >
+        <DialogTitle id="alert-dialog-title">Description</DialogTitle>
+        <DialogContent>
+          <DialogContentText id="alert-dialog-description">
+            <span>Address: {desc.address}</span><br/>
+            <span>City: {desc.city}</span><br/>
+            <span>Country: {desc.country}</span><br/>
+          </DialogContentText>
+        </DialogContent>
+      </Dialog>
     </div>
   );
 }

@@ -19,7 +19,6 @@ export const RideDatesCard = (props) => {
             <CardTitle> <p className="display-4">Reviews</p>
             </CardTitle>
             {props.reviews[0].rideReviews.map(review => {
-              console.log(props)
               return (
                 <>
                 <Card style={{ width: "25rem", backgroundColor: "#fffcfc" }}>
