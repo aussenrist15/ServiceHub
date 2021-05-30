@@ -1,10 +1,10 @@
 /*eslint-disable*/
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import DeleteIcon from "@material-ui/icons/Delete";
 import IconButton from "@material-ui/core/IconButton";
 // react components for routing our app without refresh
 import { Link, useHistory } from "react-router-dom";
- 
+
 // @material-ui/core components
 import { makeStyles } from "@material-ui/core/styles";
 import List from "@material-ui/core/List";
@@ -26,6 +26,7 @@ import Button from "../CustomButtons/Button.js";
 import Notifications from "../../../Common/Components/HelpingComponents/Notifications.js";
 import styles from "../../assets/jss/material-kit-react/components/headerLinksStyle.js";
 import { Hidden } from "@material-ui/core";
+import axios from "axios";
 
 const useStyles = makeStyles(styles);
 
@@ -37,6 +38,7 @@ const useStyles2 = makeStyles((theme) => ({
 
 export default function HeaderLinks(props) {
   const [isNotifications, setNotifications] = useState(false);
+  const [Notificationss, setNotiArray] = useState(0);
   const history = useHistory();
   const [anchorEl, setAnchorEl] = React.useState(null);
   function handleLogout() {
@@ -44,6 +46,30 @@ export default function HeaderLinks(props) {
     localStorage.setItem("isLoggedin", "false");
     history.push("/");
   }
+
+  useEffect(() => {
+    LoadNotifications();
+    const int = setInterval(LoadNotifications, 3000);
+
+    return () => {
+      clearInterval(int);
+    };
+  }, []);
+
+  const LoadNotifications = async () => {
+    const req = await axios.post(
+      "http://localhost:5000/api/v1/notifications/all",
+      {},
+      { withCredentials: true }
+    );
+
+    let data = req.data.data;
+    if (data.length > 0) {
+      setNotifications(true);
+      setNotiArray(req.data.data.length);
+    }
+    console.log(req.data.data.length);
+  };
 
   const handleClick = (event) => {
     setAnchorEl(event.currentTarget);
@@ -104,7 +130,7 @@ export default function HeaderLinks(props) {
           >
             <AccountCircleIcon className={classes.icons} /> Dashboard
           </Link>
-        </Button>  
+        </Button>
       </ListItem>
       <ListItem className={classes.listItem}>
         <Button
@@ -132,7 +158,7 @@ export default function HeaderLinks(props) {
                 className={classes.icons}
               ></NotificationsActiveIcon>
             )}
-            Notifications
+            Notifications {Notificationss}
           </Button>
           <Popover
             id={id}
