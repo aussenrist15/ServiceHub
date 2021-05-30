@@ -10,8 +10,8 @@ import { RideInfo } from "./HelpingComponents/RideInfo";
 import { BuyService } from "./BuyService";
 import { useHistory } from "react-router-dom";
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
-import {RideDatesCard} from "./HelpingComponents/RideDatesCard"
-import axios from 'axios';
+import { RideDatesCard } from "./HelpingComponents/RideDatesCard";
+import axios from "axios";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -48,15 +48,21 @@ const useStyles = makeStyles((theme) => ({
 
 export const RideDetails = (props) => {
   const history = useHistory();
-  function bookRide() {
-    axios.post("http://localhost:5000/api/v1/order/book-ride", {
-      rideID: history.location.pathname.split("/")[3],
-    }, {
-      withCredentials: true,
-    })
-    .then(res => {
-      console.log(res)
-    })
+  function bookRide(username) {
+    axios
+      .post(
+        "http://localhost:5000/api/v1/order/book-ride",
+        {
+          rideID: history.location.pathname.split("/")[3],
+          owner: username,
+        },
+        {
+          withCredentials: true,
+        }
+      )
+      .then((res) => {
+        console.log(res);
+      });
   }
   const [isLoading, setisLoading] = useState(true);
   const [rideData, setRideData] = useState({});
@@ -69,18 +75,20 @@ export const RideDetails = (props) => {
   }, []);
 
   useEffect(() => {
-    axios.post("http://localhost:5000/api/v1/ride/get-ride",
-      {
-        rideID: history.location.pathname.split("/")[3],
-      },
-      { withCredentials: true }
-    )
-    .then(res => {  
-      console.log("Check ", res.data.reviews)
-      setRideData(() => res.data.rideData)
-      setReviews(() => res.data.reviews)
-    })
-  }, [])
+    axios
+      .post(
+        "http://localhost:5000/api/v1/ride/get-ride",
+        {
+          rideID: history.location.pathname.split("/")[3],
+        },
+        { withCredentials: true }
+      )
+      .then((res) => {
+        console.log("Check ", res.data.reviews);
+        setRideData(() => res.data.rideData);
+        setReviews(() => res.data.reviews);
+      });
+  }, []);
 
   const classes = useStyles();
   const rideDummyData = {
@@ -91,8 +99,7 @@ export const RideDetails = (props) => {
     pickupTime: "Title",
     passengers: "Title",
     fare: "Title",
-    desc:
-      " Description of the gig will go here. Just mkaing this dummy text big to see how it will look on the screen. Bla bla bla blablaDescription of the gig will go here. Just mkaing this dummy textbig to see how it will look on the screen. Bla bla bla blablaDescription of the gig will go here. Just mkaing this dummy textbig to see how it will look on the screen. Bla bla bla bla bla",
+    desc: " Description of the gig will go here. Just mkaing this dummy text big to see how it will look on the screen. Bla bla bla blablaDescription of the gig will go here. Just mkaing this dummy textbig to see how it will look on the screen. Bla bla bla blablaDescription of the gig will go here. Just mkaing this dummy textbig to see how it will look on the screen. Bla bla bla bla bla",
   };
   return (
     <div>
@@ -100,22 +107,28 @@ export const RideDetails = (props) => {
       <div>
         <Grid container spacing={1} justify="center">
           <Grid>
-          {isLoading ? <LoadingAnimation /> : <RideInfo data={rideData}/>}
+            {isLoading ? <LoadingAnimation /> : <RideInfo data={rideData} />}
           </Grid>
           <Grid>
-          {isLoading ? <LoadingAnimation /> : <RideDatesCard reviews={reviews}/>}
+            {isLoading ? (
+              <LoadingAnimation />
+            ) : (
+              <RideDatesCard reviews={reviews} />
+            )}
             <br />
-            {rideData.status !== "Booked" &&
-            <Button
-              onClick={bookRide}
-              variant="contained"
-              disabled={isLoading}
-              color="secondary"
-              className={classes.btn}
-            >
-              Book Ride
-            </Button>
-            }
+            {rideData.status !== "Booked" && (
+              <Button
+                onClick={() => {
+                  bookRide(rideData.username);
+                }}
+                variant="contained"
+                disabled={isLoading}
+                color="secondary"
+                className={classes.btn}
+              >
+                Book Ride
+              </Button>
+            )}
           </Grid>
         </Grid>
       </div>
