@@ -8,7 +8,8 @@ import TextField from "@material-ui/core/TextField";
 import "../CSS/Card.css";
 import AUDI from "../Static/audi.jpg";
 import { SkeletonLoader } from "./HelpingComponents/SkeletonLoader";
-import axios from 'axios';
+import axios from "axios";
+import { UpdateRideCard } from "./HelpingComponents/UpdateRideCard";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -33,14 +34,16 @@ export const Rides = () => {
   }, []);
 
   useEffect(() => {
-    axios.post("http://localhost:5000/api/v1/ride/all-rides",
-      {},
-      { withCredentials: true }
-    )
-    .then((res) => {
-      console.log("RIDES ::: ", res)
-      setRideData(() => res.data.data)
-    });
+    axios
+      .post(
+        "http://localhost:5000/api/v1/ride/all-rides",
+        {},
+        { withCredentials: true }
+      )
+      .then((res) => {
+        console.log("RIDES ::: ", res);
+        setRideData(() => res.data.data);
+      });
   }, []);
 
   const [loading, setLoading] = useState(false);
@@ -90,17 +93,19 @@ export const Rides = () => {
         {loading ? (
           rideData.map((data) => {
             return (
-              data.status !== "Completed" &&
-              <Grid item xs={12} sm={4} key={data._id}>
-                <RideCard
-                  id={data._id}
-                  img={AUDI}
-                  title={data.source}
-                  desc={data.desc}
-                  price={data.fare}
-                  status={data.status}
-                />
-              </Grid>
+              data.status !== "Completed" && (
+                <Grid item xs={12} sm={12} key={data._id}>
+                  {/* <RideCard
+                    id={data._id}
+                    img={AUDI}
+                    title={data.source}
+                    desc={data.desc}
+                    price={data.fare}
+                    status={data.status}
+                  /> */}
+                  <UpdateRideCard data={data} />
+                </Grid>
+              )
             );
           })
         ) : (

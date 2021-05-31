@@ -9,7 +9,7 @@ import Button from "@material-ui/core/Button";
 import Typography from "@material-ui/core/Typography";
 import { useHistory } from "react-router-dom";
 
-import axios from 'axios';
+import axios from "axios";
 
 const useStyles = makeStyles({
   root: {
@@ -26,12 +26,12 @@ export const GigCard = (props) => {
   const classes = useStyles();
   const { id, img, title, desc, price, deleteBtnShow, deleteFunction } = props;
   return (
-    <Card
-      className={classes.root}
-    >
-      <CardActionArea onClick={() => {
-        gotoID(id);
-      }}>
+    <Card className={classes.root}>
+      <CardActionArea
+        onClick={() => {
+          gotoID(id);
+        }}
+      >
         <CardMedia
           component="img"
           alt="Contemplative Reptile"
@@ -56,19 +56,24 @@ export const GigCard = (props) => {
           {/* <Button size="small" color="primary">
             Button 1
           </Button> */}
-          <Button size="small" color="secondary"  onClick={() => deleteFunction(id)}>
+          <Button
+            size="small"
+            color="secondary"
+            onClick={() => deleteFunction(id)}
+          >
             Delete
           </Button>
         </CardActions>
       ) : (
-        <CardActions>
-          <Button size="small" color="primary">
-            Button 1
-          </Button>
-          <Button size="small" color="primary">
-            Button 2
-          </Button>
-        </CardActions>
+        // <CardActions>
+        //   <Button size="small" color="primary">
+        //     Button 1
+        //   </Button>
+        //   <Button size="small" color="primary">
+        //     Button 2
+        //   </Button>
+        // </CardActions>
+        <></>
       )}
     </Card>
   );

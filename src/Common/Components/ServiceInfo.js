@@ -10,9 +10,9 @@ import { GigInfo } from "./HelpingComponents/GigInfo";
 import { BuyService } from "./BuyService";
 import { useHistory } from "react-router-dom";
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
-import { OrderCard } from "./HelpingComponents/OrderCard"
+import { OrderCard } from "./HelpingComponents/OrderCard";
 
-import axios from 'axios';
+import axios from "axios";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -54,27 +54,33 @@ export const ServiceInfo = (props) => {
     history.push(`/user/buy-service/${ID}`);
     //<a href="BuyService"></a>
   }
+
+  const [gigData, setGigData] = useState(null);
   const [isLoading, setisLoading] = useState(true);
-  const [gigData, setGigData] = useState({})
 
   useEffect(() => {
-    setTimeout(() => {
-      setisLoading(false);
-    }, 2);
+    axios
+      .post(
+        "http://localhost:5000/api/v1/gigs/get-gig",
+        {
+          gigID: history.location.pathname.split("/")[3],
+        },
+        { withCredentials: true }
+      )
+      .then((res) => {
+        console.log(res);
+        setGigData(() => res.data.gigData);
+        console.log(res.data.gigData);
+      });
   }, []);
 
   useEffect(() => {
-    axios.post("http://localhost:5000/api/v1/gigs/get-gig",
-      {
-        gigID: history.location.pathname.split("/")[3],
-      },
-      { withCredentials: true }
-    )
-    .then(res => {
-      console.log(res)
-      setGigData(() => res.data.gigData)
-    })
-  }, [])
+    //
+    console.log(gigData);
+    if (gigData) {
+      setisLoading(false);
+    }
+  }, [gigData]);
   const classes = useStyles();
 
   return (
@@ -86,7 +92,15 @@ export const ServiceInfo = (props) => {
             {isLoading ? <LoadingAnimation /> : <GigInfo data={gigData} />}
           </Grid>
           <Grid>
-          {isLoading ? <LoadingAnimation /> : <OrderCard name={gigData.username} gID={gigData._id} reviews={gigData.reviews}/>}
+            {isLoading ? (
+              <LoadingAnimation />
+            ) : (
+              <OrderCard
+                name={gigData.username}
+                gID={gigData._id}
+                reviews={gigData.reviews}
+              />
+            )}
             <br />
             {/* <Button
               onClick={() => {

@@ -41,7 +41,7 @@ const Notifications = () => {
         console.log(err);
       });
     if (type.includes("place")) history.push("/dashboard/places");
-    else if (type.includes("gig")) history.push("/dashboard/orders");
+    else if (type.includes("order")) history.push("/dashboard/orders");
     else if (type.includes("ride")) history.push("/dashboard/gigs"); // Rides ka route kisi ne gig set kiya hua is waja se rides pe gigs pe jaa rahe :)
   }
   useEffect(() => {

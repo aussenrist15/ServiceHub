@@ -7,8 +7,10 @@ import { makeStyles } from "@material-ui/core/styles";
 import TextField from "@material-ui/core/TextField";
 import "../CSS/Card.css";
 import AUDI from "../Static/audi.jpg";
+import BNB from "../Static/BNB.jpg";
+
 import { SkeletonLoader } from "./HelpingComponents/SkeletonLoader";
-import axios from 'axios';
+import axios from "axios";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -33,13 +35,15 @@ export const Places = () => {
   }, []);
 
   useEffect(() => {
-    axios.post("http://localhost:5000/api/v1/place/all-places",
-      {},
-      { withCredentials: true }
-    )
-    .then((res) => {
-      setPlaceData(() => res.data.data)
-    });
+    axios
+      .post(
+        "http://localhost:5000/api/v1/place/all-places",
+        {},
+        { withCredentials: true }
+      )
+      .then((res) => {
+        setPlaceData(() => res.data.data);
+      });
   }, []);
 
   const [loading, setLoading] = useState(false);
@@ -92,7 +96,7 @@ export const Places = () => {
               <Grid item xs={12} sm={4} key={data._id}>
                 <PlaceCard
                   id={data._id}
-                  img={AUDI}
+                  img={BNB}
                   title={data.city}
                   desc={data.desc}
                   price={data.rent}
