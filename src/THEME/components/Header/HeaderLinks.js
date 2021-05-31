@@ -34,6 +34,9 @@ const useStyles2 = makeStyles((theme) => ({
   typography: {
     padding: theme.spacing(2),
   },
+  root: {
+    width: "800px",
+  },
 }));
 
 export default function HeaderLinks(props) {
@@ -161,6 +164,7 @@ export default function HeaderLinks(props) {
             Notifications {Notificationss}
           </Button>
           <Popover
+            className={notiClasess.root}
             id={id}
             open={open}
             anchorEl={anchorEl}

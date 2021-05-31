@@ -5,8 +5,10 @@ import { LoadingAnimation } from "./LoadingAnimation";
 import axios from "axios";
 import "../../CSS/LoadingAnimation.css";
 import { useHistory } from "react-router-dom";
-
+import Grid from "@material-ui/core/Grid";
 import Link from "@material-ui/core/Link";
+import AddIcon from "@material-ui/icons/Add";
+import NotificationsIcon from "@material-ui/icons/Notifications";
 
 const useStyles = makeStyles({
   root: {
@@ -82,8 +84,17 @@ const Notifications = () => {
                     handleClick(item.type, item._id);
                   }}
                 >
-                  <Typography>{item.text}</Typography>
-                  <hr className="hrdivider"></hr>
+                  <Grid spacing={3} container>
+                    <Grid item sm={1} className="paddingRight">
+                      <br></br>
+                      <NotificationsIcon />
+                    </Grid>
+
+                    <Grid item sm={10}>
+                      <Typography>{item.text}</Typography>
+                      <hr className="hrdivider"></hr>
+                    </Grid>
+                  </Grid>
                 </div>
               );
             })

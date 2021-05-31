@@ -6,8 +6,10 @@ import { makeStyles } from "@material-ui/core/styles";
 import TextField from "@material-ui/core/TextField";
 import "../../CSS/Card.css";
 import AUDI from "../../Static/audi.jpg";
+import BNB from "../../Static/BNB.jpg";
+
 import { SkeletonLoader } from "../HelpingComponents/SkeletonLoader";
-import axios from 'axios';
+import axios from "axios";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -34,27 +36,34 @@ const Places = () => {
   const [reRender, setReRender] = useState(false);
 
   useEffect(() => {
-    axios.post("http://localhost:5000/api/v1/place/user-places", {
-    },
-      { withCredentials: true }
-    )
-    .then((res) => {
-      setPlaceData(() => res.data.data)
-    });
+    axios
+      .post(
+        "http://localhost:5000/api/v1/place/user-places",
+        {},
+        { withCredentials: true }
+      )
+      .then((res) => {
+        setPlaceData(() => res.data.data);
+      });
   }, [reRender]);
 
   function deleteFunction(id) {
-    console.log("Place Delete: ", id)
-    axios.post("http://localhost:5000/api/v1/place/delete-place", {
-      placeID: id
-    }, {
-      withCredentials: true
-    })
-    .then(res => {
-      setReRender((prev) => {
-        return !prev
-      })
-    })
+    console.log("Place Delete: ", id);
+    axios
+      .post(
+        "http://localhost:5000/api/v1/place/delete-place",
+        {
+          placeID: id,
+        },
+        {
+          withCredentials: true,
+        }
+      )
+      .then((res) => {
+        setReRender((prev) => {
+          return !prev;
+        });
+      });
   }
 
   const [loading, setLoading] = useState(false);
@@ -107,7 +116,7 @@ const Places = () => {
               <Grid item xs={12} sm={4} key={data._id}>
                 <GigCard
                   id={data._id}
-                  img={AUDI}
+                  img={BNB}
                   title={data.city}
                   desc={data.desc}
                   price={data.rent}
