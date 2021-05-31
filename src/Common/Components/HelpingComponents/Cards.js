@@ -106,7 +106,7 @@ export const Cards = (props) => {
           <CardBody>
             <CardTitle> <p className="display-4">$14 / night</p>
             <p onClick={showReviews} className="h5"><u><em>
-              Rating : {avgRating.toFixed(1)}  ({props.reviews.length} reviews)
+              Rating : {avgRating.toFixed(1)}  ({props.reviews.length} review(s))
               </em></u></p>
               </CardTitle>
             {/* <Datepicker /> */}

@@ -44,6 +44,14 @@ const useStyles = makeStyles((theme) => ({
 export const OrderCard = (props) => {
     const classes = useStyles();
     const [open, setOpen] = useState(false);
+
+    let avgRating = 0
+    props.reviews.map(review => {
+      avgRating += review.rating
+    })
+    if(avgRating > 0){
+      avgRating /= props.reviews.length
+    }
     
     const handleRequest = () => {
       axios.post("http://localhost:5000/api/v1/order/place-order", {
@@ -69,7 +77,7 @@ export const OrderCard = (props) => {
           <CardBody>
             <CardTitle> <p className="display-4">$14 / order</p>
             <p onClick={showReviews} className="h5"><u><em>
-              Rating : {2}  ({2} reviews)
+            Rating : {avgRating.toFixed(1)}  ({props.reviews.length} review(s))
               </em></u></p>
               </CardTitle>
             <Button
@@ -90,7 +98,24 @@ export const OrderCard = (props) => {
         <DialogTitle id="alert-dialog-title">Reviews</DialogTitle>
         <DialogContent>
           <DialogContentText id="alert-dialog-description">
-          
+          {props.reviews.map(review => {
+              return (
+                <>
+                <Card style={{ width: "25rem", backgroundColor: "#fffcfc" }}>
+                  <CardBody>
+                    <p>Reviewer: {review["reviewer"]}</p>
+                    <p>Review: {review.review}</p>
+                    <p>Rating: </p>
+                    <Rating
+                              name="read-only"
+                              value={review.rating}
+                            />
+                  </CardBody>
+                </Card>
+                <br/>
+                </>
+              )
+            })}
           </DialogContentText>
         </DialogContent>
       </Dialog>
