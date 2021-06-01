@@ -130,7 +130,7 @@ const Analytics = (props) => {
             </Card>
           </Col>
         </Row>
-        <Row className="mt-5">
+        {/* <Row className="mt-5">
           <Col className="mb-5 mb-xl-0" xl="12">
             <Card className="shadow">
               <CardHeader className="border-0">
@@ -173,7 +173,7 @@ const Analytics = (props) => {
             </Card>
             <br />
           </Col>
-        </Row>
+        </Row> */}
         <br />
         <br />
       </Container>

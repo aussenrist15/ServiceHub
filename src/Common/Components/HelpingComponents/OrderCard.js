@@ -75,7 +75,7 @@ export const OrderCard = (props) => {
       <>
         <Card style={{ width: "23rem" }}>
           <CardBody>
-            <CardTitle> <p className="display-4">$14 / order</p>
+            <CardTitle> <p className="display-4">{props.price} coins / order</p>
             <p onClick={showReviews} className="h5"><u><em>
             Rating : {avgRating.toFixed(1)}  ({props.reviews.length} review(s))
               </em></u></p>

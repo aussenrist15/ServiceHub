@@ -39,13 +39,13 @@ var routes = [
     component: Security,
     layout: "/dashboard",
   },
-  {
-    path: "/chatmessages",
-    name: "Chat",
-    icon: "ni ni-chat-round text-green",
-    component: Chat,
-    layout: "/dashboard",
-  },
+  // {
+  //   path: "/chatmessages",
+  //   name: "Chat",
+  //   icon: "ni ni-chat-round text-green",
+  //   component: Chat,
+  //   layout: "/dashboard",
+  // },
   {
     path: "/user-profile",
     name: "User Profile",

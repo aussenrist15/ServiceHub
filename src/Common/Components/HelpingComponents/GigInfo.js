@@ -84,11 +84,10 @@ export const GigInfo = (props) => {
                             className="form-control-label"
                             htmlFor="input-city"
                           >
-                            Title
                           </label>
                           <p>
                           <small>
-                            {category}
+                            
                             </small>
                         </p>
                         </FormGroup>
@@ -99,11 +98,11 @@ export const GigInfo = (props) => {
                             className="form-control-label"
                             htmlFor="input-country"
                           >
-                            Rating
+                            Category
                           </label>
                           <p>
                           <small>
-                            {rating}
+                            {category}
                             </small>
                         </p>
                         </FormGroup>
@@ -131,7 +130,7 @@ export const GigInfo = (props) => {
                         </FormGroup>
                       </div>
                  <hr className="my-4" />
-                  <h6 className="heading-small text-muted mb-4">
+                  {/* <h6 className="heading-small text-muted mb-4">
                     Pricing
                   </h6>
                   <div className="pl-lg-4">
@@ -151,7 +150,7 @@ export const GigInfo = (props) => {
                       </div>
                       <hr className="my-4" />
                  <br />
-                <br />
+                <br /> */}
          </Form>
        
           </CardContent>

@@ -105,14 +105,6 @@ export const PlaceDetails = (props) => {
           {isLoading ? <LoadingAnimation /> : <Cards name={placeData.username} pID={placeData._id} dates={placeData.bookingDates
           } reviews={placeData.reviews}/>}
             <br />
-            <Button
-              variant="contained"
-              disabled={isLoading}
-              color="secondary"
-              className={classes.btn}
-            >
-              Message Seller
-            </Button>
           </Grid>
         </Grid>
       </div>

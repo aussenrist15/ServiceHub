@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 
 // reactstrap components
 import {
@@ -11,8 +11,29 @@ import {
 } from "reactstrap";
 // core components
 import BalanceHeader from "./Headers/BalanceHeader.js";
+import axios from 'axios';
 
 const Balance = () => {
+
+  const [balance, setBalance] = useState({
+    balance: 0,
+    earnings: 0,
+    spent: 0,
+  })
+
+  useEffect(() => {
+    axios.post("http://localhost:5000/api/v1/user/get-balance", {}, {
+      withCredentials: true,
+    })
+    .then(res => {
+      setBalance({
+        balance: res.data.balance,
+        earnings: res.data.earnings,
+        spent: res.data.spent,
+      })
+    })
+  }, [])
+
   return (
     <>
       <BalanceHeader />
@@ -32,8 +53,8 @@ const Balance = () => {
               >
                <thead className="thead-dark">
                   <tr>
-                    <th scope="col">Servi-Hub Balance</th>
-                    <th scope="col">Total $0.00</th>
+                    <th scope="col">Service-Hub Balance</th>
+                    <th scope="col">{balance.balance} coins</th>
                     <th scope="col" />
                   </tr>
                 </thead>
@@ -62,7 +83,7 @@ const Balance = () => {
                         </Media>
                       </Media>
                     </th>
-                    <td>$2,500 USD</td>
+                    <td>{balance.earnings} coins</td>
                     <td>
                     </td>
                    </tr>
@@ -84,10 +105,8 @@ const Balance = () => {
                         </a>
                         <Media>
                           <span className="mb-0 text-sm">
-                          Your Reimbursements
+                          Your Expense
                           <br></br>
-                          <small>Funds that were credited back to your account for canceled orders.
-                          </small>
                           </span>
                           
                           
@@ -97,7 +116,7 @@ const Balance = () => {
                       </Media>
                       
                     </th>
-                    <td>$1,800 USD</td>
+                    <td>{balance.spent} coins</td>
                     </tr>
                 </tbody>
               </Table>

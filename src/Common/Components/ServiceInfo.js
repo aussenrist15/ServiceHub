@@ -99,6 +99,7 @@ export const ServiceInfo = (props) => {
                 name={gigData.username}
                 gID={gigData._id}
                 reviews={gigData.reviews}
+                price={gigData.price}
               />
             )}
             <br />
