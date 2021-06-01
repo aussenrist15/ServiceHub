@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import BillingHeader from "./Headers/BillingHeader.js";
 import {
   Button,
@@ -13,9 +13,56 @@ import {
   Row,
   Col,
 } from "reactstrap";
+import IconButton from "@material-ui/core/IconButton";
+import axios from "axios";
+import Alert from "@material-ui/lab/Alert";
+import Collapse from "@material-ui/core/Collapse";
+import CloseIcon from "@material-ui/icons/Close";
+
 //import {isMobile} from 'react-device-detect';
 
 const Security = () => {
+  const [Err, setErr] = useState(false);
+  const [ErrMsg, setErrMsg] = useState("");
+  const [current, setCurrent] = useState("");
+  const [newP, setNew] = useState("");
+  const [newC, setNewC] = useState("");
+  const [severity, setSeverity] = useState("");
+  function handleClick() {
+    if (current === "" || newP === "" || newC === "") {
+      setErr(true);
+      setErrMsg("Please fill in all fields");
+      setSeverity("error");
+
+      return;
+    }
+    if (newP !== newC) {
+      setErr(true);
+      setErrMsg("New Passwords donot match.");
+      setSeverity("error");
+
+      return;
+    }
+
+    console.log(current, newP, newC);
+    axios
+      .post(
+        "http://localhost:5000/api/v1/user/reset-password",
+        {
+          oldpassword: current,
+          newpassword: newP,
+        },
+        { withCredentials: true }
+      )
+      .then((res) => {
+        if (!res.data.error) {
+          setErr(true);
+          setErrMsg(res.data.message);
+          setSeverity("success");
+        }
+      });
+  }
+
   return (
     <>
       <BillingHeader />
@@ -27,9 +74,32 @@ const Security = () => {
           </CardHeader>
           <CardBody>
             <Form>
-              <h6 className="heading-small text-muted mb-4">
-                Change Password
-              </h6>
+              <h6 className="heading-small text-muted mb-4">Change Password</h6>
+              {Err ? (
+                <Collapse in={Err}>
+                  {" "}
+                  <Alert
+                    action={
+                      <IconButton
+                        aria-label="close"
+                        color="inherit"
+                        size="small"
+                        onClick={() => {
+                          setErr(false);
+                        }}
+                      >
+                        <CloseIcon fontSize="inherit" />
+                      </IconButton>
+                    }
+                    severity={severity}
+                  >
+                    {ErrMsg}
+                  </Alert>{" "}
+                </Collapse>
+              ) : (
+                <></>
+              )}
+              <br></br>
               <div className="pl-lg-4">
                 <Row>
                   <Col lg="3">
@@ -45,9 +115,11 @@ const Security = () => {
                       className="form-control-alternative"
                       id="input-password"
                       type="password"
+                      onChange={(e) => setCurrent(e.target.value)}
+                      value={current}
                     />
                   </Col>
-                </Row>  
+                </Row>
                 <br></br>
                 <Row>
                   <Col lg="3">
@@ -63,6 +135,8 @@ const Security = () => {
                       className="form-control-alternative"
                       id="input-newpassword"
                       type="password"
+                      onChange={(e) => setNew(e.target.value)}
+                      value={newP}
                     />
                   </Col>
                 </Row>
@@ -81,19 +155,26 @@ const Security = () => {
                       className="form-control-alternative"
                       id="input-confirmpassword"
                       type="password"
+                      onChange={(e) => setNewC(e.target.value)}
+                      value={newC}
                     />
                   </Col>
                 </Row>
                 <br></br>
                 <Row>
                   <Col lg="8">
-                    <small>8 characters or longer. Combine upper and lowercase letters and numbers.</small>
+                    <small>
+                      8 characters or longer. Combine upper and lowercase
+                      letters and numbers.
+                    </small>
                   </Col>
                   <Col lg="4">
                     <Button
                       color="default"
-                      href="#"
-                      onClick={(e) => e.preventDefault()}
+                      onClick={(e) => {
+                        e.preventDefault();
+                        handleClick();
+                      }}
                       size="sm"
                     >
                       Save Changes
@@ -210,11 +291,11 @@ const Security = () => {
                     </Card>
                   </div>
                   <hr className="my-4" /> */}
-                </Form>
-              </CardBody>
-            </Card>
-            <br />
-        </Container>
+            </Form>
+          </CardBody>
+        </Card>
+        <br />
+      </Container>
     </>
   );
 };
