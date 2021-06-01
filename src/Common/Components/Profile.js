@@ -17,7 +17,8 @@ import GridItem from "../../THEME/components/Grid/GridItem.js";
 import NavPills from "../../THEME/components/NavPills/NavPills.js";
 import Parallax from "../../THEME/components/Parallax/Parallax.js";
 
-import DP from "../Static/kdb.jpg";
+import DP from "../Static/PROFILE.jpg";
+import PARALLEX from "../Static/Parallex.png";
 import styles from "../../THEME/assets/jss/material-kit-react/views/profilePage.js";
 import { Services } from "./Services.js";
 import { Places } from "./Places.js";
@@ -48,7 +49,7 @@ export const Profile = (props) => {
 
   return (
     <div>
-      <Parallax small filter image={DP} />
+      <Parallax small filter image={PARALLEX} />
       <div className={classNames(classes.main, classes.mainRaised)}>
         <div>
           <div className={classes.container}>
@@ -60,13 +61,16 @@ export const Profile = (props) => {
                   </div>
                   <div className={classes.name}>
                     <h1 className={classes.title}>{fullName}</h1>
-                    <h6>Footballer</h6>
+                    {/* <h6>Footballer</h6> */}
                   </div>
                 </div>
               </GridItem>
             </GridContainer>
             <div className={classes.description}>
-              <p>Footballer at Manchester City. </p>
+              <p>
+                {" "}
+                Welcome to Service Hub. A place where you can find all you need{" "}
+              </p>
             </div>
             <GridContainer justify="center">
               <GridItem xs={12} sm={12} md={12} className={classes.navWrapper}>

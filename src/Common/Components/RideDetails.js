@@ -62,17 +62,18 @@ export const RideDetails = (props) => {
       )
       .then((res) => {
         console.log(res);
+        history.push("/dashboard/gigs");
       });
   }
   const [isLoading, setisLoading] = useState(true);
   const [rideData, setRideData] = useState({});
   const [reviews, setReviews] = useState([]);
 
-  useEffect(() => {
-    setTimeout(() => {
-      setisLoading(false);
-    }, 1000);
-  }, []);
+  // useEffect(() => {
+  //   setTimeout(() => {
+
+  //   }, 1000);
+  // }, []);
 
   useEffect(() => {
     axios
@@ -87,6 +88,7 @@ export const RideDetails = (props) => {
         console.log("Check ", res.data.reviews);
         setRideData(() => res.data.rideData);
         setReviews(() => res.data.reviews);
+        setisLoading(false);
       });
   }, []);
 

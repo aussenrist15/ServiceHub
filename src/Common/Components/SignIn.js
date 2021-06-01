@@ -13,6 +13,7 @@ import Container from "@material-ui/core/Container";
 import { useHistory } from "react-router-dom";
 import "../CSS/Card.css";
 import axios from "axios";
+import { Alert, AlertTitle } from "@material-ui/lab";
 
 function Copyright() {
   return (
@@ -55,6 +56,8 @@ export default function SignIn({ val, revertVal }) {
   const [userErr, setUserErr] = useState(false);
   const [passErr, setPassErr] = useState(false);
 
+  const [signInError, setSignInError] = useState(false);
+
   function Validate() {
     if (!username || 0 === username.length) {
       setUserErr((err) => !err);
@@ -86,6 +89,8 @@ export default function SignIn({ val, revertVal }) {
               res.data.data.first_name + " " + res.data.data.last_name;
             localStorage.setItem("fullname", fullname);
             history.push("/user");
+          } else {
+            setSignInError(true);
           }
         });
     }
@@ -131,6 +136,14 @@ export default function SignIn({ val, revertVal }) {
             id="password"
             autoComplete="current-password"
           />
+          {signInError ? (
+            <Alert severity="error">
+              The username or password is wrong. Please try again
+            </Alert>
+          ) : (
+            <></>
+          )}
+
           <FormControlLabel
             control={<Checkbox value="remember" color="primary" />}
             label="Remember me"

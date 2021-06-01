@@ -13,6 +13,7 @@ import Container from "@material-ui/core/Container";
 import "../CSS/Card.css";
 import { useState } from "react";
 import axios from "axios";
+import { Alert, AlertTitle } from "@material-ui/lab";
 
 function Copyright() {
   return (
@@ -59,7 +60,7 @@ export default function SignUp({ val, revertVal }) {
   const [errUname, setErrUname] = useState(false);
   const [errEmail, setErrEmail] = useState(false);
   const [errPass, setErrPass] = useState(false);
-
+  const [authError, setAuthError] = useState(false);
   function test() {
     if (fname === "") setErrFname(true);
     if (lname === "") setErrLname(true);
@@ -82,8 +83,7 @@ export default function SignUp({ val, revertVal }) {
         .then((res) => {
           console.log("Response: ", res);
           if (res.data.error) {
-            document.getElementById("error-message").innerHTML =
-              "You were not signed up. Please enter all fields correctly";
+            setAuthError(true);
             return;
           }
           revertVal(!val);
@@ -189,6 +189,11 @@ export default function SignUp({ val, revertVal }) {
               />
             </Grid>
           </Grid>
+          {authError ? (
+            <Alert severity="error">Please Enter Correct Data</Alert>
+          ) : (
+            <></>
+          )}
           <Button
             onClick={test}
             fullWidth

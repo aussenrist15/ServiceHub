@@ -81,14 +81,14 @@ export const Places = () => {
   // ];
   return (
     <div className={classes.root}>
-      <div className="mtb">
+      {/* <div className="mtb">
         <TextField
           id="outlined-basic"
           label="Search"
           variant="outlined"
           className="mtb bt"
         />
-      </div>
+      </div> */}
       <Grid container spacing={1}>
         {loading ? (
           placeData.map((data) => {

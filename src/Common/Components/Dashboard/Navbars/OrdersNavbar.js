@@ -1,13 +1,13 @@
-import React, {useState, useEffect} from 'react';
-import PropTypes from 'prop-types';
-import { makeStyles } from '@material-ui/core/styles';
-import AppBar from '@material-ui/core/AppBar';
-import Tabs from '@material-ui/core/Tabs';
-import Tab from '@material-ui/core/Tab';
-import Typography from '@material-ui/core/Typography';
-import Box from '@material-ui/core/Box';
+import React, { useState, useEffect } from "react";
+import PropTypes from "prop-types";
+import { makeStyles } from "@material-ui/core/styles";
+import AppBar from "@material-ui/core/AppBar";
+import Tabs from "@material-ui/core/Tabs";
+import Tab from "@material-ui/core/Tab";
+import Typography from "@material-ui/core/Typography";
+import Box from "@material-ui/core/Box";
 import Button from "@material-ui/core/Button";
-import axios from 'axios';
+import axios from "axios";
 
 // reactstrap components
 import {
@@ -57,19 +57,19 @@ TabPanel.propTypes = {
 function a11yProps(index) {
   return {
     id: `scrollable-auto-tab-${index}`,
-    'aria-controls': `scrollable-auto-tabpanel-${index}`,
+    "aria-controls": `scrollable-auto-tabpanel-${index}`,
   };
 }
 
 const useStyles = makeStyles((theme) => ({
   root: {
     flexGrow: 1,
-    width: '100%',
+    width: "100%",
     backgroundColor: theme.palette.background.paper,
   },
 }));
 
-export default function ScrollableTabsButtonAuto() {
+export default function ScrollableTabsButtonAuto(props) {
   const classes = useStyles();
   const [value, setValue] = React.useState(0);
   const [myRequests, setMyRequests] = useState([]);
@@ -82,26 +82,36 @@ export default function ScrollableTabsButtonAuto() {
   });
   const [ratingValue, setRatingValue] = useState(3);
   const [review, setReview] = useState("");
-  const [urlValue, setUrlValue] = useState("")
+  const [urlValue, setUrlValue] = useState("");
 
   const handleChange = (event, newValue) => {
     setValue(newValue);
   };
 
   useEffect(() => {
-    axios.post("http://localhost:5000/api/v1/order/my-orders", {}, {
-      withCredentials: true,
-    })
-    .then(res => {
-      setMyOrders(() => res.data.data)
-    });
-    axios.post("http://localhost:5000/api/v1/order/my-requests", {}, {
-      withCredentials: true,
-    })
-    .then(res => {
-      setMyRequests(() => res.data.data)
-    });
-  }, [])
+    axios
+      .post(
+        "http://localhost:5000/api/v1/order/my-orders",
+        {},
+        {
+          withCredentials: true,
+        }
+      )
+      .then((res) => {
+        setMyOrders(() => res.data.data);
+      });
+    axios
+      .post(
+        "http://localhost:5000/api/v1/order/my-requests",
+        {},
+        {
+          withCredentials: true,
+        }
+      )
+      .then((res) => {
+        setMyRequests(() => res.data.data);
+      });
+  }, []);
 
   const handleShowDesc = (id) => {
     axios
@@ -115,7 +125,7 @@ export default function ScrollableTabsButtonAuto() {
         }
       )
       .then((res) => {
-        console.log(res)
+        console.log(res);
         setDesc(res.data.data);
         setTimeout(() => {
           handleClickOpenDes();
@@ -188,32 +198,42 @@ export default function ScrollableTabsButtonAuto() {
       .then((res) => {
         handleClose();
         console.log(res);
-        window.location.reload(true)
+        window.location.reload(true);
       });
   };
 
   const handleUrlChange = (e) => {
-    setUrlValue(e.target.value)
-  }
+    setUrlValue(e.target.value);
+  };
 
   const handleUrlSend = (id) => {
-    axios.post("http://localhost:5000/api/v1/order/submit-order", {
-      orderID: id,
-      driveLink: urlValue,
-    }, {
-      withCredentials: true,
-    })
-    .then(res => console.log(res))
-  }
+    axios
+      .post(
+        "http://localhost:5000/api/v1/order/submit-order",
+        {
+          orderID: id,
+          driveLink: urlValue,
+        },
+        {
+          withCredentials: true,
+        }
+      )
+      .then((res) => console.log(res));
+  };
 
   const handleReviewRequest = (id) => {
-    axios.post("http://localhost:5000/api/v1/order/review-order", {
-      orderID: id,
-    }, {
-      withCredentials: true,
-    })
-    .then(res => console.log(res))
-  }
+    axios
+      .post(
+        "http://localhost:5000/api/v1/order/review-order",
+        {
+          orderID: id,
+        },
+        {
+          withCredentials: true,
+        }
+      )
+      .then((res) => console.log(res));
+  };
 
   return (
     <div className={classes.root}>
@@ -232,8 +252,8 @@ export default function ScrollableTabsButtonAuto() {
         </Tabs>
       </AppBar>
       <TabPanel value={value} index={0}>
-          {/* Page content */}
-        <Container className="mt--10" fluid>      
+        {/* Page content */}
+        <Container className="mt--10" fluid>
           <Row>
             <div className="col">
               <Card className="shadow">
@@ -250,11 +270,10 @@ export default function ScrollableTabsButtonAuto() {
                     </tr>
                   </thead>
                   <tbody>
-                    {
-                      myOrders.map((order) => {
-                        return (
-                          <>
-                            <tr>
+                    {myOrders.map((order) => {
+                      return (
+                        <>
+                          <tr>
                             <th scope="row">
                               <Media className="align-items-center">
                                 <a
@@ -298,9 +317,7 @@ export default function ScrollableTabsButtonAuto() {
                                 <Button
                                   variant="contained"
                                   color="primary"
-                                  onClick={() =>
-                                    handleCancel(order._id)
-                                  }
+                                  onClick={() => handleCancel(order._id)}
                                 >
                                   Cancel
                                 </Button>
@@ -311,35 +328,32 @@ export default function ScrollableTabsButtonAuto() {
                                 <Button
                                   variant="contained"
                                   color="primary"
-                                  onClick={() =>
-                                    handleApprove(
-                                      order._id,
-                                    )
-                                  }
+                                  onClick={() => handleApprove(order._id)}
                                 >
                                   Approve
                                 </Button>
                               )}
                             </td>
                           </tr>
-                          { (order.status === "Booked" || order.status === "Review") &&
-                          <tr>
-                            <td colSpan="2">
-                            <TextField
-                            id="filled-full-width"
-                            value={urlValue}
-                            onChange={(e) => handleUrlChange(e)}
-                            style={{ margin: 8 }}
-                            placeholder="URL"
-                            fullWidth
-                            margin="normal"
-                            InputLabelProps={{
-                              shrink: true,
-                            }}
-                            variant="outlined"
-                          />
-                            </td>
-                            <td>
+                          {(order.status === "Booked" ||
+                            order.status === "Review") && (
+                            <tr>
+                              <td colSpan="2">
+                                <TextField
+                                  id="filled-full-width"
+                                  value={urlValue}
+                                  onChange={(e) => handleUrlChange(e)}
+                                  style={{ margin: 8 }}
+                                  placeholder="URL"
+                                  fullWidth
+                                  margin="normal"
+                                  InputLabelProps={{
+                                    shrink: true,
+                                  }}
+                                  variant="outlined"
+                                />
+                              </td>
+                              <td>
                                 <Button
                                   variant="contained"
                                   color="primary"
@@ -347,13 +361,12 @@ export default function ScrollableTabsButtonAuto() {
                                 >
                                   Send
                                 </Button>
-                            </td>
-                          </tr>
-                        }
-                          </>
-                        )
-                      })
-                    }
+                              </td>
+                            </tr>
+                          )}
+                        </>
+                      );
+                    })}
                   </tbody>
                 </Table>
               </Card>
@@ -362,8 +375,8 @@ export default function ScrollableTabsButtonAuto() {
         </Container>
       </TabPanel>
       <TabPanel value={value} index={1}>
-         {/* Page content */}
-         <Container className="mt--10" fluid>      
+        {/* Page content */}
+        <Container className="mt--10" fluid>
           <Row>
             <div className="col">
               <Card className="shadow">
@@ -380,7 +393,7 @@ export default function ScrollableTabsButtonAuto() {
                     </tr>
                   </thead>
                   <tbody>
-                  {myRequests.map((request) => {
+                    {myRequests.map((request) => {
                       return (
                         <>
                           <tr>
@@ -468,7 +481,7 @@ export default function ScrollableTabsButtonAuto() {
                                         onClick={() =>
                                           handleSubmit(
                                             request._id,
-                                            request.gigID,
+                                            request.gigID
                                           )
                                         }
                                         color="primary"
@@ -489,45 +502,41 @@ export default function ScrollableTabsButtonAuto() {
                               </span>
                             </td>
                             <td></td>
-                            {
-                              request.status === "Check" &&
-                            <td>
-                              <Button
-                                onClick={() =>
-                                  handleReviewRequest(
-                                    request._id
-                                  )
-                                }
-                                color="primary"
-                                variant="contained"
-                              >
-                                Review Request
-                              </Button>
-                            </td>
-                            }
+                            {request.status === "Check" && (
+                              <td>
+                                <Button
+                                  onClick={() =>
+                                    handleReviewRequest(request._id)
+                                  }
+                                  color="primary"
+                                  variant="contained"
+                                >
+                                  Review Request
+                                </Button>
+                              </td>
+                            )}
                           </tr>
-                          {
-                            request.status === "Check" &&
-                          <tr>
-                          <td colSpan="4">
-                            <TextField
-                            id="filled-full-width"
-                            value={request.driveLink}
-                            style={{ margin: 8 }}
-                            placeholder="URL"
-                            fullWidth
-                            margin="normal"
-                            InputLabelProps={{
-                              shrink: true,
-                            }}
-                            InputProps={{
-                              readOnly: true
-                            }}
-                            variant="outlined"
-                          />
-                            </td>
-                          </tr>
-                        }
+                          {request.status === "Check" && (
+                            <tr>
+                              <td colSpan="4">
+                                <TextField
+                                  id="filled-full-width"
+                                  value={request.driveLink}
+                                  style={{ margin: 8 }}
+                                  placeholder="URL"
+                                  fullWidth
+                                  margin="normal"
+                                  InputLabelProps={{
+                                    shrink: true,
+                                  }}
+                                  InputProps={{
+                                    readOnly: true,
+                                  }}
+                                  variant="outlined"
+                                />
+                              </td>
+                            </tr>
+                          )}
                         </>
                       );
                     })}

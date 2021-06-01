@@ -53,14 +53,14 @@ export const Services = () => {
 
   return (
     <div className={classes.root}>
-      <div className="mtb">
+      {/* <div className="mtb">
         <TextField
           id="outlined-basic"
           label="Search"
           variant="outlined"
           className="mtb bt"
         />
-      </div>
+      </div> */}
       <Grid container spacing={1}>
         {loading ? (
           gigData.map((data) => {

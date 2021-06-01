@@ -10,8 +10,10 @@ import { PlaceInfo } from "./HelpingComponents/PlaceInfo";
 import { BuyService } from "./BuyService";
 import { useHistory } from "react-router-dom";
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
-import {Cards} from "./HelpingComponents/Cards"
-import axios from 'axios';
+import { Cards } from "./HelpingComponents/Cards";
+import axios from "axios";
+import { Alert, AlertTitle } from "@material-ui/lab";
+
 const useStyles = makeStyles((theme) => ({
   root: {
     flexGrow: 1,
@@ -54,25 +56,37 @@ export const PlaceDetails = (props) => {
   }
   const [isLoading, setisLoading] = useState(true);
   const [placeData, setPlaceData] = useState({});
+  const [ERROR, setError] = useState(false);
+  const [msg, setMsg] = useState("");
 
   useEffect(() => {
     setTimeout(() => {
       setisLoading(false);
-    }, 2000);
+    }, 3000);
   }, []);
 
   useEffect(() => {
-    axios.post("http://localhost:5000/api/v1/place/get-place",
-      {
-        placeID: history.location.pathname.split("/")[3],
-      },
-      { withCredentials: true }
-    )
-    .then(res => {
-      console.log(res.data.placeData)
-      setPlaceData(() => res.data.placeData)
-    })
-  }, [])
+    axios
+      .post(
+        "http://localhost:5000/api/v1/place/get-place",
+        {
+          placeID: history.location.pathname.split("/")[3],
+        },
+        { withCredentials: true }
+      )
+      .then((res) => {
+        console.log(res.data.placeData);
+        setPlaceData(() => res.data.placeData);
+      });
+  }, []);
+
+  useEffect(() => {
+    if (ERROR) {
+      setTimeout(() => {
+        setError(false);
+      }, 3000);
+    }
+  }, [ERROR]);
 
   const classes = useStyles();
   const placeDummyData = {
@@ -90,20 +104,30 @@ export const PlaceDetails = (props) => {
     safetyAmenities: "Title",
     rent: "Title",
     reviews: "Title",
-    desc:
-      " Description of the gig will go here. Just mkaing this dummy text big to see how it will look on the screen. Bla bla bla blablaDescription of the gig will go here. Just mkaing this dummy textbig to see how it will look on the screen. Bla bla bla blablaDescription of the gig will go here. Just mkaing this dummy textbig to see how it will look on the screen. Bla bla bla bla bla",
+    desc: " Description of the gig will go here. Just mkaing this dummy text big to see how it will look on the screen. Bla bla bla blablaDescription of the gig will go here. Just mkaing this dummy textbig to see how it will look on the screen. Bla bla bla blablaDescription of the gig will go here. Just mkaing this dummy textbig to see how it will look on the screen. Bla bla bla bla bla",
   };
   return (
     <div>
+      {ERROR ? <Alert severity="error">{msg}</Alert> : <></>}
       <Parallax small filter image={PARALLEX} className={classes.parall} />
       <div>
         <Grid container spacing={1} justify="center">
           <Grid>
-          {isLoading ? <LoadingAnimation /> : <PlaceInfo data={placeData} />}
+            {isLoading ? <LoadingAnimation /> : <PlaceInfo data={placeData} />}
           </Grid>
           <Grid>
-          {isLoading ? <LoadingAnimation /> : <Cards name={placeData.username} pID={placeData._id} dates={placeData.bookingDates
-          } reviews={placeData.reviews}/>}
+            {isLoading ? (
+              <LoadingAnimation />
+            ) : (
+              <Cards
+                name={placeData.username}
+                pID={placeData._id}
+                dates={placeData.bookingDates}
+                reviews={placeData.reviews}
+                setError={setError}
+                setMsg={setMsg}
+              />
+            )}
             <br />
           </Grid>
         </Grid>
