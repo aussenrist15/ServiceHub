@@ -27,6 +27,7 @@ import DialogContentText from "@material-ui/core/DialogContentText";
 import DialogTitle from "@material-ui/core/DialogTitle";
 import TextField from "@material-ui/core/TextField";
 import Rating from "@material-ui/lab/Rating";
+import URLfield from './URLtext';
 
 function TabPanel(props) {
   const { children, value, index, ...other } = props;
@@ -82,7 +83,6 @@ export default function ScrollableTabsButtonAuto(props) {
   });
   const [ratingValue, setRatingValue] = useState(3);
   const [review, setReview] = useState("");
-  const [urlValue, setUrlValue] = useState("");
 
   const handleChange = (event, newValue) => {
     setValue(newValue);
@@ -158,7 +158,7 @@ export default function ScrollableTabsButtonAuto(props) {
   const handleCancel = (orderID) => {
     axios
       .post(
-        "http://localhost:5000/api/v1/place/cancel-order",
+        "http://localhost:5000/api/v1/order/cancel-order",
         {
           orderID: orderID,
         },
@@ -202,11 +202,7 @@ export default function ScrollableTabsButtonAuto(props) {
       });
   };
 
-  const handleUrlChange = (e) => {
-    setUrlValue(e.target.value);
-  };
-
-  const handleUrlSend = (id) => {
+  const handleUrlSend = (id, urlValue) => {
     axios
       .post(
         "http://localhost:5000/api/v1/order/submit-order",
@@ -338,30 +334,7 @@ export default function ScrollableTabsButtonAuto(props) {
                           {(order.status === "Booked" ||
                             order.status === "Review") && (
                             <tr>
-                              <td colSpan="2">
-                                <TextField
-                                  id="filled-full-width"
-                                  value={urlValue}
-                                  onChange={(e) => handleUrlChange(e)}
-                                  style={{ margin: 8 }}
-                                  placeholder="URL"
-                                  fullWidth
-                                  margin="normal"
-                                  InputLabelProps={{
-                                    shrink: true,
-                                  }}
-                                  variant="outlined"
-                                />
-                              </td>
-                              <td>
-                                <Button
-                                  variant="contained"
-                                  color="primary"
-                                  onClick={() => handleUrlSend(order._id)}
-                                >
-                                  Send
-                                </Button>
-                              </td>
+                              <URLfield handleUrlSend={handleUrlSend} id={order._id}/>
                             </tr>
                           )}
                         </>

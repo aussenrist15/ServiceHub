@@ -95,6 +95,7 @@ export const ServiceInfo = (props) => {
             {isLoading ? (
               <LoadingAnimation />
             ) : (
+              history.location.pathname.split("/")[2] === "service" &&
               <OrderCard
                 name={gigData.username}
                 gID={gigData._id}

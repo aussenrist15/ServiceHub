@@ -92,17 +92,9 @@ export const RideDetails = (props) => {
       });
   }, []);
 
+  console.log("RRR ", rideData)
+
   const classes = useStyles();
-  const rideDummyData = {
-    username: "Name of creator",
-    source: "Title",
-    destination: "Title",
-    pickupDate: "Title",
-    pickupTime: "Title",
-    passengers: "Title",
-    fare: "Title",
-    desc: " Description of the gig will go here. Just mkaing this dummy text big to see how it will look on the screen. Bla bla bla blablaDescription of the gig will go here. Just mkaing this dummy textbig to see how it will look on the screen. Bla bla bla blablaDescription of the gig will go here. Just mkaing this dummy textbig to see how it will look on the screen. Bla bla bla bla bla",
-  };
   return (
     <div>
       <Parallax small filter image={PARALLEX} className={classes.parall} />
@@ -115,22 +107,10 @@ export const RideDetails = (props) => {
             {isLoading ? (
               <LoadingAnimation />
             ) : (
-              <RideDatesCard reviews={reviews} />
+              history.location.pathname.split("/")[2] === "ride" &&
+              <RideDatesCard fare={rideData.fare} name={rideData.username} rID={rideData._id} reviews={reviews} />
             )}
             <br />
-            {rideData.status !== "Booked" && (
-              <Button
-                onClick={() => {
-                  bookRide(rideData.username);
-                }}
-                variant="contained"
-                disabled={isLoading}
-                color="secondary"
-                className={classes.btn}
-              >
-                Book Ride
-              </Button>
-            )}
           </Grid>
         </Grid>
       </div>

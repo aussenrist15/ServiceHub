@@ -18,8 +18,12 @@ const useStyles = makeStyles({
 export const PlaceCard = (props) => {
   const history = useHistory();
   function gotoID(id) {
-    //history.push(`/user/service/${id}`);
-    history.push(`/user/place/${id}`);
+    if(props.deleteBtnShow){
+      history.push(`/user/my-place/${id}`);
+    }
+    else{
+      history.push(`/user/place/${id}`);
+    }
   }
 
   const classes = useStyles();
@@ -50,22 +54,13 @@ export const PlaceCard = (props) => {
           </Typography>
         </CardContent>
       </CardActionArea>
-      {deleteBtnShow ? (
+      {deleteBtnShow && (
         <CardActions>
           {/* <Button size="small" color="primary">
             Button 1
           </Button> */}
           <Button size="small" color="secondary"  onClick={() => deleteFunction(id)}>
             Delete
-          </Button>
-        </CardActions>
-      ) : (
-        <CardActions>
-          <Button size="small" color="primary">
-            Buttonssss 1
-          </Button>
-          <Button size="small" color="primary">
-            Buttonssss 2
           </Button>
         </CardActions>
       )}

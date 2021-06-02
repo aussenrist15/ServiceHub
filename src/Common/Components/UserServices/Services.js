@@ -49,7 +49,6 @@ const Services = () => {
   }, [reRender]);
 
   function deleteFunction(id) {
-    console.log("Gig Delete: ", id);
     axios
       .post(
         "http://localhost:5000/api/v1/gigs/delete-gig",
@@ -71,36 +70,6 @@ const Services = () => {
 
   const [gigData, setGigData] = useState([]);
   const classes = useStyles();
-  // const dummyData = [
-  //   {
-  //     id: 1,
-  //     img: AUDI,
-  //     title: "TITLE HERE",
-  //     desc: "Description about the gig here",
-  //     price: 10,
-  //   },
-  //   {
-  //     id: 2,
-  //     img: AUDI,
-  //     title: "TITLE HERE",
-  //     desc: "Description about the gig here",
-  //     price: 10,
-  //   },
-  //   {
-  //     id: 3,
-  //     img: AUDI,
-  //     title: "TITLE HERE",
-  //     desc: "Description about the gig here",
-  //     price: 10,
-  //   },
-  //   {
-  //     id: 4,
-  //     img: AUDI,
-  //     title: "TITLE HERE",
-  //     desc: "Description about the gig here",
-  //     price: 10,
-  //   },
-  // ];
   return (
     <div className={classes.root}>
       <div className="mtb">
@@ -123,6 +92,8 @@ const Services = () => {
                     title={data.category}
                     desc={data.desc}
                     price={data.price}
+                    deleteBtnShow={true}
+                    deleteFunction={deleteFunction}
                   />
                 </Grid>
               );
@@ -135,6 +106,8 @@ const Services = () => {
                     title={data.category}
                     desc={data.desc}
                     price={data.price}
+                    deleteBtnShow={true}
+                    deleteFunction={deleteFunction}
                   />
                 </Grid>
               );
@@ -147,6 +120,8 @@ const Services = () => {
                     title={data.category}
                     desc={data.desc}
                     price={data.price}
+                    deleteBtnShow={true}
+                    deleteFunction={deleteFunction}
                   />
                 </Grid>
               );

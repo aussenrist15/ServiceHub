@@ -41,7 +41,6 @@ export const Rides = () => {
         { withCredentials: true }
       )
       .then((res) => {
-        console.log("RIDES ::: ", res);
         setRideData(() => res.data.data);
       });
   }, []);
@@ -49,46 +48,8 @@ export const Rides = () => {
   const [loading, setLoading] = useState(false);
   const [rideData, setRideData] = useState([]);
   const classes = useStyles();
-  // const dummyData = [
-  //   {
-  //     id: 1,
-  //     img: AUDI,
-  //     title: "TITLE HERE",
-  //     desc: "Description about the gig here",
-  //     price: 10,
-  //   },
-  //   {
-  //     id: 2,
-  //     img: AUDI,
-  //     title: "TITLE HERE",
-  //     desc: "Description about the gig here",
-  //     price: 10,
-  //   },
-  //   {
-  //     id: 3,
-  //     img: AUDI,
-  //     title: "TITLE HERE",
-  //     desc: "Description about the gig here",
-  //     price: 10,
-  //   },
-  //   {
-  //     id: 4,
-  //     img: AUDI,
-  //     title: "TITLE HERE",
-  //     desc: "Description about the gig here",
-  //     price: 10,
-  //   },
-  // ];
   return (
     <div className={classes.root}>
-      {/* <div className="mtb">
-        <TextField
-          id="outlined-basic"
-          label="Search"
-          variant="outlined"
-          className="mtb bt"
-        />
-      </div> */}
       <Grid container spacing={1}>
         {loading ? (
           rideData.map((data) => {

@@ -33,6 +33,7 @@ export const User = () => {
 
       <Route path="/user/" exact component={Profile}></Route>
       <Route path="/user/service/:id" component={ServiceInfo}></Route>
+      <Route path="/user/my-service/:id" component={ServiceInfo}></Route>
       <Route path="/user/create-gig" component={CreateGig}></Route>
       <Route path="/user/user-services" component={MyServices}></Route>
 
@@ -41,8 +42,9 @@ export const User = () => {
       <Route path="/user/buy-service/:id" component={BuyService}></Route>
       <Route path="/user/create-place" component={RentPlace}></Route>
       <Route path="/user/create-ride" component={ShareRide}></Route>
-
+      <Route path="/user/my-place/:id" component={PlaceDetails}></Route>
       <Route path="/user/ride/:id" component={RideDetails}></Route>
+      <Route path="/user/my-ride/:id" component={RideDetails}></Route>
       <Route path="/user/place/:id" component={PlaceDetails}></Route>
     </div>
   );

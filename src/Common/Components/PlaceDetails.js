@@ -48,6 +48,7 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 export const PlaceDetails = (props) => {
+  console.log("aa gaya")
   const history = useHistory();
   function gotoBuy() {
     let ID = props.match.params.id;
@@ -89,23 +90,6 @@ export const PlaceDetails = (props) => {
   }, [ERROR]);
 
   const classes = useStyles();
-  const placeDummyData = {
-    username: "Name of creator",
-    country: "Title",
-    city: "Title",
-    address: "Title",
-    propertyType: "Title",
-    totalRooms: "Title",
-    guestPlaceType: "Title",
-    totalGuests: "Title",
-    totalBeds: "Title",
-    totalBathrooms: "Title",
-    basicAmenities: "Title",
-    safetyAmenities: "Title",
-    rent: "Title",
-    reviews: "Title",
-    desc: " Description of the gig will go here. Just mkaing this dummy text big to see how it will look on the screen. Bla bla bla blablaDescription of the gig will go here. Just mkaing this dummy textbig to see how it will look on the screen. Bla bla bla blablaDescription of the gig will go here. Just mkaing this dummy textbig to see how it will look on the screen. Bla bla bla bla bla",
-  };
   return (
     <div>
       {ERROR ? <Alert severity="error">{msg}</Alert> : <></>}
@@ -119,6 +103,7 @@ export const PlaceDetails = (props) => {
             {isLoading ? (
               <LoadingAnimation />
             ) : (
+              history.location.pathname.split("/")[2] === "place" &&
               <Cards
                 name={placeData.username}
                 pID={placeData._id}

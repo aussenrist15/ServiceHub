@@ -49,36 +49,6 @@ export const Places = () => {
   const [loading, setLoading] = useState(false);
   const [placeData, setPlaceData] = useState([]);
   const classes = useStyles();
-  // const dummyData = [
-  //   {
-  //     id: 1,
-  //     img: AUDI,
-  //     title: "TITLE HERE",
-  //     desc: "Description about the gig here",
-  //     price: 10,
-  //   },
-  //   {
-  //     id: 2,
-  //     img: AUDI,
-  //     title: "TITLE HERE",
-  //     desc: "Description about the gig here",
-  //     price: 10,
-  //   },
-  //   {
-  //     id: 3,
-  //     img: AUDI,
-  //     title: "TITLE HERE",
-  //     desc: "Description about the gig here",
-  //     price: 10,
-  //   },
-  //   {
-  //     id: 4,
-  //     img: AUDI,
-  //     title: "TITLE HERE",
-  //     desc: "Description about the gig here",
-  //     price: 10,
-  //   },
-  // ];
   return (
     <div className={classes.root}>
       {/* <div className="mtb">

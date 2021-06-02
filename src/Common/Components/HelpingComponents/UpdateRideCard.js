@@ -9,6 +9,7 @@ import TrendingFlatSharpIcon from "@material-ui/icons/TrendingFlatSharp";
 import AccountCircleSharpIcon from "@material-ui/icons/AccountCircleSharp";
 import QueryBuilderSharpIcon from "@material-ui/icons/QueryBuilderSharp";
 import EventAvailableSharpIcon from "@material-ui/icons/EventAvailableSharp";
+import Button from "@material-ui/core/Button";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -26,12 +27,16 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-export const UpdateRideCard = ({ data }) => {
+export const UpdateRideCard = ({ data, deleteBtnShow, deleteFunction }) => {
   const classes = useStyles();
   const history = useHistory();
   function gotoID(id) {
-    //history.push(`/user/service/${id}`);
-    history.push(`/user/ride/${id}`);
+    if(deleteBtnShow){
+      history.push(`/user/my-ride/${id}`);
+    }
+    else{
+      history.push(`/user/ride/${id}`);
+    }
   }
   return (
     <Paper
@@ -67,6 +72,15 @@ export const UpdateRideCard = ({ data }) => {
         <Grid item sm={3}>
           <DriveEtaIcon fontSize="large" />
         </Grid>
+        {deleteBtnShow &&
+        <Button
+            size="small"
+            color="secondary"
+            onClick={() => deleteFunction(data._id)}
+          >
+            Delete
+          </Button>
+          }
       </Grid>
     </Paper>
   );

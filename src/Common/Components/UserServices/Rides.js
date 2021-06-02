@@ -7,6 +7,7 @@ import TextField from "@material-ui/core/TextField";
 import "../../CSS/Card.css";
 import AUDI from "../../Static/audi.jpg";
 import { SkeletonLoader } from "../HelpingComponents/SkeletonLoader";
+import { UpdateRideCard } from "../HelpingComponents/UpdateRideCard";
 import axios from 'axios';
 
 const useStyles = makeStyles((theme) => ({
@@ -60,36 +61,6 @@ const Rides = () => {
   const [loading, setLoading] = useState(false);
   const [rideData, setRideData] = useState([])
   const classes = useStyles();
-  // const dummyData = [
-  //   {
-  //     id: 1,
-  //     img: AUDI,
-  //     title: "TITLE HERE",
-  //     desc: "Description about the gig here",
-  //     price: 10,
-  //   },
-  //   {
-  //     id: 2,
-  //     img: AUDI,
-  //     title: "TITLE HERE",
-  //     desc: "Description about the gig here",
-  //     price: 10,
-  //   },
-  //   {
-  //     id: 3,
-  //     img: AUDI,
-  //     title: "TITLE HERE",
-  //     desc: "Description about the gig here",
-  //     price: 10,
-  //   },
-  //   {
-  //     id: 4,
-  //     img: AUDI,
-  //     title: "TITLE HERE",
-  //     desc: "Description about the gig here",
-  //     price: 10,
-  //   },
-  // ];
   return (
     <div className={classes.root}>
       <div className="mtb">
@@ -105,7 +76,7 @@ const Rides = () => {
           rideData.map((data) => {
             return (
               <Grid item xs={12} sm={4} key={data._id}>
-                <GigCard
+                {/* <GigCard
                   id={data._id}
                   img={AUDI}
                   title={data.source}
@@ -113,7 +84,11 @@ const Rides = () => {
                   price={data.fare}
                   deleteBtnShow={true}
                   deleteFunction={deleteFunction}
-                />
+                /> */}
+                <UpdateRideCard 
+                  data={data} 
+                  deleteBtnShow={true}
+                  deleteFunction={deleteFunction}/>
               </Grid>
             );
           })

@@ -20,7 +20,12 @@ const useStyles = makeStyles({
 export const GigCard = (props) => {
   const history = useHistory();
   function gotoID(id) {
-    history.push(`/user/service/${id}`);
+    if(props.deleteBtnShow){
+      history.push(`/user/my-service/${id}`);
+    }
+    else{
+      history.push(`/user/service/${id}`);
+    }
   }
 
   const classes = useStyles();
@@ -51,11 +56,8 @@ export const GigCard = (props) => {
           </Typography>
         </CardContent>
       </CardActionArea>
-      {deleteBtnShow ? (
+      {deleteBtnShow && (
         <CardActions>
-          {/* <Button size="small" color="primary">
-            Button 1
-          </Button> */}
           <Button
             size="small"
             color="secondary"
@@ -64,16 +66,6 @@ export const GigCard = (props) => {
             Delete
           </Button>
         </CardActions>
-      ) : (
-        // <CardActions>
-        //   <Button size="small" color="primary">
-        //     Button 1
-        //   </Button>
-        //   <Button size="small" color="primary">
-        //     Button 2
-        //   </Button>
-        // </CardActions>
-        <></>
       )}
     </Card>
   );

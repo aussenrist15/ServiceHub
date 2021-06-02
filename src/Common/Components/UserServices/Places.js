@@ -7,6 +7,7 @@ import TextField from "@material-ui/core/TextField";
 import "../../CSS/Card.css";
 import AUDI from "../../Static/audi.jpg";
 import BNB from "../../Static/BNB.jpg";
+import { PlaceCard } from "../HelpingComponents/PlaceCard";
 
 import { SkeletonLoader } from "../HelpingComponents/SkeletonLoader";
 import axios from "axios";
@@ -48,7 +49,6 @@ const Places = () => {
   }, [reRender]);
 
   function deleteFunction(id) {
-    console.log("Place Delete: ", id);
     axios
       .post(
         "http://localhost:5000/api/v1/place/delete-place",
@@ -69,36 +69,6 @@ const Places = () => {
   const [loading, setLoading] = useState(false);
   const [placeData, setPlaceData] = useState([]);
   const classes = useStyles();
-  // const dummyData = [
-  //   {
-  //     id: 1,
-  //     img: AUDI,
-  //     title: "TITLE HERE",
-  //     desc: "Description about the gig here",
-  //     price: 10,
-  //   },
-  //   {
-  //     id: 2,
-  //     img: AUDI,
-  //     title: "TITLE HERE",
-  //     desc: "Description about the gig here",
-  //     price: 10,
-  //   },
-  //   {
-  //     id: 3,
-  //     img: AUDI,
-  //     title: "TITLE HERE",
-  //     desc: "Description about the gig here",
-  //     price: 10,
-  //   },
-  //   {
-  //     id: 4,
-  //     img: AUDI,
-  //     title: "TITLE HERE",
-  //     desc: "Description about the gig here",
-  //     price: 10,
-  //   },
-  // ];
   return (
     <div className={classes.root}>
       <div className="mtb">
@@ -114,7 +84,7 @@ const Places = () => {
           placeData.map((data) => {
             return (
               <Grid item xs={12} sm={4} key={data._id}>
-                <GigCard
+                <PlaceCard
                   id={data._id}
                   img={BNB}
                   title={data.city}
