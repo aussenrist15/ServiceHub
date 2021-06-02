@@ -14,7 +14,7 @@ import Typography from "@material-ui/core/Typography";
 import AccountCircleIcon from "@material-ui/icons/AccountCircle";
 import Tooltip from "@material-ui/core/Tooltip";
 import Popover from "@material-ui/core/Popover";
-
+import MonetizationOnIcon from "@material-ui/icons/MonetizationOn";
 // @material-ui/icons
 import { Apps, CloudDownload } from "@material-ui/icons";
 import NotificationsActiveIcon from "@material-ui/icons/NotificationsActive";
@@ -27,6 +27,7 @@ import Notifications from "../../../Common/Components/HelpingComponents/Notifica
 import styles from "../../assets/jss/material-kit-react/components/headerLinksStyle.js";
 import { Hidden } from "@material-ui/core";
 import axios from "axios";
+import { Wallet } from "../../../Common/Components/HelpingComponents/Wallet.js";
 
 const useStyles = makeStyles(styles);
 
@@ -44,6 +45,9 @@ export default function HeaderLinks(props) {
   const [Notificationss, setNotiArray] = useState(0);
   const history = useHistory();
   const [anchorEl, setAnchorEl] = React.useState(null);
+  const [anchorEl2, setAnchorEl2] = React.useState(null);
+  const [openWallet, setOpenWallet] = useState(false);
+
   function handleLogout() {
     console.log("Logout");
     localStorage.setItem("isLoggedin", "false");
@@ -79,6 +83,14 @@ export default function HeaderLinks(props) {
     setNotifications(true);
   };
 
+  const handleClickWallet = (e) => {
+    setAnchorEl2(e.currentTarget);
+    setOpenWallet(true);
+  };
+  const handleCloseWallet = () => {
+    setAnchorEl2(null);
+    setOpenWallet(false);
+  };
   const handleClose = () => {
     setAnchorEl(null);
   };
@@ -135,6 +147,38 @@ export default function HeaderLinks(props) {
           </Link>
         </Button>
       </ListItem>
+
+      <ListItem className={classes.listItem}>
+        {/**TODO Add Popover */}
+        <div>
+          <Button
+            aria-describedby={id}
+            className={classes.navLink}
+            onClick={handleClickWallet}
+          >
+            <MonetizationOnIcon /> Wallet
+          </Button>
+          <Popover
+            className={notiClasess.root}
+            id={id}
+            open={openWallet}
+            anchorEl={anchorEl2}
+            onClose={handleCloseWallet}
+            anchorOrigin={{
+              vertical: "bottom",
+              horizontal: "center",
+            }}
+            transformOrigin={{
+              vertical: "top",
+              horizontal: "center",
+            }}
+          >
+            {/** Notifications */}
+            <Wallet />
+          </Popover>
+        </div>
+      </ListItem>
+
       <ListItem className={classes.listItem}>
         <Button
           onClick={handleLogout}
