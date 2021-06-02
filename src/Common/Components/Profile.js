@@ -8,7 +8,10 @@ import { makeStyles } from "@material-ui/core/styles";
 import LaptopIcon from "@material-ui/icons/Laptop";
 import HomeIcon from "@material-ui/icons/Home";
 import LocalTaxiIcon from "@material-ui/icons/LocalTaxi";
+import Alert from "@material-ui/lab/Alert";
+import Button from "@material-ui/core/Button";
 
+import axios from "axios";
 // Core Comoponents
 import Footer from "../../THEME/components/Footer/Footer.js";
 
@@ -47,6 +50,23 @@ export const Profile = (props) => {
     classes.imgFluid
   );
 
+  const [completed, setCompleted] = React.useState(true);
+
+  React.useEffect(() => {
+    axios
+      .post(
+        "http://localhost:5000/api/v1/user/userdata",
+        {},
+        { withCredentials: true }
+      )
+      .then((res) => {
+        console.log(res);
+        setCompleted(res.data.data[0].completed);
+      })
+      .catch((err) => console.log(err));
+
+    console.log(completed);
+  });
   return (
     <div>
       <Parallax small filter image={PARALLEX} />
@@ -74,6 +94,24 @@ export const Profile = (props) => {
             </div>
             <GridContainer justify="center">
               <GridItem xs={12} sm={12} md={12} className={classes.navWrapper}>
+                {!completed ? (
+                  <Alert
+                    severity="warning"
+                    action={
+                      <Button
+                        color="inherit"
+                        size="small"
+                        onClick={() => {
+                          history.push("/dashboard/user-profile");
+                        }}
+                      >
+                        Edit
+                      </Button>
+                    }
+                  >
+                    Your profile is incomplete. Click here to complete it.
+                  </Alert>
+                ) : null}
                 <NavPills
                   alignCenter
                   color="primary"

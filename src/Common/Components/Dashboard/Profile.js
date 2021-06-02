@@ -1,5 +1,5 @@
-import React from "react";
-import { Box } from '@material-ui/core';
+import React, { useState, useEffect } from "react";
+import { Box } from "@material-ui/core";
 
 import FormDialog from "./FormDialog";
 // reactstrap components
@@ -15,106 +15,71 @@ import {
   Row,
   Col,
 } from "reactstrap";
+import Alert from "@material-ui/lab/Alert";
+import axios from "axios";
 // core components
 import UserHeader from "./Headers/UserHeader.js";
 
 const Profile = () => {
+  const [age, setAge] = useState(null);
+  const [city, setCity] = useState(null);
+  const [country, setCountry] = useState(null);
+  const [skills, setSkills] = useState([]);
+  const [skillTemp, setSkillTmp] = useState(null);
+  const [about, setAbout] = useState(null);
+  const [msg, setMsg] = useState(false);
+  const [severity, setSeverity] = useState(false);
+
+  const [err, setErr] = useState(false);
+
+  function handleClick() {
+    if (!age || !city || !country || skills.length === 0 || !about) {
+      setErr(true);
+      setMsg("Please enter all the fields");
+      setSeverity("error");
+      return;
+    }
+
+    axios
+      .post(
+        "http://localhost:5000/api/v1/user/complete-profile",
+        {
+          age,
+          city,
+          country,
+          skills,
+          about,
+        },
+        { withCredentials: true }
+      )
+      .then((res) => {
+        if (!res.data.error) {
+          setErr(true);
+          setMsg("Successfully updated profile. Enjoy using Service Hub");
+          setSeverity("success");
+        } else {
+          setErr(true);
+          setMsg("Server has refused connection. Please try again");
+          setSeverity("error");
+        }
+      });
+  }
+
+  useEffect(() => {
+    if (err) {
+      setTimeout(() => {
+        setErr(false);
+      }, 3000);
+    }
+  }, [err]);
+
   return (
     <>
       <UserHeader />
       {/* Page content */}
       <Container className="mt--7" fluid>
         <Row>
-          <Col className="order-xl-2 mb-5 mb-xl-0" xl="4">
-            <Card className="card-profile shadow">
-              <Row className="justify-content-center">
-                <Col className="order-lg-2" lg="3">
-                  <div className="card-profile-image">
-                    <a href="#pablo" onClick={(e) => e.preventDefault()}>
-                      <img
-                        alt="..."
-                        className="rounded-circle"
-                        src={
-                          require("./assets/img/team-4-800x800.jpg")
-                            .default
-                        }
-                      />
-                    </a>
-                  </div>
-                </Col>
-              </Row>
-              <CardHeader className="text-center border-0 pt-8 pt-md-4 pb-0 pb-md-4">
-                <div className="d-flex justify-content-between">
-                  <Button
-                    className="mr-4"
-                    color="info"
-                    href="#pablo"
-                    onClick={(e) => e.preventDefault()}
-                    size="sm"
-                  >
-                    Connect
-                  </Button>
-                  <Button
-                    className="float-right"
-                    color="default"
-                    href="#pablo"
-                    onClick={(e) => e.preventDefault()}
-                    size="sm"
-                  >
-                    Message
-                  </Button>
-                </div>
-              </CardHeader>
-              <CardBody className="pt-0 pt-md-4">
-                <Row>
-                  <div className="col">
-                    <div className="card-profile-stats d-flex justify-content-center mt-md-5">
-                      <div>
-                        <span className="heading">22</span>
-                        <span className="description">Friends</span>
-                      </div>
-                      <div>
-                        <span className="heading">10</span>
-                        <span className="description">Photos</span>
-                      </div>
-                      <div>
-                        <span className="heading">89</span>
-                        <span className="description">Comments</span>
-                      </div>
-                    </div>
-                  </div>
-                </Row>
-                <div className="text-center">
-                  <h3>
-                    Jessica Jones
-                    <span className="font-weight-light">, 27</span>
-                  </h3>
-                  <div className="h5 font-weight-300">
-                    <i className="ni location_pin mr-2" />
-                    Bucharest, Romania
-                  </div>
-                  <div className="h5 mt-4">
-                    <i className="ni business_briefcase-24 mr-2" />
-                    Solution Manager - Creative Tim Officer
-                  </div>
-                  <div>
-                    <i className="ni education_hat mr-2" />
-                    University of Computer Science
-                  </div>
-                  <hr className="my-4" />
-                  <p>
-                    Ryan — the name taken by Melbourne-raised, Brooklyn-based
-                    Nick Murphy — writes, performs and records all of his own
-                    music.
-                  </p>
-                  <a href="#pablo" onClick={(e) => e.preventDefault()}>
-                    Show more
-                  </a>
-                </div>
-              </CardBody>
-            </Card>
-          </Col>
-          <Col className="order-xl-1" xl="8">
+          <Col className="order-xl-1" xl="12">
             <Card className="bg-secondary shadow">
               <CardHeader className="bg-white border-0">
                 <Row className="align-items-center">
@@ -125,118 +90,45 @@ const Profile = () => {
                     <Button
                       color="primary"
                       href="#pablo"
-                      onClick={(e) => e.preventDefault()}
-                      size="sm"
+                      onClick={(e) => {
+                        e.preventDefault();
+                        handleClick();
+                      }}
                     >
-                      Settings
+                      Save
                     </Button>
                   </Col>
                 </Row>
               </CardHeader>
+              {err ? <Alert severity={severity}>{msg}</Alert> : null}
               <CardBody>
                 <Form>
-                  <h6 className="heading-small text-muted mb-4">
-                    User information
-                  </h6>
-                  <div className="pl-lg-4">
-                    <Row>
-                      <Col lg="6">
-                        <FormGroup>
-                          <label
-                            className="form-control-label"
-                            htmlFor="input-username"
-                          >
-                            Username
-                          </label>
-                          <Input
-                            className="form-control-alternative"
-                            defaultValue="lucky.jesse"
-                            id="input-username"
-                            placeholder="Username"
-                            type="text"
-                          />
-                        </FormGroup>
-                      </Col>
-                      <Col lg="6">
-                        <FormGroup>
-                          <label
-                            className="form-control-label"
-                            htmlFor="input-email"
-                          >
-                            Email address
-                          </label>
-                          <Input
-                            className="form-control-alternative"
-                            id="input-email"
-                            placeholder="jesse@example.com"
-                            type="email"
-                          />
-                        </FormGroup>
-                      </Col>
-                    </Row>
-                    <Row>
-                      <Col lg="6">
-                        <FormGroup>
-                          <label
-                            className="form-control-label"
-                            htmlFor="input-first-name"
-                          >
-                            First name
-                          </label>
-                          <Input
-                            className="form-control-alternative"
-                            defaultValue="Lucky"
-                            id="input-first-name"
-                            placeholder="First name"
-                            type="text"
-                          />
-                        </FormGroup>
-                      </Col>
-                      <Col lg="6">
-                        <FormGroup>
-                          <label
-                            className="form-control-label"
-                            htmlFor="input-last-name"
-                          >
-                            Last name
-                          </label>
-                          <Input
-                            className="form-control-alternative"
-                            defaultValue="Jesse"
-                            id="input-last-name"
-                            placeholder="Last name"
-                            type="text"
-                          />
-                        </FormGroup>
-                      </Col>
-                    </Row>
-                  </div>
                   <hr className="my-4" />
                   {/* Address */}
                   <h6 className="heading-small text-muted mb-4">
-                    Contact information
+                    Personal Information
                   </h6>
                   <div className="pl-lg-4">
                     <Row>
-                      <Col md="12">
+                      <Col lg="4">
                         <FormGroup>
                           <label
                             className="form-control-label"
-                            htmlFor="input-address"
+                            htmlFor="input-city"
                           >
-                            Address
+                            Age
                           </label>
                           <Input
                             className="form-control-alternative"
-                            defaultValue="Bld Mihail Kogalniceanu, nr. 8 Bl 1, Sc 1, Ap 09"
-                            id="input-address"
-                            placeholder="Home Address"
-                            type="text"
+                            id="input-city"
+                            placeholder="Age"
+                            type="number"
+                            value={age}
+                            onChange={(e) => setAge(e.target.value)}
                           />
                         </FormGroup>
                       </Col>
-                    </Row>
-                    <Row>
+
                       <Col lg="4">
                         <FormGroup>
                           <label
@@ -247,10 +139,11 @@ const Profile = () => {
                           </label>
                           <Input
                             className="form-control-alternative"
-                            defaultValue="New York"
                             id="input-city"
                             placeholder="City"
                             type="text"
+                            value={city}
+                            onChange={(e) => setCity(e.target.value)}
                           />
                         </FormGroup>
                       </Col>
@@ -264,7 +157,8 @@ const Profile = () => {
                           </label>
                           <Input
                             className="form-control-alternative"
-                            defaultValue="United States"
+                            value={country}
+                            onChange={(e) => setCountry(e.target.value)}
                             id="input-country"
                             placeholder="Country"
                             type="text"
@@ -290,63 +184,39 @@ const Profile = () => {
                     </Row>
                   </div>
 
-                  <h6 className="heading-small text-muted mb-4">
-                    My Skills
-                  </h6>
-                  
+                  <h6 className="heading-small text-muted mb-4">My Skills</h6>
+
                   <div className="pl-lg-4">
                     <Row>
-                    
                       <Col lg="6">
-                      
                         <FormGroup>
-                        
-                        <Box borderRadius="borderRadius" {...defaultProps} placeholder="Yours Skills" ></Box>
-                        <Input
-                        className="form-control-alternative"
-                        placeholder="Yours Added Skill"
-                        rows="4"
-                        type="textarea"/>
-                      
-                        
-
+                          <Input
+                            className="form-control-alternative"
+                            placeholder="Add Skill"
+                            type="text"
+                            value={skillTemp}
+                            onChange={(e) => setSkillTmp(e.target.value)}
+                          />
                         </FormGroup>
-                        </Col>
-                        <Col lg="6">
+                        {skills.map((item) => {
+                          return <li>{item}</li>;
+                        })}
+                      </Col>
+                      <Col lg="6">
                         <FormGroup>
-                        <FormDialog />
+                          <Button
+                            color="success"
+                            onClick={(e) => {
+                              e.preventDefault();
+                              setSkills([...skills, skillTemp]);
+                              setSkillTmp("");
+                            }}
+                          >
+                            Add
+                          </Button>
                         </FormGroup>
                       </Col>
-                      
                     </Row>
-                    
-                      
-                  </div>
-
-                  <h6 className="heading-small text-muted mb-4">
-                    Linked Accounts
-                  </h6>
-                  <div className="pl-lg-4">
-                    <Row>
-                      <Col lg="6">
-                        <FormGroup>
-                          <label
-                            className="form-control-label"
-                            htmlFor="input-username"
-                          >
-                            
-                          </label>
-                         
-                          
-                        </FormGroup>
-                        </Col>
-                        
-                        
-                      
-                      
-                    </Row>
-                    
-                      
                   </div>
 
                   <hr className="my-4" />
@@ -357,20 +227,17 @@ const Profile = () => {
                       <label>About Me</label>
                       <Input
                         className="form-control-alternative"
-                        placeholder="A few words about you ..."
                         rows="4"
-                        defaultValue="A beautiful Dashboard for Bootstrap 4. It is Free and
-                        Open Source."
                         type="textarea"
+                        value={about}
+                        onChange={(e) => setAbout(e.target.value)}
                       />
                     </FormGroup>
                   </div>
                 </Form>
               </CardBody>
-
             </Card>
             <br />
-
           </Col>
         </Row>
       </Container>
@@ -378,11 +245,10 @@ const Profile = () => {
   );
 };
 const defaultProps = {
-  bgcolor: 'background.paper',
-  borderColor: 'text.primary',
-  marginBottom:12,
+  bgcolor: "background.paper",
+  borderColor: "text.primary",
+  marginBottom: 12,
   border: 1,
-  style: { width: '300px', height: '150x' },
-  
+  style: { width: "300px", height: "150x" },
 };
 export default Profile;

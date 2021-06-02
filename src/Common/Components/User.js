@@ -15,9 +15,17 @@ import { BuyService } from "./BuyService.js";
 import { ShareRide } from "./CreateServices/ShareRide";
 
 import { RideDetails } from "./RideDetails";
+
 import { PlaceDetails } from "./PlaceDetails";
+import Alert from "@material-ui/lab/Alert";
+import Button from "@material-ui/core/Button";
+
+import axios from "axios";
+import zIndex from "@material-ui/core/styles/zIndex";
 
 export const User = () => {
+  const [completed, setCompleted] = React.useState(true);
+
   return (
     <div>
       <Header
@@ -38,7 +46,7 @@ export const User = () => {
       <Route path="/user/user-services" component={MyServices}></Route>
 
       {/* <Route path="/user/buy-service" component={BuyService}></Route> */}
-      
+
       <Route path="/user/buy-service/:id" component={BuyService}></Route>
       <Route path="/user/create-place" component={RentPlace}></Route>
       <Route path="/user/create-ride" component={ShareRide}></Route>
