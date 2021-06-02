@@ -69,6 +69,7 @@ export const CreateGig = () => {
   const [category, setCategory] = useState("");
   const [desc, setDesc] = useState("");
   const [price, setPrice] = useState(0);
+  const [duration, setDuration] = useState(0);
   const history = useHistory();
 
   const handleChange = (event) => {
@@ -83,11 +84,16 @@ export const CreateGig = () => {
     setPrice(event.target.value);
   };
 
+  const handleDurationChange = (event) => {
+    setDuration(event.target.value);
+  }
+
   const addGig = () => {
     axios.post("http://localhost:5000/api/v1/gigs/create-gig", {
       category: category,
       desc: desc,
       price: price,
+      duration: duration,
     }, {
       withCredentials: true
     })
@@ -138,6 +144,17 @@ export const CreateGig = () => {
                 shrink: true,
               }}
             />
+
+            <TextField
+              id="standard-number"
+              label="Duration"
+              type="number"
+              onChange={handleDurationChange}
+              className={classes.marginTopBottom}
+              InputLabelProps={{
+                shrink: true,
+              }}
+            />
             <br></br>
             {/* <form className={classes.root1} noValidate autoComplete="on">
               <TextField
@@ -148,7 +165,7 @@ export const CreateGig = () => {
               />
             </form> */}
             <br></br>
-            <FormHelperText className={classes.marginLeft}>
+            {/* <FormHelperText className={classes.marginLeft}>
               Graphic And Design (Logo Design / Resume designs / Illustrations /
               Brochure design / poster design / cartoons and comics / menu
               design){" "}
@@ -176,8 +193,8 @@ export const CreateGig = () => {
                 Data (Databases / Data processing / Data Analytics / Data
                 Visualisation / Data Science / Data Entry )
               </FormHelperText>
-            </FormHelperText>
-            <input
+            </FormHelperText> */}
+            {/* <input
               accept="image/*"
               className={classes.input}
               id="contained-button-file"
@@ -193,7 +210,7 @@ export const CreateGig = () => {
               >
                 Upload Image
               </Button>
-            </label>
+            </label> */}
 
             <Button
               onClick={addGig}

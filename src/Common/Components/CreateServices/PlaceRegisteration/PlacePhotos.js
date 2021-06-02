@@ -56,11 +56,9 @@ export const PlacePhotos = (props) => {
   const setStep = props.setStep;
   return (
     <div>
-      <h1 className={classes.marginBlock}>Liven up your listing with photos</h1>
+      <h1 className={classes.marginBlock}>Give a price to the buyers</h1>
       <p className={classes.margintop}>
-        Take photos using a phone or camera. Upload at least one photo to
-        publish your listing and drag to reorder however you like. You can
-        always add or edit your photos later
+        Enter the price that seems according to your place
       </p>
       <FormControl className={classes.formControl}>
         <Card
@@ -70,14 +68,16 @@ export const PlacePhotos = (props) => {
         >
           <CardContent>
             <label htmlFor="contained-button-file">
-              <Button
-                variant="outlined"
-                color="primary"
-                component="span"
-                className={classes.marginTopBottom}
-              >
-                Upload Image
-              </Button>
+            <TextField
+              id="standard-number"
+              label="Fare"
+              type="number"
+              onChange={(e) => props.handleFare(e.target.value)}
+              className={classes.marginTopBottom}
+              InputLabelProps={{
+                shrink: true,
+              }}
+            />
             </label>
           </CardContent>
           <CardActions>

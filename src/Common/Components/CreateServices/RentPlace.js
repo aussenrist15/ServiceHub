@@ -202,6 +202,12 @@ export const RentPlace = () => {
     setBathrooms(n);
   };
 
+  const [fare, setFare] = useState();
+
+  const handleFare = (n) => {
+    setFare(n);
+  };
+
   const submitPlaceDetails = () => {
     //console.log(Country, Street, Cities, description, PropertyType, Rooms, PlaceType, basicAmentities, safetyAmentities, spaces, guests, beds, bathrooms)
     let basic = [],
@@ -232,7 +238,7 @@ export const RentPlace = () => {
           totalBathrooms: bathrooms,
           basicAmenities: basic,
           safetyAmenities: safety,
-          rent: 1000,
+          rent: fare,
           Position,
         },
         {
@@ -301,6 +307,7 @@ export const RentPlace = () => {
             <PlacePhotos
               step={step}
               setStep={setStep}
+              handleFare={handleFare}
               submitPlaceDetails={submitPlaceDetails}
             />
           )}

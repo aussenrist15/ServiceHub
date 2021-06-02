@@ -124,7 +124,7 @@ export const Cards = (props) => {
         <CardBody>
           <CardTitle>
             {" "}
-            <p className="display-4">$14 / night</p>
+            <p className="display-4">{props.fare} coins / night</p>
             <p onClick={showReviews} className="h5">
               <u>
                 <em>

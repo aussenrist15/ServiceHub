@@ -52,7 +52,7 @@ const useStyles = makeStyles((theme) => ({
 
 export const GigInfo = (props) => {
   const classes = useStyles();
-  const { username, category, desc, price, rating } = props.data;
+  const { username, category, desc, duration } = props.data;
   return (
     <div>
       <Card className={classes.root} variant="outlined">
@@ -130,8 +130,8 @@ export const GigInfo = (props) => {
                         </FormGroup>
                       </div>
                  <hr className="my-4" />
-                  {/* <h6 className="heading-small text-muted mb-4">
-                    Pricing
+                  <h6 className="heading-small text-muted mb-4">
+                    Duration
                   </h6>
                   <div className="pl-lg-4">
                       <FormGroup>
@@ -139,18 +139,18 @@ export const GigInfo = (props) => {
                             className="form-control-label"
                             htmlFor="input-country"
                           >
-                            Cost
+                            Time
                           </label>
                             <p>
                           <small>
-                            {price}
+                            {duration} Days
                             </small>
                         </p>
                         </FormGroup>
                       </div>
                       <hr className="my-4" />
                  <br />
-                <br /> */}
+                <br />
          </Form>
        
           </CardContent>

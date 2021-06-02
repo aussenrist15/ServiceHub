@@ -107,6 +107,7 @@ export const PlaceDetails = (props) => {
               <Cards
                 name={placeData.username}
                 pID={placeData._id}
+                fare={placeData.rent}
                 dates={placeData.bookingDates}
                 reviews={placeData.reviews}
                 setError={setError}
