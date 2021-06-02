@@ -69,7 +69,10 @@
   height: 25em;
   margin: auto;
 }
-
+.wallet {
+  margin: 10px;
+  text-align: center;
+}
 .CONTAINER {
   height: 200px;
   position: relative;
