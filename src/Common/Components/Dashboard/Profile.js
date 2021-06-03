@@ -34,9 +34,9 @@ const Profile = () => {
 
   function handleClick() {
     if (!age || !city || !country || skills.length === 0 || !about) {
-      setErr(true);
       setMsg("Please enter all the fields");
       setSeverity("error");
+      setErr(true);
       return;
     }
 
@@ -54,13 +54,13 @@ const Profile = () => {
       )
       .then((res) => {
         if (!res.data.error) {
-          setErr(true);
           setMsg("Successfully updated profile. Enjoy using Service Hub");
           setSeverity("success");
-        } else {
           setErr(true);
+        } else {
           setMsg("Server has refused connection. Please try again");
           setSeverity("error");
+          setErr(true);
         }
       });
   }
