@@ -1,0 +1,126 @@
+.bodyback {
+  background: linear-gradient(253deg, #0cc898, #1797d2, #864fe1);
+  background-size: 300% 300%;
+  -webkit-animation: Background 25s ease infinite;
+  -moz-animation: Background 25s ease infinite;
+  animation: Background 25s ease infinite;
+  height: 100%;
+  position: fixed;
+  width: 100%;
+  margin-top: 0;
+}
+
+@-webkit-keyframes Background {
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
+}
+
+@-moz-keyframes Background {
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
+}
+
+@keyframes Background {
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
+}
+
+.full-screen {
+  background: url(https://i.imgur.com/wCG2csZ.png);
+  background-size: cover;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 50%;
+  height: 100%;
+
+  /* works with row or column */
+}
+@media (max-width: 768px) {
+  .full-screen {
+    width: 100% !important;
+  }
+}
+.homeh1 {
+  color: #fff;
+  font-family: "Open Sans", sans-serif;
+  font-weight: 800;
+  font-size: 4rem;
+  letter-spacing: -2px;
+
+  text-shadow: 1px 2px 1px rgba(0, 0, 0, 0.6);
+}
+
+.homeh1:after {
+  color: #fff;
+  letter-spacing: 1px;
+  font-family: "Poiret One", sans-serif;
+  font-size: 0.4em;
+}
+
+.button-line {
+  font-family: "Open Sans", sans-serif;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  background: transparent;
+  border: 1px solid #fff;
+  color: #fff;
+  text-align: center;
+  font-size: 1.4em;
+  opacity: 0.8;
+  padding: 20px 40px;
+  text-decoration: none;
+  transition: all 0.5s ease;
+
+  width: 100px;
+}
+
+.button-line:hover {
+  opacity: 1;
+}
+
+.flotleft {
+  float: left;
+}
+
+.cor-outer {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.logo {
+  font-family: "Nerko One", cursive;
+  font-size: "20vh";
+  color: black;
+}
+
+.homeContainer {
+  overflow: hidden;
+  overflow-y: hidden;
+}
+
+-webkit-scrollbar {
+  display: none;
+}
